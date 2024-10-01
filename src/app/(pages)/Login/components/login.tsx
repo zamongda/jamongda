@@ -1,3 +1,5 @@
+"use client";
+
 import { sva } from "@styled-system/css";
 import { Input } from "antd";
 
@@ -9,7 +11,8 @@ const Login = () => {
       </h2>
       <div className={loginStyle.box}>
         <h3>로그인</h3>
-        <Input placeholder="Username" />
+        <Input placeholder="이메일" />
+        <Input placeholder="비밀번호" className={loginStyle.passwordInput} />
       </div>
     </div>
   );
@@ -18,7 +21,7 @@ const Login = () => {
 export default Login;
 
 const LoginSva = sva({
-  slots: ["wrapper", "imgWrapper", "box"],
+  slots: ["wrapper", "imgWrapper", "box", "passwordInput"],
   base: {
     wrapper: {
       w: "100vw",
@@ -31,15 +34,21 @@ const LoginSva = sva({
     imgWrapper: {
       display: "flex",
       justifyContent: "center",
-      pt: "60px",
+      pt: "3.75rem",
       "& img": {
-        w: "217px",
+        w: "13.5625rem",
       },
     },
     box: {
       bgColor: "white",
-      borderTopRadius: "50px",
-      p: "60px 50px 80px",
+      borderTopRadius: "3.125rem",
+      p: "3.75rem 3.125rem 5rem",
+      "& h3": {
+        textAlign: "center",
+      },
+    },
+    passwordInput: {
+      mt: "1.25rem",
     },
   },
 });

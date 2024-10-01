@@ -18,6 +18,6 @@ const loadingStyle = css({
   justifyContent: "center",
   alignItems: "center",
   "& img": {
-    w: "217px",
+    w: "13.5625rem",
   },
 });
