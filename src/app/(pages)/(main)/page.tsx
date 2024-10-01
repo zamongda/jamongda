@@ -1,9 +1,7 @@
-// import Main from "./components/main";
-import Loading from "./loading";
+import Main from "./components/main";
 
 const Page = () => {
-  // return <Main />;
-  return <Loading />;
+  return <Main />;
 };
 
 export default Page;
