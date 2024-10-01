@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { css } from "@styled-system/css";
 
 const Loading = () => {
