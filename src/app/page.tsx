@@ -1,3 +1,5 @@
+import Page from "./(pages)/(main)/page";
+
 export default function Home() {
-  return <ul></ul>;
+  return <Page />;
 }

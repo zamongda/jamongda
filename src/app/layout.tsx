@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
-import "./reset.css";
+import "./css/globals.css";
+import "./css/reset.css";
 
 const godoB = localFont({
   src: "./fonts/GodoB.woff2",
