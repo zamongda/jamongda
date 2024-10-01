@@ -1,1 +1,8 @@
 @layer reset, base, tokens, recipes, utilities;
+
+* {
+  font-family: var(--font-godo-m);
+  .bold {
+    font-family: var(--font-godo-b);
+  }
+}

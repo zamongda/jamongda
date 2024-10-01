@@ -3,16 +3,15 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./css/globals.css";
 import "./css/reset.css";
-import "@styled-system/styles.css";
 
 const godoB = localFont({
-  src: "./fonts/GodoB.woff2",
+  src: "./fonts/GodoB.ttf",
   variable: "--font-godo-b",
   weight: "400",
 });
 
 const godoM = localFont({
-  src: "./fonts/GodoM.woff2",
+  src: "./fonts/GodoM.ttf",
   variable: "--font-godo-m",
   weight: "400",
 });
