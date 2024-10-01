@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { css } from "@styled-system/css";
 
 const Loading = () => {
@@ -12,8 +11,8 @@ const Loading = () => {
 export default Loading;
 
 const loadingStyle = css({
-  height: "100dvh",
-  width: "100vw",
+  height: "100%",
+  width: "100%",
   bgColor: "lightOrange",
   display: "flex",
   justifyContent: "center",
