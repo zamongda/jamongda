@@ -18,6 +18,30 @@ const loadingStyle = css({
   justifyContent: "center",
   alignItems: "center",
   "& img": {
+    w: "13.5625rem",
+  },
+});
+
+import { css } from "@styled-system/css";
+
+const Loading = () => {
+  return (
+    <div className={loadingStyle}>
+      <img src="/images/main-logo.png" alt="jamongda" />
+    </div>
+  );
+};
+
+export default Loading;
+
+const loadingStyle = css({
+  height: "100dvh",
+  width: "100vw",
+  bgColor: "lightOrange",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  "& img": {
     width: "217px",
   },
 });
