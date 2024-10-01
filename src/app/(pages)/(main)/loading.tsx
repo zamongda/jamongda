@@ -15,4 +15,10 @@ const loadingStyle = css({
   height: "100dvh",
   width: "100vw",
   bgColor: "lightOrange",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  "& img": {
+    width: "217px",
+  },
 });
