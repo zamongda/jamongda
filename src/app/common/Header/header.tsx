@@ -1,14 +1,23 @@
+"use client";
+
 import { css, sva } from "@styled-system/css";
+import { useRouter } from "next/navigation";
 
 interface HeaderProps {
   type?: "default" | "main" | "back";
   title?: string;
 }
 const Header = ({ title, type = "default" }: HeaderProps) => {
+  const router = useRouter();
+
   if (type === "default") {
     return (
       <div className={headerStyle.wrapper}>
-        <img src="/icons/icon-back.svg" alt="뒤로가기" />
+        <img
+          src="/icons/icon-back.svg"
+          alt="뒤로가기"
+          onClick={() => router.back()}
+        />
         {title && <h2 className={headerStyle.title}>{title}</h2>}
         <img src="/icons/icon-setting.svg" alt="설정" />
       </div>
@@ -30,7 +39,11 @@ const Header = ({ title, type = "default" }: HeaderProps) => {
   if (type === "back") {
     return (
       <div className={headerStyle.back}>
-        <img src="/icons/icon-back.svg" alt="뒤로가기" />
+        <img
+          src="/icons/icon-back.svg"
+          alt="뒤로가기"
+          onClick={() => router.back()}
+        />
       </div>
     );
   }
