@@ -19,7 +19,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@styled-system/*": ["./styled-system/*"]
+      "@styled-system/*": ["./styled-system/*"],
+      "@common/*": ["./src/app/common/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

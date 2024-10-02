@@ -1,7 +1,9 @@
 "use client";
 
-import { sva } from "@styled-system/css";
-import { Input } from "antd";
+import Button from "@/app/common/Button/button";
+import Form from "@/app/common/Form/form";
+import Input from "@/app/common/Input/input";
+import { css, sva } from "@styled-system/css";
 
 const Login = () => {
   return (
@@ -10,9 +12,23 @@ const Login = () => {
         <img src="/images/main-logo.png" alt="jamongda" />
       </h2>
       <div className={loginStyle.box}>
-        <h3>로그인</h3>
-        <Input placeholder="이메일" />
-        <Input placeholder="비밀번호" className={loginStyle.passwordInput} />
+        <h3 className={css({ textStyle: "Text-22-M" })}>로그인</h3>
+        <Form>
+          <Input text="이메일" name="email" />
+          <Input text="비밀번호" name="password" />
+        </Form>
+        <div className={loginStyle.buttonWrapper}>
+          <Button text="로그인하기" />
+          <Button
+            text="카카오 로그인"
+            bgColor="white"
+            Icon="/icons/ico-kakao-l.svg"
+          />
+          <Button text="로그인하기" bgColor="lightGreen" />
+        </div>
+        <span className={loginStyle.findAccountButton}>
+          계정을 잃어버리셨나요?
+        </span>
       </div>
     </div>
   );
@@ -21,7 +37,14 @@ const Login = () => {
 export default Login;
 
 const LoginSva = sva({
-  slots: ["wrapper", "imgWrapper", "box", "passwordInput"],
+  slots: [
+    "wrapper",
+    "imgWrapper",
+    "box",
+    "passwordInput",
+    "buttonWrapper",
+    "findAccountButton",
+  ],
   base: {
     wrapper: {
       w: "100vw",
@@ -43,12 +66,43 @@ const LoginSva = sva({
       bgColor: "white",
       borderTopRadius: "3.125rem",
       p: "3.75rem 3.125rem 5rem",
+      boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+      mt: "2.5rem",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
       "& h3": {
         textAlign: "center",
+      },
+      "& form": {
+        mt: "2.5rem",
+        w: "100%",
       },
     },
     passwordInput: {
       mt: "1.25rem",
+    },
+    buttonWrapper: {
+      display: "flex",
+      flexDirection: "column",
+      gap: ".875rem",
+      mt: "1.875rem",
+      w: "100%",
+    },
+    findAccountButton: {
+      textStyle: "Text-12-M",
+      position: "relative",
+      color: "gray.05",
+      mt: "2.5rem",
+      _after: {
+        content: '""',
+        w: "100%",
+        h: "1px",
+        bgColor: "gray.05",
+        position: "absolute",
+        bottom: "-.25rem",
+        left: "0",
+      },
     },
   },
 });
