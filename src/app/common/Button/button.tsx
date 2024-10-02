@@ -39,7 +39,6 @@ export const buttonCva = cva({
   base: {
     position: "relative",
     w: "100%",
-    textStyle: "Text-16-M",
     borderRadius: "1.875rem",
     textAlign: "center",
     textWrap: "nowrap",
@@ -52,8 +51,8 @@ export const buttonCva = cva({
   },
   variants: {
     size: {
-      lg: { height: "4.5rem" },
-      sm: { height: "3.125rem" },
+      lg: { height: "4.5rem", textStyle: "Text-22-M" },
+      sm: { height: "3.125rem", textStyle: "Text-16-M" },
     },
     bgColor: {
       orange: {
