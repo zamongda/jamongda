@@ -15,14 +15,14 @@ const Login = () => {
         <h3 className={css({ textStyle: "Text-22-M" })}>로그인</h3>
         <Form>
           <Input text="이메일" name="email" />
-          <Input text="비밀번호" name="password" />
+          <Input text="비밀번호" name="password" type="password" />
         </Form>
         <div className={loginStyle.buttonWrapper}>
           <Button text="로그인하기" />
           <Button
             text="카카오 로그인"
             bgColor="white"
-            Icon="/icons/ico-kakao-l.svg"
+            Icon="/icons/icon-kakao.svg"
           />
           <Button text="로그인하기" bgColor="lightGreen" />
         </div>

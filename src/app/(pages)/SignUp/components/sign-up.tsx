@@ -9,10 +9,15 @@ const SignUp = () => {
       <div className={signUpStyle.box}>
         <h3 className={css({ textStyle: "Text-22-M" })}>회원가입</h3>
         <Form>
+          <Input text="이름" name="name" />
           <Input text="이메일" name="email" />
-          <Input text="비밀번호" name="password" />
+          <Input text="비밀번호" name="password" type="password" />
+          <Input text="비밀번호 확인" name="checkPassword" type="password" />
         </Form>
-        <Button text="로그인하기" />
+        <Button
+          text="회원가입하기"
+          className={css({ mt: "1.875rem !important" })}
+        />
       </div>
     </div>
   );
@@ -25,7 +30,7 @@ const SignUpSva = sva({
   base: {
     wrapper: {
       w: "100vw",
-      h: "100dvh",
+      h: "100%",
       bgColor: "lightOrange",
       display: "flex",
       flexDirection: "column",
@@ -36,7 +41,6 @@ const SignUpSva = sva({
       borderTopRadius: "3.125rem",
       p: "3.75rem 3.125rem 5rem",
       boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
-      mt: "2.5rem",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
