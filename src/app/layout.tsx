@@ -40,6 +40,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link href="/styles$.css" rel="stylesheet" />
+      </head>
       <body
         className={`${godoB.variable} ${godoM.variable} ${godoL.variable} ${godoR.variable}`}
       >

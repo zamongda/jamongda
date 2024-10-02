@@ -73,7 +73,7 @@ const LoginSva = sva({
       bgColor: "white",
       borderTopRadius: "3.125rem",
       p: "3.75rem 3.125rem 5rem",
-      boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+      boxShadow: "0px -5px 20px 0px rgba(0, 0, 0, 0.1)",
       mt: "2.5rem",
       display: "flex",
       flexDirection: "column",
