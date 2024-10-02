@@ -6,8 +6,14 @@ interface InputProps {
   text: string;
   name: string;
   placeholder?: string;
+  type?: "password" | "text";
 }
-const Input = ({ text, name, placeholder = text }: InputProps) => {
+const Input = ({
+  text,
+  name,
+  placeholder = text,
+  type = "text",
+}: InputProps) => {
   return (
     <div className={InputStyle}>
       <label
@@ -18,7 +24,7 @@ const Input = ({ text, name, placeholder = text }: InputProps) => {
       </label>
       <input
         id={name}
-        type="text"
+        type={type}
         placeholder={placeholder}
         className={css({
           textStyle: "Text-16-M",

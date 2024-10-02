@@ -25,6 +25,14 @@ export const textStyles = defineTextStyles({
       lineHeight: "1.625rem !important",
     },
   },
+  "Text-20-B": {
+    value: {
+      fontSize: "1.25rem !important",
+      fontWeight: "400 !important",
+      fontFamily: "var(--font-godo-b) !important",
+      lineHeight: "2.125rem !important",
+    },
+  },
   "Text-20-M": {
     value: {
       fontSize: "1.25rem !important",

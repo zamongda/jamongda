@@ -4,8 +4,11 @@ import Button from "@/app/common/Button/button";
 import Form from "@/app/common/Form/form";
 import Input from "@/app/common/Input/input";
 import { css, sva } from "@styled-system/css";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const router = useRouter();
+
   return (
     <div className={loginStyle.wrapper}>
       <h2 className={loginStyle.imgWrapper}>
@@ -15,16 +18,20 @@ const Login = () => {
         <h3 className={css({ textStyle: "Text-22-M" })}>로그인</h3>
         <Form>
           <Input text="이메일" name="email" />
-          <Input text="비밀번호" name="password" />
+          <Input text="비밀번호" name="password" type="password" />
         </Form>
         <div className={loginStyle.buttonWrapper}>
           <Button text="로그인하기" />
           <Button
             text="카카오 로그인"
             bgColor="white"
-            Icon="/icons/ico-kakao-l.svg"
+            Icon="/icons/icon-kakao.svg"
           />
-          <Button text="로그인하기" bgColor="lightGreen" />
+          <Button
+            text="회원가입하기"
+            bgColor="lightGreen"
+            onClick={() => router.push("/SignUp")}
+          />
         </div>
         <span className={loginStyle.findAccountButton}>
           계정을 잃어버리셨나요?
