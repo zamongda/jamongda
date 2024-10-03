@@ -55,11 +55,29 @@ export const deleteWord = async (id: string) => {
 	const { user, error: userError } = await getUser();
 	const userId = user?.id;
 
+	if (userError) {
+		throw new Error(userError.message);
+	}
+	if (!userId) {
+		throw new Error('User not found');
+	}
+
 	const { error } = await supabase
 		.from('words')
 		.delete()
 		.eq('id', id)
 		.eq('user_id', userId);
+
+	if (error) {
+		throw new Error(error.message);
+	}
+
+	return { success: true };
+};
+
+export const finishTest = async (ids: string[]) => {
+	const { user, error: userError } = await getUser();
+	const userId = user?.id;
 
 	if (userError) {
 		throw new Error(userError.message);
@@ -68,6 +86,13 @@ export const deleteWord = async (id: string) => {
 		throw new Error('User not found');
 	}
 
+	const { data, error } = await supabase
+		.from('words')
+		.update({ is_memorized: true })
+		.in('id', ids)
+		.eq('user_id', userId);
+
+	console.log(data, error);
 	if (error) {
 		throw new Error(error.message);
 	}
