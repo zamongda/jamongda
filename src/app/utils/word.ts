@@ -42,11 +42,35 @@ export const addWord = async (
 		return { ...word, user_id: userId };
 	});
 
-	const { data, error } = await supabase.from('words').insert(newWordsArray);
+	const { error } = await supabase.from('words').insert(newWordsArray);
 
 	if (error) {
 		throw new Error(error.message);
 	}
 
-	return { data: data ? JSON.stringify(data) : '' };
+	return { success: true };
+};
+
+export const deleteWord = async (id: string) => {
+	const { user, error: userError } = await getUser();
+	const userId = user?.id;
+
+	const { error } = await supabase
+		.from('words')
+		.delete()
+		.eq('id', id)
+		.eq('user_id', userId);
+
+	if (userError) {
+		throw new Error(userError.message);
+	}
+	if (!userId) {
+		throw new Error('User not found');
+	}
+
+	if (error) {
+		throw new Error(error.message);
+	}
+
+	return { success: true };
 };
