@@ -1,8 +1,8 @@
-/* eslint-disable @next/next/no-css-tags */
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./css/globals.css";
-import "./css/reset.css";
+import "@styled-system/reset.css";
+import "@styled-system/globals.css";
+import "swiper/css";
 
 const godoB = localFont({
   src: "./fonts/GodoB.ttf",
@@ -40,6 +40,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link href="/styles$.css" rel="stylesheet" />
+      </head>
       <body
         className={`${godoB.variable} ${godoM.variable} ${godoL.variable} ${godoR.variable}`}
       >

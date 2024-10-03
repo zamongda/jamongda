@@ -1,5 +1,7 @@
 import { defineConfig } from "@pandacss/dev";
 
+import { textStyles } from "./text-style.config";
+
 export default defineConfig({
   // Whether to use css reset
   preflight: true,
@@ -40,6 +42,7 @@ export default defineConfig({
           mobileTab: { value: 9998 },
         },
       },
+      textStyles: textStyles,
     },
   },
 
