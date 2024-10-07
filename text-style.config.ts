@@ -57,6 +57,7 @@ export const textStyles = defineTextStyles({
       lineHeight: "1.625rem !important",
     },
   },
+
   "Text-12-M": {
     value: {
       fontSize: ".75rem !important",

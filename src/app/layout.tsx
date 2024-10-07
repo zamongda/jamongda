@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "@/styles/reset.css";
 import "@/styles/globals.css";
 import "swiper/css";
+import ToastContainer from "./providers/toast-container";
 
 const godoB = localFont({
   src: "./fonts/GodoB.ttf",
@@ -47,6 +48,7 @@ export default function RootLayout({
         className={`${godoB.variable} ${godoM.variable} ${godoL.variable} ${godoR.variable}`}
       >
         {children}
+        <ToastContainer />
       </body>
     </html>
   );

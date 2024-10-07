@@ -4,13 +4,20 @@ import CardSlide from "./card-slide";
 import Form from "@/app/common/Form/form";
 import Button from "@/app/common/Button/button";
 import { useRouter } from "next/navigation";
+import { toast, ToastContainer } from "react-toastify";
+import { ToastPopup } from "@/app/common/Toast/toast-popup";
 
 const Main = () => {
   const router = useRouter();
+
+  const openAddCardModal = () => {
+    toast(<ToastPopup type="error" />);
+  };
+
   return (
     <div className={mainStyle.wrapper}>
       <div className={mainStyle.inner}>
-        <button className={mainStyle.addButton}>
+        <button className={mainStyle.addButton} onClick={openAddCardModal}>
           <img src="/icons/icon-plus.svg" alt="추가하기" />
           <span>카드 추가하기</span>
         </button>
