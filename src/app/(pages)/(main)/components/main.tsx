@@ -56,7 +56,7 @@ const MainSva = sva({
       alignItems: "center",
       w: "100%",
       h: "85.76%",
-      maxH: "700px",
+      maxH: "46.875rem",
     },
     addButton: {
       w: "11.25rem",

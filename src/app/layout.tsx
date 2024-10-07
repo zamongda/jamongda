@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "@styled-system/reset.css";
-import "@styled-system/globals.css";
+import "@/styles/reset.css";
+import "@/styles/globals.css";
 import "swiper/css";
 
 const godoB = localFont({

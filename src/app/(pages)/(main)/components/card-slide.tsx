@@ -36,14 +36,15 @@ const SwierStyle = css({
     w: "100vw",
     "& .swiper-wrapper": {
       pt: "1.25rem",
+      w: "100%",
       "& .swiper-slide": {
         transition: "all 0.3s",
-        scale: "0.6",
+        scale: "0.7",
         bgColor: "white",
         color: "black",
         borderRadius: "1.875rem",
-        w: "200px !important",
-        h: "18.75rem !important",
+        w: "60% !important",
+        h: "45vh !important",
         boxShadow: "0rem -0.3125rem 1.25rem 0rem rgba(0, 0, 0, 0.1)",
         textStyle: "Text-22-M",
         "& > div": {
