@@ -29,7 +29,7 @@ const closeIconStyle = {
   display: "flex",
   justifyContent: "flex-end",
   alignItems: "center",
-  marginBottom: "16px",
+  marginBottom: "1rem",
 };
 const customModalStyles: ReactModal.Styles = {
   overlay: {
@@ -42,14 +42,14 @@ const customModalStyles: ReactModal.Styles = {
     left: "0",
   },
   content: {
-    width: "315px",
+    width: "19.6875rem",
     height: "fit-content",
     zIndex: "150",
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    borderRadius: "10px",
+    borderRadius: "30px",
     backgroundColor: "white",
     border: "none",
   },

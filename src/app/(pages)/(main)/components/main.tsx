@@ -57,7 +57,7 @@ const Main = () => {
           />
           <Input text="뜻" name="meaning" placeholder="뜻을 입력하세요" />
         </Form>
-        <Button text="저장하기" className={css({ mt: "40px!" })} />
+        <Button text="저장하기" className={css({ mt: "2.5rem!" })} />
       </ModalPopup>
     </div>
   );
