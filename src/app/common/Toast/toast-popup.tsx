@@ -1,4 +1,4 @@
-import { css, cva, sva } from "@styled-system/css";
+import { css } from "@styled-system/css";
 
 interface ToastPopupProps {
   text?: React.ReactNode;

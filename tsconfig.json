@@ -18,7 +18,7 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
+      "@*": ["./src/*"],
       "@styled-system/*": ["./styled-system/*"],
       "@common/*": ["./src/app/common/*"]
     }

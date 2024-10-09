@@ -1,6 +1,7 @@
-import Button from "@/app/common/Button/button";
-import Form from "@/app/common/Form/form";
-import Input from "@/app/common/Input/input";
+import Button from "@common/button/button";
+import Form from "@common/form/form";
+import Input from "@common/input/input";
+
 import { css, sva } from "@styled-system/css";
 
 const SignUp = () => {

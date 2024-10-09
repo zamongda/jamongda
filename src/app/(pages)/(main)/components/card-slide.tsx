@@ -1,5 +1,7 @@
 "use client";
+
 import { css } from "@styled-system/css";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const CardSlide = () => {
