@@ -1,32 +1,36 @@
+import "@styles/globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "@/styles/reset.css";
-import "@/styles/globals.css";
 import "swiper/css";
+
 import ToastContainer from "./providers/toast-container";
 
 const godoB = localFont({
   src: "./fonts/GodoB.ttf",
   variable: "--font-godo-b",
   weight: "400",
+  preload: true,
 });
 
 const godoM = localFont({
   src: "./fonts/GodoM.ttf",
   variable: "--font-godo-m",
   weight: "400",
+  preload: true,
 });
 
 const godoL = localFont({
   src: "./fonts/godoRoundedL.woff2",
   variable: "--font-godo-l",
   weight: "400",
+  preload: true,
 });
 
 const godoR = localFont({
   src: "./fonts/godoRoundedR.woff2",
   variable: "--font-godo-r",
   weight: "400",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -41,9 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link href="/styles.css" rel="stylesheet" />
-      </head>
+      <head>{/* <link href="./styles/global.css" rel="stylesheet" /> */}</head>
       <body
         className={`${godoB.variable} ${godoM.variable} ${godoL.variable} ${godoR.variable}`}
       >

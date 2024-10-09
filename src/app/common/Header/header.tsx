@@ -31,7 +31,7 @@ const Header = ({ title, type = "default" }: HeaderProps) => {
         <img
           src="/images/main-logo.png"
           alt="jamongda"
-          className={css({ w: "167px !important" })}
+          className={css({ w: "10.4375rem !important" })}
         />
         <img src="/icons/icon-setting.svg" alt="설정" />
       </div>
@@ -57,16 +57,16 @@ const HeaderStyle = sva({
   base: {
     wrapper: {
       w: "100vw",
-      h: "50px",
+      h: "3.125rem",
       pos: "fixed",
-      top: "26px",
-      p: "0 20px",
+      top: "1.625rem",
+      p: "0 1.25rem",
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
       "& img": {
-        w: "24px",
-        h: "24px",
+        w: "1.5rem",
+        h: "1.5rem",
       },
     },
     title: {
@@ -75,9 +75,9 @@ const HeaderStyle = sva({
     },
     back: {
       w: "100vw",
-      p: "0 20px",
-      pt: "26px",
-      pb: "24px",
+      p: "0 1.25rem",
+      pt: "1.625rem",
+      pb: "1.5rem",
       bgColor: "lightOrange",
     },
   },

@@ -6,10 +6,10 @@ import Input from "@common/input/input";
 import ModalPopup from "@common/modal/modal-popup";
 import { ToastPopup } from "@common/toast/toast-popup";
 
-import { css, sva } from "@styled-system/css";
-
 import { useState } from "react";
 import { toast } from "react-toastify";
+
+import { css, sva } from "@styled-system/css";
 
 import { useRouter } from "next/navigation";
 
@@ -92,7 +92,7 @@ const MainSva = sva({
     addButton: {
       w: "11.25rem",
       h: "3.125rem",
-      bgColor: "white !important",
+      bgColor: "white ",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -100,7 +100,7 @@ const MainSva = sva({
       boxShadow: "0rem .25rem .625rem 0rem rgba(0, 0, 0, 0.1)",
       borderRadius: "1.875rem",
       textStyle: "Text-16-M",
-      color: "black !important",
+      color: "black ",
     },
     form: {
       p: "0 1.25rem",
@@ -113,10 +113,10 @@ const MainSva = sva({
       h: "3.125rem",
       bgColor: "white",
       borderRadius: ".9375rem",
-      border: ".0625rem solid {colors.gray.04} !important",
-      p: "0 1.25rem !important",
+      border: ".0625rem solid {colors.gray.04} ",
+      p: "0 1.25rem ",
       textStyle: "Text-16-M",
-      color: "gray.05 !important",
+      color: "gray.05 ",
       appearance: "none",
       background:
         "url('/icons/icon-arrow-down.svg') no-repeat right .9375rem center",
