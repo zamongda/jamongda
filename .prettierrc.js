@@ -3,8 +3,8 @@ module.exports = {
   importOrder: [
     "^@*/(.*)$",
     "^@common/(.*)$",
-    "^@styled-system/(.*)$",
     "^react",
+    "^@styled-system/(.*)$",
     "<THIRD_PARTY_MODULES>",
     "^[./]",
   ],
