@@ -43,9 +43,9 @@ export const buttonCva = cva({
     textAlign: "center",
     textWrap: "nowrap",
     cursor: "pointer",
-    color: "white !important",
+    color: "white ",
     _disabled: {
-      bg: "gray.04 !important",
+      bg: "gray.04 ",
       cursor: "not-allowed",
     },
   },
@@ -56,12 +56,12 @@ export const buttonCva = cva({
     },
     bgColor: {
       orange: {
-        bgColor: "orange !important",
+        bgColor: "orange ",
       },
-      lightGreen: { bgColor: "lightGreen !important" },
+      lightGreen: { bgColor: "lightGreen " },
       white: {
-        bgColor: "white !important",
-        border: "1px solid {colors.gray.04} !important",
+        bgColor: "white ",
+        border: "1px solid {colors.gray.04} ",
         color: "black",
       },
     },
