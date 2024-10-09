@@ -1,9 +1,11 @@
 "use client";
 
-import Button from "@/app/common/button/button";
-import Form from "@/app/common/form/form";
-import Input from "@/app/common/input/input";
+import Button from "@common/button/button";
+import Form from "@common/form/form";
+import Input from "@common/input/input";
+
 import { css, sva } from "@styled-system/css";
+
 import { useRouter } from "next/navigation";
 
 const Login = () => {

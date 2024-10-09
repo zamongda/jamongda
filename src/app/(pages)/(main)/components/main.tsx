@@ -2,15 +2,14 @@
 
 import { css, sva } from "@styled-system/css";
 import CardSlide from "./card-slide";
-import Button from "@/app/common/button/button";
+import Button from "@common/button/button";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { ToastPopup } from "@/app/common/toast/toast-popup";
+import { ToastPopup } from "@common/toast/toast-popup";
 import { useState } from "react";
-import Modal from "react-modal";
-import Form from "@/app/common/form/form";
-import ModalPopup from "@/app/common/modal/modal-popup";
-import Input from "@/app/common/input/input";
+import Form from "@common/form/form";
+import ModalPopup from "@common/modal/modal-popup";
+import Input from "@common/input/input";
 
 const Main = () => {
   const router = useRouter();
