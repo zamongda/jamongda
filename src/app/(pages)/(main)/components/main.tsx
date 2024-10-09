@@ -1,23 +1,31 @@
 "use client";
 import { css, sva } from "@styled-system/css";
 import CardSlide from "./card-slide";
-import Form from "@/app/common/Form/form";
-import Button from "@/app/common/Button/button";
+import Button from "@/app/common/button/button";
 import { useRouter } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
-import { ToastPopup } from "@/app/common/Toast/toast-popup";
+import { ToastPopup } from "@/app/common/toast/toast-popup";
+import { useState } from "react";
+import Modal from "react-modal";
+import Form from "@/app/common/form/form";
+import ModalPopup from "@/app/common/modal/modal-popup";
+import Input from "@/app/common/input/input";
 
 const Main = () => {
   const router = useRouter();
+  const [modalOpen, setModalOpen] = useState(false);
 
   const openAddCardModal = () => {
-    toast(<ToastPopup type="error" />);
+    toast(<ToastPopup text="준비중입니다." />);
   };
 
   return (
     <div className={mainStyle.wrapper}>
       <div className={mainStyle.inner}>
-        <button className={mainStyle.addButton} onClick={openAddCardModal}>
+        <button
+          className={mainStyle.addButton}
+          onClick={() => setModalOpen(true)}
+        >
           <img src="/icons/icon-plus.svg" alt="추가하기" />
           <span>카드 추가하기</span>
         </button>
@@ -35,10 +43,22 @@ const Main = () => {
           <Button
             text="테스트 시작"
             size="lg"
-            onClick={() => router.push("/Test")}
+            // onClick={() => router.push("/Test")}
+            onClick={openAddCardModal}
           />
         </div>
       </div>
+      <ModalPopup isOpen={modalOpen} setModalOpen={setModalOpen}>
+        <Form>
+          <Input
+            text="단어 또는 문장"
+            name="word"
+            placeholder="단어 또는 문장을 입력하세요"
+          />
+          <Input text="뜻" name="meaning" placeholder="뜻을 입력하세요" />
+        </Form>
+        <Button text="저장하기" className={css({ mt: "40px!" })} />
+      </ModalPopup>
     </div>
   );
 };
