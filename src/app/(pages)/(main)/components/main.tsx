@@ -1,9 +1,10 @@
 "use client";
+
 import { css, sva } from "@styled-system/css";
 import CardSlide from "./card-slide";
 import Button from "@/app/common/button/button";
 import { useRouter } from "next/navigation";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { ToastPopup } from "@/app/common/toast/toast-popup";
 import { useState } from "react";
 import Modal from "react-modal";
