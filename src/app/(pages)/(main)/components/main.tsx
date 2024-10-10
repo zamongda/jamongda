@@ -5,14 +5,10 @@ import Form from "@common/form/form";
 import Input from "@common/input/input";
 import ModalPopup from "@common/modal/modal-popup";
 import { ToastPopup } from "@common/toast/toast-popup";
-
 import { useState } from "react";
 import { toast } from "react-toastify";
-
 import { css, sva } from "@styled-system/css";
-
 import { useRouter } from "next/navigation";
-
 import CardSlide from "./card-slide";
 
 const Main = () => {

@@ -8,6 +8,6 @@ module.exports = {
     "<THIRD_PARTY_MODULES>",
     "^[./]",
   ],
-  importOrderSeparation: true,
+  // importOrderSeparation: true,
   importOrderSortSpecifiers: true,
 };
