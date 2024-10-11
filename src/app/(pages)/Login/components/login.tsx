@@ -3,9 +3,7 @@
 import Button from "@common/button/button";
 import Form from "@common/form/form";
 import Input from "@common/input/input";
-
 import { css, sva } from "@styled-system/css";
-
 import { useRouter } from "next/navigation";
 
 const Login = () => {
@@ -66,7 +64,7 @@ const LoginSva = sva({
     imgWrapper: {
       display: "flex",
       justifyContent: "center",
-      pt: "3.75rem",
+      pt: "3.125rem",
       "& img": {
         w: "13.5625rem",
       },
@@ -101,7 +99,7 @@ const LoginSva = sva({
     findAccountButton: {
       textStyle: "Text-12-M",
       position: "relative",
-      color: "gray.05",
+      color: "gray.05!",
       mt: "2.5rem",
       _after: {
         content: '""',

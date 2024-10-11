@@ -1,7 +1,6 @@
 "use client";
 
 import { css, sva } from "@styled-system/css";
-
 import { useRouter } from "next/navigation";
 
 interface HeaderProps {
@@ -59,7 +58,7 @@ const HeaderStyle = sva({
       w: "100vw",
       h: "3.125rem",
       pos: "fixed",
-      top: "1.625rem",
+      top: "1rem",
       p: "0 1.25rem",
       display: "flex",
       alignItems: "center",
@@ -71,7 +70,7 @@ const HeaderStyle = sva({
     },
     title: {
       textStyle: "Text-18-M",
-      color: "white ",
+      color: "white!",
     },
     back: {
       w: "100vw",

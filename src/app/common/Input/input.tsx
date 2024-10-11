@@ -15,10 +15,10 @@ const Input = ({
   type = "text",
 }: InputProps) => {
   return (
-    <div className={InputStyle}>
+    <div className={InputWrapper}>
       <label
         htmlFor={name}
-        className={css({ textStyle: "Text-12-M", color: "gray.04" })}
+        className={css({ textStyle: "Text-12-M", color: "gray.04!" })}
       >
         {text}
       </label>
@@ -26,18 +26,14 @@ const Input = ({
         id={name}
         type={type}
         placeholder={placeholder}
-        className={css({
-          textStyle: "Text-16-M",
-          color: "gray.05",
-          outline: "none",
-        })}
+        className={InputStyle}
       />
     </div>
   );
 };
 export default Input;
 
-const InputStyle = css({
+const InputWrapper = css({
   display: "flex",
   flexDirection: "column",
   w: "100%",
@@ -45,4 +41,10 @@ const InputStyle = css({
   bgColor: "gray.01",
   borderRadius: "10px",
   gap: "0.5rem",
+});
+
+const InputStyle = css({
+  textStyle: "Text-16-M",
+  color: "gray.05!",
+  outline: "none",
 });

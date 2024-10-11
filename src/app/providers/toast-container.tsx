@@ -1,6 +1,5 @@
 import { ToastContainer as ToastifyToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-
 import { sva } from "@styled-system/css";
 
 export default function ToastContainer() {

@@ -28,7 +28,7 @@ const ToastWrapper = css({
   w: "343px",
   p: "13px 20px",
   bgColor: "rgba(0, 0, 0, 0.8)",
-  color: "white",
+  color: "white!",
   backdropBlur: "10px",
   rounded: "15px",
   zIndex: "3",
