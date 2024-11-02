@@ -3,9 +3,15 @@
 import { getUser } from "./auth";
 import { createClient } from "./supabase/create-client";
 
+interface IGetWordsArgs {
+  category_id?: string;
+  is_memorized?: boolean;
+  memory_date?: string;
+}
+
 const supabase = createClient();
 
-export const getWords = async () => {
+export const getWords = async (conditions: IGetWordsArgs) => {
   const { user, error: userError } = await getUser();
   if (userError) {
     throw new Error(userError.message);
@@ -13,10 +19,14 @@ export const getWords = async () => {
   if (!user?.id) {
     throw new Error("User not found");
   }
-  const { data, error } = await supabase
-    .from("words")
-    .select("*")
-    .eq("user_id", user?.id);
+
+  let query = supabase.from("words").select("*").eq("user_id", user?.id);
+
+  for (const key in conditions) {
+    query = query.eq(key, conditions[key as keyof IGetWordsArgs]);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     throw new Error(error.message);
@@ -26,7 +36,7 @@ export const getWords = async () => {
 };
 
 export const addWord = async (
-  words: { ko: string; en: string; category?: string }[],
+  words: { ko: string; en: string; category_id?: string }[],
 ) => {
   const { user, error: userError } = await getUser();
   const userId = user?.id;
@@ -88,7 +98,10 @@ export const finishTest = async (ids: string[]) => {
 
   const { data, error } = await supabase
     .from("words")
-    .update({ is_memorized: true })
+    .update({
+      is_memorized: true,
+      memory_date: new Date().toLocaleDateString(),
+    })
     .in("id", ids)
     .eq("user_id", userId);
 
