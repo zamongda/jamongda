@@ -43,3 +43,26 @@ export const deleteCategory = async (id: string) => {
 
   return { success: true };
 };
+
+export const getCategories = async () => {
+  const { user, error: userError } = await getUser();
+  const userId = user?.id;
+
+  if (userError) {
+    throw new Error(userError.message);
+  }
+  if (!userId) {
+    throw new Error("User not found");
+  }
+
+  const { data, error } = await supabase
+    .from("category")
+    .select("*")
+    .eq("user_id", userId);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return { data: data ? JSON.stringify(data) : "" };
+};
