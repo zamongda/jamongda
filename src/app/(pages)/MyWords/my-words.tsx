@@ -7,9 +7,8 @@ import ModalPopup from "@common/modal/modal-popup";
 import { useState } from "react";
 import { css, sva } from "@styled-system/css";
 import { useRouter } from "next/navigation";
-import CardSlide from "./card-slide";
 
-const Main = () => {
+const MyWords = () => {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -23,7 +22,6 @@ const Main = () => {
           <img src="/icons/icon-plus.svg" alt="추가하기" />
           <span>카드 추가하기</span>
         </button>
-        <CardSlide />
         <Form className={mainStyle.form}>
           <select name="category" id="category" className={mainStyle.select}>
             <option value="all" selected>
@@ -56,7 +54,7 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default MyWords;
 
 const MainSva = sva({
   slots: ["wrapper", "inner", "addButton", "form", "select", "buttonWrapper"],
@@ -68,17 +66,6 @@ const MainSva = sva({
       display: "flex",
       flexDirection: "column",
       justifyContent: "flex-end",
-      overflow: "hidden",
-      "&:before": {
-        content: "''",
-        w: "100%",
-        h: "70%",
-        bgColor: "#FAFAFA",
-        position: "absolute",
-        left: "0",
-        bottom: "0",
-        borderTopRadius: "50px",
-      },
     },
     inner: {
       display: "flex",
