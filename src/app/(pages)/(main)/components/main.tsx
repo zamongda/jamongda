@@ -77,7 +77,7 @@ const MainSva = sva({
         position: "absolute",
         left: "0",
         bottom: "0",
-        borderTopRadius: "50px",
+        borderTopRadius: "3.125rem",
       },
     },
     inner: {

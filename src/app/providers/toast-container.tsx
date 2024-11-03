@@ -26,15 +26,15 @@ const toastSva = sva({
   base: {
     container: {
       zIndex: "toast!",
-      pt: "60px!",
-      px: "16px!",
-      bottom: "50px!",
+      pt: "3.75rem!",
+      px: "1rem!",
+      bottom: "3.125rem!",
       display: "flex!",
       justifyContent: "center!",
     },
     body: {
       p: "0!",
-      mt: "10px",
+      mt: ".625rem",
     },
     toast: {
       bg: "none!",

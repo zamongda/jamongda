@@ -44,17 +44,17 @@ const SwierStyle = css({
     overflow: "visible!",
     overflowX: "hidden",
     "& .swiper-wrapper": {
-      pt: "20px",
+      pt: "1.25rem",
       w: "100%",
       "& .swiper-slide": {
         transition: "all 0.3s",
         scale: "0.5",
         bgColor: "white",
         color: "black",
-        borderRadius: "30px",
+        borderRadius: "1.875rem",
         w: "60% !important",
         h: "45vh !important",
-        boxShadow: "0px -5px 20px 0px rgba(0, 0, 0, 0.1)",
+        boxShadow: "0rem -0.3125rem 1.25rem 0rem rgba(0, 0, 0, 0.1)",
         textStyle: "Text-22-M",
         "& > div": {
           w: "100%",
