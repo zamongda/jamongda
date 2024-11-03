@@ -68,6 +68,17 @@ const MainSva = sva({
       display: "flex",
       flexDirection: "column",
       justifyContent: "flex-end",
+      overflow: "hidden",
+      "&:before": {
+        content: "''",
+        w: "100%",
+        h: "70%",
+        bgColor: "#FAFAFA",
+        position: "absolute",
+        left: "0",
+        bottom: "0",
+        borderTopRadius: "3.125rem",
+      },
     },
     inner: {
       display: "flex",

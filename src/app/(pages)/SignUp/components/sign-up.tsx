@@ -1,7 +1,6 @@
 import Button from "@common/button/button";
 import Form from "@common/form/form";
 import Input from "@common/input/input";
-
 import { css, sva } from "@styled-system/css";
 
 const SignUp = () => {
@@ -41,7 +40,7 @@ const SignUpSva = sva({
       bgColor: "white",
       borderTopRadius: "3.125rem",
       p: "3.75rem 3.125rem 5rem",
-      boxShadow: "0px -5px 20px 0px rgba(0, 0, 0, 0.1)",
+      boxShadow: "0rem -.3125rem 1.25rem 0rem rgba(0, 0, 0, 0.1)",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",

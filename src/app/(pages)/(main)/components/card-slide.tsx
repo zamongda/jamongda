@@ -1,13 +1,18 @@
 "use client";
 
 import { css } from "@styled-system/css";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const CardSlide = () => {
   return (
     <div className={SwierStyle}>
-      <Swiper loop={true} slidesPerView="auto" centeredSlides={true}>
+      <Swiper
+        loop={true}
+        slidesPerView="auto"
+        centeredSlides={true}
+        spaceBetween="-20"
+        // loopAdditionalSlides={4}
+      >
         <SwiperSlide>
           <div>test01</div>
         </SwiperSlide>
@@ -36,12 +41,14 @@ export default CardSlide;
 const SwierStyle = css({
   "& .swiper": {
     w: "100vw",
+    overflow: "visible!",
+    overflowX: "hidden",
     "& .swiper-wrapper": {
       pt: "1.25rem",
       w: "100%",
       "& .swiper-slide": {
         transition: "all 0.3s",
-        scale: "0.7",
+        scale: "0.5",
         bgColor: "white",
         color: "black",
         borderRadius: "1.875rem",

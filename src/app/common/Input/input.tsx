@@ -39,7 +39,7 @@ const InputWrapper = css({
   w: "100%",
   p: "1.25rem",
   bgColor: "gray.01",
-  borderRadius: "10px",
+  borderRadius: ".625rem",
   gap: "0.5rem",
 });
 

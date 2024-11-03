@@ -49,7 +49,7 @@ const customModalStyles: ReactModal.Styles = {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    borderRadius: "30px",
+    borderRadius: "1.875rem",
     backgroundColor: "white",
     border: "none",
   },
