@@ -1,117 +1,130 @@
 "use client";
 
-import Button from "@common/button/button";
-import Form from "@common/form/form";
-import Input from "@common/input/input";
-import ModalPopup from "@common/modal/modal-popup";
-import { useState } from "react";
-import { css, sva } from "@styled-system/css";
-import { useRouter } from "next/navigation";
+import { sva } from "@styled-system/css";
 
+const CardDetail = [
+  {
+    title: "나의 단어",
+    icon: "/icons/icon-note.svg",
+    count: 120,
+    color: "#FF8168",
+  },
+  {
+    title: "내가 암기한 단어",
+    icon: "/icons/icon-check.svg",
+    count: 120,
+    color: "#618B7B",
+  },
+  {
+    title: "오늘 암기한 단어",
+    icon: "/icons/icon-calendar.svg",
+    count: 120,
+    color: "#618B7B",
+  },
+  {
+    title: "나의 카테고리",
+    icon: "/icons/icon-chart.svg",
+    count: 120,
+    color: "#FF8168",
+  },
+];
 const MyWords = () => {
-  const router = useRouter();
-  const [modalOpen, setModalOpen] = useState(false);
+  const myWordsStyle = MyWordsSva();
 
   return (
-    <div className={mainStyle.wrapper}>
-      <div className={mainStyle.inner}>
-        <button
-          className={mainStyle.addButton}
-          onClick={() => setModalOpen(true)}
-        >
-          <img src="/icons/icon-plus.svg" alt="추가하기" />
-          <span>카드 추가하기</span>
-        </button>
-        <Form className={mainStyle.form}>
-          <select name="category" id="category" className={mainStyle.select}>
-            <option value="all" selected>
-              전체
-            </option>
-            <option value="business">비즈니스</option>
-            <option value="conversation">회화</option>
-          </select>
-        </Form>
-        <div className={mainStyle.buttonWrapper}>
-          <Button
-            text="테스트 시작"
-            size="lg"
-            onClick={() => router.push("/Test")}
-          />
-        </div>
+    <div className={myWordsStyle.wrapper}>
+      <div className={myWordsStyle.inner}>
+        {CardDetail.map((card, idx) => (
+          <div key={idx} className={myWordsStyle.card}>
+            <div className={myWordsStyle.cardTitle}>
+              <img src={card.icon} alt={card.title} />
+              <div>{card.title}</div>
+            </div>
+            <div
+              className={myWordsStyle.count}
+              style={{ "--count-color": card.color } as React.CSSProperties}
+            >
+              {card.count}개
+            </div>
+          </div>
+        ))}
       </div>
-      <ModalPopup isOpen={modalOpen} setModalOpen={setModalOpen}>
-        <Form>
-          <Input
-            text="단어 또는 문장"
-            name="word"
-            placeholder="단어 또는 문장을 입력하세요"
-          />
-          <Input text="뜻" name="meaning" placeholder="뜻을 입력하세요" />
-        </Form>
-        <Button text="저장하기" className={css({ mt: "2.5rem!" })} />
-      </ModalPopup>
     </div>
   );
 };
 
 export default MyWords;
 
-const MainSva = sva({
-  slots: ["wrapper", "inner", "addButton", "form", "select", "buttonWrapper"],
+const MyWordsSva = sva({
+  slots: ["wrapper", "inner", "card", "cardTitle", "count"],
   base: {
     wrapper: {
       w: "100vw",
       h: "100dvh",
-      bgColor: "lightOrange",
+      bgColor: "green",
       display: "flex",
       flexDirection: "column",
       justifyContent: "flex-end",
+      "&:before": {
+        content: "''",
+        w: "100%",
+        h: "70%",
+        bgColor: "#FAFAFA",
+        position: "absolute",
+        left: "0",
+        bottom: "0",
+        borderTopRadius: "50px",
+      },
     },
     inner: {
+      position: "relative",
+      display: "grid",
+      gridTemplateColumns: "repeat(2, 1fr)",
+      gridTemplateRows: "repeat(2, 1fr)",
+      w: "100%",
+      h: "80%",
+      p: "0 20px 40px",
+      rowGap: "30px",
+      columnGap: "19px",
+    },
+    card: {
+      bgColor: "white",
+      color: "black",
+      borderRadius: "30px",
+      boxShadow: "0px -5px 20px 0px rgba(0, 0, 0, 0.1)",
+      h: "100%",
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
-      alignItems: "center",
-      w: "100%",
-      h: "85.76%",
-      maxH: "46.875rem",
+      p: "40px 20px",
     },
-    addButton: {
-      w: "11.25rem",
-      h: "3.125rem",
-      bgColor: "white ",
+    cardTitle: {
       display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: ".25rem",
-      boxShadow: "0rem .25rem .625rem 0rem rgba(0, 0, 0, 0.1)",
-      borderRadius: "1.875rem",
-      textStyle: "Text-16-M",
-      color: "black",
+      flexDir: "column",
+      gap: "10px",
+      "& img": {
+        w: "24px",
+        h: "24px",
+      },
+      "& div": {
+        textStyle: "Text-16-M",
+        color: "gray.05",
+      },
     },
-    form: {
-      p: "0 1.25rem",
-      mt: "1.25rem",
+    count: {
+      textStyle: "Text-28-B",
       position: "relative",
-    },
-    select: {
-      outline: "none",
-      w: "100%",
-      h: "3.125rem",
-      bgColor: "white",
-      borderRadius: ".9375rem",
-      border: ".0625rem solid {colors.gray.04} ",
-      p: "0 1.25rem ",
-      textStyle: "Text-16-M",
-      color: "gray.05!",
-      appearance: "none",
-      background:
-        "url('/icons/icon-arrow-down.svg') no-repeat right .9375rem center",
-    },
-    buttonWrapper: {
-      p: "1.25rem 1.25rem 2.5rem",
-      w: "100%",
+      pb: "20px",
+      "&:before": {
+        content: "''",
+        w: "50px",
+        h: "5px",
+        bgColor: "var(--count-color)",
+        position: "absolute",
+        left: "0",
+        bottom: "0",
+        borderRadius: "50px",
+      },
     },
   },
 });
-const mainStyle = MainSva();
