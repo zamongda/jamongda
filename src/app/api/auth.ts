@@ -29,7 +29,5 @@ export const login = async (email: string, password: string) => {
 export const getUser = async () => {
   const { data, error } = await supabase.auth.getSession();
 
-  console.log(data, "getUser");
-
   return { user: data.session?.user, error };
 };
