@@ -1,6 +1,11 @@
 "use client";
 
-import { sva } from "@styled-system/css";
+import Button from "@common/button/button";
+import Form from "@common/form/form";
+import Input from "@common/input/input";
+import DrawerPopup from "@common/modal/drawer-popup";
+import { useState } from "react";
+import { css, sva } from "@styled-system/css";
 
 const CardDetail = [
   {
@@ -28,28 +33,39 @@ const CardDetail = [
     color: "#FF8168",
   },
 ];
+
 const MyWords = () => {
   const myWordsStyle = MyWordsSva();
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <div className={myWordsStyle.wrapper}>
-      <div className={myWordsStyle.inner}>
-        {CardDetail.map((card, idx) => (
-          <div key={idx} className={myWordsStyle.card}>
-            <div className={myWordsStyle.cardTitle}>
-              <img src={card.icon} alt={card.title} />
-              <div>{card.title}</div>
-            </div>
+    <>
+      <div className={myWordsStyle.wrapper}>
+        <div className={myWordsStyle.inner}>
+          {CardDetail.map((card, idx) => (
             <div
-              className={myWordsStyle.count}
-              style={{ "--count-color": card.color } as React.CSSProperties}
+              key={idx}
+              className={myWordsStyle.card}
+              onClick={() => setModalOpen(true)}
             >
-              {card.count}개
+              <div className={myWordsStyle.cardTitle}>
+                <img src={card.icon} alt={card.title} />
+                <div>{card.title}</div>
+              </div>
+              <div
+                className={myWordsStyle.count}
+                style={{ "--count-color": card.color } as React.CSSProperties}
+              >
+                {card.count}개
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+      <DrawerPopup isOpen={modalOpen} setModalOpen={setModalOpen}>
+        <div>TEST</div>
+      </DrawerPopup>
+    </>
   );
 };
 
