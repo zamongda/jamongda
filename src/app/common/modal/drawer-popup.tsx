@@ -27,15 +27,11 @@ const DrawerPopup = ({ children, isOpen, setModalOpen }: ModalPopupProps) => {
             initial={{ y: "100vh" }}
             animate={{ y: 0 }}
             exit={{ y: "100vh" }}
-            transition={{ type: "spring", duration: 0.5, bounce: 0.2 }}
+            transition={{ type: "spring", duration: 0.6, bounce: 0.3 }}
             drag="y"
             dragControls={controls}
-            dragConstraints={{ top: 0, bottom: 0 }}
             dragListener={false}
-            dragElastic={{
-              top: 0,
-              bottom: 0.5,
-            }}
+            dragElastic={{ top: 0, bottom: 0.6 }}
             onDragEnd={(_event, info) => {
               if (info.offset.y > 100 && setModalOpen) {
                 setModalOpen(false);
@@ -63,8 +59,20 @@ const DrawerPopup = ({ children, isOpen, setModalOpen }: ModalPopupProps) => {
                   h: "100%",
                   cursor: "grab",
                   touchAction: "none",
+                  position: "relative",
                   _active: {
                     cursor: "grabbing",
+                  },
+                  _before: {
+                    content: "''",
+                    w: "50px",
+                    h: "4px",
+                    bgColor: "black",
+                    position: "absolute",
+                    top: "20px",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    borderRadius: "30px",
                   },
                 })}
               />
