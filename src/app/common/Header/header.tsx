@@ -13,37 +13,44 @@ const Header = ({ title, type = "default" }: HeaderProps) => {
   if (type === "default") {
     return (
       <div className={headerStyle.wrapper}>
-        <img
-          src="/icons/icon-back.svg"
-          alt="뒤로가기"
-          onClick={() => router.back()}
-        />
+        <button onClick={() => router.back()}>
+          <img src="/icons/icon-back.svg" alt="뒤로가기" />
+        </button>
+
         {title && <h2 className={headerStyle.title}>{title}</h2>}
-        <img src="/icons/icon-setting.svg" alt="설정" />
+        <button>
+          <img src="/icons/icon-setting.svg" alt="설정" />
+        </button>
       </div>
     );
   }
   if (type === "main") {
     return (
       <div className={headerStyle.wrapper}>
-        <img src="/icons/icon-album.svg" alt="보관함" />
+        <button>
+          <img
+            src="/icons/icon-album.svg"
+            alt="보관함"
+            onClick={() => router.push("/MyWords")}
+          />
+        </button>
         <img
           src="/images/main-logo.png"
           alt="jamongda"
           className={css({ w: "10.4375rem !important" })}
         />
-        <img src="/icons/icon-setting.svg" alt="설정" />
+        <button>
+          <img src="/icons/icon-setting.svg" alt="설정" />
+        </button>
       </div>
     );
   }
   if (type === "back") {
     return (
       <div className={headerStyle.back}>
-        <img
-          src="/icons/icon-back.svg"
-          alt="뒤로가기"
-          onClick={() => router.back()}
-        />
+        <button onClick={() => router.back()}>
+          <img src="/icons/icon-back.svg" alt="뒤로가기" />
+        </button>
       </div>
     );
   }
