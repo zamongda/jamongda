@@ -18,7 +18,7 @@ const Header = ({ title, type = "default" }: HeaderProps) => {
         </button>
 
         {title && <h2 className={headerStyle.title}>{title}</h2>}
-        <button>
+        <button onClick={() => router.push("/Setting")}>
           <img src="/icons/icon-setting.svg" alt="설정" />
         </button>
       </div>
@@ -27,19 +27,15 @@ const Header = ({ title, type = "default" }: HeaderProps) => {
   if (type === "main") {
     return (
       <div className={headerStyle.wrapper}>
-        <button>
-          <img
-            src="/icons/icon-album.svg"
-            alt="보관함"
-            onClick={() => router.push("/MyWords")}
-          />
+        <button onClick={() => router.push("/MyWords")}>
+          <img src="/icons/icon-album.svg" alt="보관함" />
         </button>
         <img
           src="/images/main-logo.png"
           alt="jamongda"
           className={css({ w: "10.4375rem !important" })}
         />
-        <button>
+        <button onClick={() => router.push("/Setting")}>
           <img src="/icons/icon-setting.svg" alt="설정" />
         </button>
       </div>
@@ -70,6 +66,7 @@ const HeaderStyle = sva({
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
+      zIndex: "header",
       "& img": {
         w: "1.5rem",
         h: "1.5rem",
