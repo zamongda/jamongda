@@ -1,11 +1,8 @@
 "use client";
 
-import Button from "@common/button/button";
-import Form from "@common/form/form";
-import Input from "@common/input/input";
 import DrawerPopup from "@common/modal/drawer-popup";
 import { useState } from "react";
-import { css, sva } from "@styled-system/css";
+import { sva } from "@styled-system/css";
 
 const CardDetail = [
   {
