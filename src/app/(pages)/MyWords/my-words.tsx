@@ -1,5 +1,6 @@
 "use client";
 
+import Form from "@common/form/form";
 import DrawerPopup from "@common/modal/drawer-popup";
 import { useState } from "react";
 import { css, sva } from "@styled-system/css";
@@ -61,6 +62,15 @@ const MyWords = () => {
         </div>
       </div>
       <DrawerPopup isOpen={modalOpen} setModalOpen={setModalOpen}>
+        <Form className={wordsSelectStyle}>
+          <select name="wordsList" id="wordsList">
+            <option value="all" selected>
+              전체
+            </option>
+            <option value="business">비즈니스</option>
+            <option value="conversation">회화</option>
+          </select>
+        </Form>
         <ul className={wordsListStyle.wrapper}>
           <li className={wordsListStyle.item}>
             <div>
@@ -201,6 +211,7 @@ const WordsListSva = sva({
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
+      pr: "10px",
     },
     EngWord: {
       textStyle: "Text-20-M",
@@ -214,4 +225,12 @@ const WordsListSva = sva({
       gap: "12px",
     },
   },
+});
+
+const wordsSelectStyle = css({
+  position: "absolute",
+  top: "30px",
+  right: "30px",
+  w: "auto",
+  textStyle: "Text-14-M",
 });
