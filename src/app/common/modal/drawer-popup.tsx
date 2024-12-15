@@ -99,7 +99,7 @@ const modalContentStyle = {
   borderRadius: "1.875rem 1.875rem 0 0",
   backgroundColor: "white",
   border: "none",
-  padding: "1rem",
+  padding: "60px 30px",
 };
 const customModalStyles: ReactModal.Styles = {
   overlay: {
