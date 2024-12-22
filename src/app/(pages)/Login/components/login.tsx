@@ -3,15 +3,17 @@
 import Button from "@common/button/button";
 import Form from "@common/form/form";
 import Input from "@common/input/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { css, sva } from "@styled-system/css";
 import { useRouter } from "next/navigation";
-import { login } from "../../../api/auth";
+import { createClient } from "../../../api/supabase/create-client";
+import { useLogin } from "../../../providers/auth-provider";
 
 const Login = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const supabase = createClient();
 
   const handleLogin = async () => {
     if (email === "") {
@@ -22,10 +24,12 @@ const Login = () => {
       alert("비밀번호를 입력해주세요.");
       return;
     }
-    const { data } = await login(email, password);
-    const { user, session } = JSON.parse(data);
+    const { data } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
-    if (!user || !session) {
+    if (!data) {
       alert("로그인에 실패했습니다.");
       return;
     }

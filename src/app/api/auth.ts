@@ -1,10 +1,9 @@
 "use server";
 
-import { createClient } from "./supabase/create-client";
-
-const supabase = createClient();
+import { createServerSupabaseClient } from "./supabase/server-props";
 
 export const signUp = async (email: string, password: string) => {
+  const supabase = await createServerSupabaseClient();
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -16,6 +15,7 @@ export const signUp = async (email: string, password: string) => {
 };
 
 export const login = async (email: string, password: string) => {
+  const supabase = await createServerSupabaseClient();
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
@@ -27,7 +27,18 @@ export const login = async (email: string, password: string) => {
 };
 
 export const getUser = async () => {
-  const { data, error } = await supabase.auth.getSession();
+  const supabase = await createServerSupabaseClient();
+  const { data, error } = await supabase.auth.getUser();
 
-  return { user: data.session?.user, error };
+  return { user: data.user, error };
+};
+
+export const logout = async () => {
+  const supabase = await createServerSupabaseClient();
+  const { error } = await supabase.auth.signOut();
+  console.log("logout", error);
+
+  if (error) alert("잠시 후 다시 시도해주세요.");
+
+  return {};
 };
