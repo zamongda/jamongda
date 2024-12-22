@@ -16,17 +16,19 @@ const Login = () => {
   const supabase = createClient();
 
   const handleLogin = async () => {
-    if (email === "") {
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+    if (trimmedEmail === "") {
       alert("이메일을 입력해주세요.");
       return;
     }
-    if (password === "") {
+    if (trimmedPassword === "") {
       alert("비밀번호를 입력해주세요.");
       return;
     }
     const { data } = await supabase.auth.signInWithPassword({
-      email,
-      password,
+      email: trimmedEmail,
+      password: trimmedPassword,
     });
 
     if (!data) {
