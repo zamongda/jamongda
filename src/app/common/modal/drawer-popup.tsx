@@ -13,12 +13,15 @@ interface ModalPopupProps {
 const DrawerPopup = ({ children, isOpen, setModalOpen }: ModalPopupProps) => {
   const controls = useDragControls();
 
+  console.log(isOpen, "isOpen");
   return (
     <AnimatePresence>
       {isOpen && (
         <Modal
           isOpen={isOpen}
-          onRequestClose={() => setModalOpen && setModalOpen(false)}
+          onRequestClose={() => {
+            setModalOpen && setModalOpen(false);
+          }}
           style={customModalStyles}
           ariaHideApp={false}
         >
