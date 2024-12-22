@@ -1,11 +1,11 @@
 import Header from "@common/header/header";
-import MyWords from "./components/my-words";
+import Setting from "./components/setting";
 
 const MyWordsPage = () => {
   return (
     <>
-      <Header title="보관함" />
-      <MyWords />
+      <Header title="설정" />
+      <Setting />
     </>
   );
 };
