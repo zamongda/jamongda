@@ -2,6 +2,7 @@
 
 import { css, sva } from "@styled-system/css";
 import { useRouter } from "next/navigation";
+import { useLogin } from "../../providers/auth-provider";
 
 interface HeaderProps {
   type?: "default" | "main" | "back";
@@ -9,6 +10,7 @@ interface HeaderProps {
 }
 const Header = ({ title, type = "default" }: HeaderProps) => {
   const router = useRouter();
+  const { isLogin } = useLogin();
 
   if (type === "default") {
     return (
@@ -27,7 +29,15 @@ const Header = ({ title, type = "default" }: HeaderProps) => {
   if (type === "main") {
     return (
       <div className={headerStyle.wrapper}>
-        <button onClick={() => router.push("/MyWords")}>
+        <button
+          onClick={() => {
+            if (!isLogin) {
+              router.push("/Login");
+              return;
+            }
+            router.push("/MyWords");
+          }}
+        >
           <img src="/icons/icon-album.svg" alt="보관함" />
         </button>
         <img

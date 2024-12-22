@@ -1,10 +1,10 @@
-import { getUser } from "./auth";
+import { getUserInClient } from "./get-client-user";
 import { createClient } from "./supabase/create-client";
 
 const supabase = createClient();
 
 export const addCategory = async (name: string) => {
-  const { user, error: userError } = await getUser();
+  const { user, error: userError } = await getUserInClient();
   const userId = user?.id;
 
   if (userError) {
@@ -26,7 +26,7 @@ export const addCategory = async (name: string) => {
 };
 
 export const deleteCategory = async (id: string) => {
-  const { user, error: userError } = await getUser();
+  const { user, error: userError } = await getUserInClient();
   const userId = user?.id;
 
   if (userError) {
@@ -45,7 +45,7 @@ export const deleteCategory = async (id: string) => {
 };
 
 export const getCategories = async () => {
-  const { user, error: userError } = await getUser();
+  const { user, error: userError } = await getUserInClient();
   const userId = user?.id;
 
   if (userError) {

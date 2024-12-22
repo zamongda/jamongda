@@ -2,7 +2,7 @@ import "@styles/globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "swiper/css";
-
+import { AuthProvider } from "./providers/auth-provider";
 import ToastContainer from "./providers/toast-container";
 
 const godoB = localFont({
@@ -49,8 +49,10 @@ export default function RootLayout({
       <body
         className={`${godoB.variable} ${godoM.variable} ${godoL.variable} ${godoR.variable}`}
       >
-        {children}
-        <ToastContainer />
+        <AuthProvider>
+          {children}
+          <ToastContainer />
+        </AuthProvider>
       </body>
     </html>
   );

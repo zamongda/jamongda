@@ -1,17 +1,37 @@
-import { sva } from "@styled-system/css";
+"use client";
 
-const settingListTitle = ["비밀번호 변경하기", "회원 탈퇴하기", "로그아웃"];
+import { sva } from "@styled-system/css";
+import { useRouter } from "next/navigation";
+import { logout } from "../../../api/auth";
 
 const Setting = () => {
+  const router = useRouter();
   const settingStyle = SettingSva();
+
+  const settings = [
+    { id: 0, title: "비밀번호 변경하기", onClick: () => {} },
+    { id: 0, title: "회원 탈퇴하기", onClick: () => {} },
+    {
+      id: 0,
+      title: "로그아웃",
+      onClick: () => {
+        logout();
+        router.push("/Login");
+      },
+    },
+  ];
 
   return (
     <div className={settingStyle.wrapper}>
       <div className={settingStyle.inner}>
         <ul className={settingStyle.listWrapper}>
-          {settingListTitle.map((title, idx) => (
-            <li className={settingStyle.list} key={idx}>
-              <div>{title}</div>
+          {settings.map((setting) => (
+            <li
+              className={settingStyle.list}
+              key={setting.id}
+              onClick={setting.onClick}
+            >
+              <div>{setting.title}</div>
               <img src="/icons/icon-arrow-right.svg" alt="선택" />
             </li>
           ))}

@@ -4,46 +4,23 @@ import Form from "@common/form/form";
 import DrawerPopup from "@common/modal/drawer-popup";
 import { useState } from "react";
 import { css, sva } from "@styled-system/css";
-
-const CardDetail = [
-  {
-    title: "나의 단어",
-    icon: "/icons/icon-note.svg",
-    count: 120,
-    color: "#FF8168",
-  },
-  {
-    title: "내가 암기한 단어",
-    icon: "/icons/icon-check.svg",
-    count: 120,
-    color: "#618B7B",
-  },
-  {
-    title: "오늘 암기한 단어",
-    icon: "/icons/icon-calendar.svg",
-    count: 120,
-    color: "#618B7B",
-  },
-  {
-    title: "나의 카테고리",
-    icon: "/icons/icon-chart.svg",
-    count: 120,
-    color: "#FF8168",
-  },
-];
+import useMyWords from "../hooks/use-my-words";
 
 const MyWords = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const { cardList } = useMyWords();
+
   const myWordsStyle = MyWordsSva();
   const wordsListStyle = WordsListSva();
-  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <>
       <div className={myWordsStyle.wrapper}>
         <div className={myWordsStyle.inner}>
-          {CardDetail.map((card, idx) => (
+          {cardList.map((card) => (
             <div
-              key={idx}
+              key={card.id}
               className={myWordsStyle.card}
               onClick={() => setModalOpen(true)}
             >

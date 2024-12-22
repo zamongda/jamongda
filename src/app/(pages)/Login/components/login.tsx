@@ -3,11 +3,40 @@
 import Button from "@common/button/button";
 import Form from "@common/form/form";
 import Input from "@common/input/input";
+import { useEffect, useState } from "react";
 import { css, sva } from "@styled-system/css";
 import { useRouter } from "next/navigation";
+import { createClient } from "../../../api/supabase/create-client";
+import { useLogin } from "../../../providers/auth-provider";
 
 const Login = () => {
   const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const supabase = createClient();
+
+  const handleLogin = async () => {
+    if (email === "") {
+      alert("이메일을 입력해주세요.");
+      return;
+    }
+    if (password === "") {
+      alert("비밀번호를 입력해주세요.");
+      return;
+    }
+    const { data } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (!data) {
+      alert("로그인에 실패했습니다.");
+      return;
+    }
+
+    router.push("/");
+    router.refresh(); // 강제 리로드하여 auth-provider에서 isLogin을 갱신
+  };
 
   return (
     <div className={loginStyle.wrapper}>
@@ -17,11 +46,20 @@ const Login = () => {
       <div className={loginStyle.box}>
         <h3 className={css({ textStyle: "Text-22-M" })}>로그인</h3>
         <Form>
-          <Input text="이메일" name="email" />
-          <Input text="비밀번호" name="password" type="password" />
+          <Input
+            text="이메일"
+            name="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            text="비밀번호"
+            name="password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </Form>
         <div className={loginStyle.buttonWrapper}>
-          <Button text="로그인하기" />
+          <Button text="로그인하기" onClick={handleLogin} />
           <Button
             text="카카오 로그인"
             bgColor="white"

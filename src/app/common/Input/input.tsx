@@ -2,18 +2,12 @@
 
 import { css } from "@styled-system/css";
 
-interface InputProps {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   text: string;
   name: string;
-  placeholder?: string;
   type?: "password" | "text";
 }
-const Input = ({
-  text,
-  name,
-  placeholder = text,
-  type = "text",
-}: InputProps) => {
+const Input = ({ text, name, type = "text", ...props }: InputProps) => {
   return (
     <div className={InputWrapper}>
       <label
@@ -25,8 +19,9 @@ const Input = ({
       <input
         id={name}
         type={type}
-        placeholder={placeholder}
         className={InputStyle}
+        {...props}
+        placeholder={props.placeholder || text}
       />
     </div>
   );
