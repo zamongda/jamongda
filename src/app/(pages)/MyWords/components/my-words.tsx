@@ -5,6 +5,7 @@ import DrawerPopup from "@common/modal/drawer-popup";
 import { useState } from "react";
 import { css, sva } from "@styled-system/css";
 import useMyWords from "../hooks/use-my-words";
+import MyWordsCard from "./my-words-card";
 
 const MyWords = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -18,24 +19,16 @@ const MyWords = () => {
     <>
       <div className={myWordsStyle.wrapper}>
         <div className={myWordsStyle.inner}>
-          {cardList.map((card) => (
-            <div
-              key={card.id}
-              className={myWordsStyle.card}
-              onClick={() => setModalOpen(true)}
-            >
-              <div className={myWordsStyle.cardTitle}>
-                <img src={card.icon} alt={card.title} />
-                <div>{card.title}</div>
-              </div>
-              <div
-                className={myWordsStyle.count}
-                style={{ "--count-color": card.color } as React.CSSProperties}
-              >
-                {card.count}개
-              </div>
-            </div>
-          ))}
+          {cardList.map((card, idx) => {
+            console.log(card, "card");
+            return (
+              <MyWordsCard
+                key={idx}
+                card={card}
+                onClick={() => setModalOpen(true)}
+              />
+            );
+          })}
         </div>
       </div>
       <DrawerPopup isOpen={modalOpen} setModalOpen={setModalOpen}>
@@ -94,7 +87,7 @@ const MyWords = () => {
 export default MyWords;
 
 const MyWordsSva = sva({
-  slots: ["wrapper", "inner", "card", "cardTitle", "count"],
+  slots: ["wrapper", "inner"],
   base: {
     wrapper: {
       w: "100vw",
@@ -124,45 +117,6 @@ const MyWordsSva = sva({
       p: "0 1.25rem 2.5rem",
       rowGap: "1.875rem",
       columnGap: "1.1875rem",
-    },
-    card: {
-      bgColor: "white",
-      color: "black",
-      borderRadius: "1.875rem",
-      boxShadow: "0rem -0.3125rem 1.25rem 0rem rgba(0, 0, 0, 0.1)",
-      h: "100%",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "space-between",
-      p: "2.5rem 1.25rem",
-    },
-    cardTitle: {
-      display: "flex",
-      flexDir: "column",
-      gap: ".625rem",
-      "& img": {
-        w: "1.5rem",
-        h: "1.5rem",
-      },
-      "& div": {
-        textStyle: "Text-16-M",
-        color: "gray.05",
-      },
-    },
-    count: {
-      textStyle: "Text-28-B",
-      position: "relative",
-      pb: "1.25rem",
-      "&:before": {
-        content: "''",
-        w: "3.125rem",
-        h: ".3125rem",
-        bgColor: "var(--count-color)",
-        position: "absolute",
-        left: "0",
-        bottom: "0",
-        borderRadius: "3.125rem",
-      },
     },
   },
 });
