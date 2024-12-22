@@ -35,6 +35,7 @@ const Login = () => {
     }
 
     router.push("/");
+    router.refresh(); // 강제 리로드하여 auth-provider에서 isLogin을 갱신
   };
 
   return (
