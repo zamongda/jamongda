@@ -8,7 +8,7 @@ export const useMyWordsCount = async () => {
     return 0;
   }
 
-  return JSON.parse(myWords).length;
+  return myWords.length;
 };
 
 export const useMemorizedWordsCount = async () => {
@@ -20,7 +20,7 @@ export const useMemorizedWordsCount = async () => {
     return 0;
   }
 
-  return JSON.parse(memorizedWords).length;
+  return memorizedWords.length;
 };
 
 export const useTodayMemorizedWordsCount = async () => {
@@ -33,11 +33,11 @@ export const useTodayMemorizedWordsCount = async () => {
     return 0;
   }
 
-  return JSON.parse(todayMemorizedWords).length;
+  return todayMemorizedWords.length;
 };
 
 export const useCategoryCount = async () => {
   const list = await getCategories();
 
-  return JSON.parse(list.data).length;
+  return list.data.length;
 };

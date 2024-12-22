@@ -2,7 +2,14 @@
 
 import { createContext, useContext } from "react";
 
-const AuthContext = createContext<{ isLogin: boolean } | undefined>(undefined);
+interface IuserData {
+  id: string;
+  email?: string;
+}
+
+const AuthContext = createContext<
+  { isLogin: boolean; userData?: IuserData | null } | undefined
+>(undefined);
 
 export const AuthProvider = ({
   children,
@@ -10,6 +17,7 @@ export const AuthProvider = ({
 }: {
   children: React.ReactNode;
   isLogin: boolean;
+  userData?: IuserData | null;
 }) => {
   return (
     <AuthContext.Provider value={{ isLogin }}>{children}</AuthContext.Provider>
@@ -21,5 +29,6 @@ export const useLogin = () => {
 
   return {
     isLogin: context?.isLogin,
+    userData: context?.userData,
   };
 };

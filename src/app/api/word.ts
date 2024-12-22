@@ -1,5 +1,7 @@
-import { getUserInClient } from "./get-client-user";
-import { createClient } from "./supabase/create-client";
+import { getUser } from "./auth";
+import { createServerSupabaseClient } from "./supabase/server-client";
+
+// import { createClient } from "./supabase/create-client";
 
 interface IGetWordsArgs {
   category_id?: string;
@@ -7,10 +9,11 @@ interface IGetWordsArgs {
   memory_date?: string;
 }
 
-const supabase = createClient();
+// const supabase = createClient();
 
 export const getWords = async (conditions: IGetWordsArgs) => {
-  const { user, error: userError } = await getUserInClient();
+  const supabase = await createServerSupabaseClient();
+  const { user, error: userError } = await getUser();
   if (userError) {
     throw new Error(userError.message);
   }
@@ -36,7 +39,8 @@ export const getWords = async (conditions: IGetWordsArgs) => {
 export const addWord = async (
   words: { ko: string; en: string; category_id?: string }[],
 ) => {
-  const { user, error: userError } = await getUserInClient();
+  const supabase = await createServerSupabaseClient();
+  const { user, error: userError } = await getUser();
   const userId = user?.id;
 
   if (userError) {
@@ -60,7 +64,8 @@ export const addWord = async (
 };
 
 export const deleteWord = async (id: string) => {
-  const { user, error: userError } = await getUserInClient();
+  const supabase = await createServerSupabaseClient();
+  const { user, error: userError } = await getUser();
   const userId = user?.id;
 
   if (userError) {
@@ -84,7 +89,8 @@ export const deleteWord = async (id: string) => {
 };
 
 export const finishTest = async (ids: string[]) => {
-  const { user, error: userError } = await getUserInClient();
+  const supabase = await createServerSupabaseClient();
+  const { user, error: userError } = await getUser();
   const userId = user?.id;
 
   if (userError) {
