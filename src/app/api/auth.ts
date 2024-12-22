@@ -36,7 +36,6 @@ export const getUser = async () => {
 export const logout = async () => {
   const supabase = await createServerSupabaseClient();
   const { error } = await supabase.auth.signOut();
-  console.log("logout", error);
 
   if (error) alert("잠시 후 다시 시도해주세요.");
 

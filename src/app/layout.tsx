@@ -41,7 +41,15 @@ export const metadata: Metadata = {
 
 const getLoginData = async () => {
   const { user } = await getUser();
-  return user ? true : false;
+
+  if (!user) {
+    return null;
+  }
+
+  return {
+    id: user.id,
+    email: user.email,
+  };
 };
 
 export default async function RootLayout({
@@ -49,7 +57,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isLogin = await getLoginData();
+  const loginData = await getLoginData();
 
   return (
     <html lang="en">
@@ -57,7 +65,7 @@ export default async function RootLayout({
       <body
         className={`${godoB.variable} ${godoM.variable} ${godoL.variable} ${godoR.variable}`}
       >
-        <AuthProvider isLogin={isLogin}>
+        <AuthProvider isLogin={loginData ? true : false} userData={loginData}>
           {children}
           <ToastContainer />
         </AuthProvider>
