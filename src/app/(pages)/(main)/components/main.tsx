@@ -5,8 +5,9 @@ import Form from "@common/form/form";
 import Input from "@common/input/input";
 import ModalPopup from "@common/modal/modal-popup";
 import { useState } from "react";
-import { css, sva } from "@styled-system/css";
+import { sva } from "@styled-system/css";
 import { useRouter } from "next/navigation";
+import AddWordModal from "./add-word-modal";
 import CardSlide from "./card-slide";
 
 const Main = () => {
@@ -41,17 +42,7 @@ const Main = () => {
           />
         </div>
       </div>
-      <ModalPopup isOpen={modalOpen} setModalOpen={setModalOpen}>
-        <Form>
-          <Input
-            text="단어 또는 문장"
-            name="word"
-            placeholder="단어 또는 문장을 입력하세요"
-          />
-          <Input text="뜻" name="meaning" placeholder="뜻을 입력하세요" />
-        </Form>
-        <Button text="저장하기" className={css({ mt: "2.5rem!" })} />
-      </ModalPopup>
+      <AddWordModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
     </div>
   );
 };
