@@ -2,7 +2,7 @@
 
 import Form from "@common/form/form";
 import DrawerPopup from "@common/modal/drawer-popup";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { css, sva } from "@styled-system/css";
 import useMyWords from "../hooks/use-my-words";
 import MyWordsCard from "./my-words-card";
@@ -12,6 +12,8 @@ const MyWords = () => {
 
   const { cardList } = useMyWords();
 
+  console.log(cardList, "cardList");
+
   const myWordsStyle = MyWordsSva();
   const wordsListStyle = WordsListSva();
 
@@ -19,16 +21,18 @@ const MyWords = () => {
     <>
       <div className={myWordsStyle.wrapper}>
         <div className={myWordsStyle.inner}>
-          {cardList.map((card, idx) => {
-            console.log(card, "card");
-            return (
-              <MyWordsCard
-                key={idx}
-                card={card}
-                onClick={() => setModalOpen(true)}
-              />
-            );
-          })}
+          <Suspense fallback={<>loading</>}>
+            {cardList.map((card, idx) => {
+              console.log(card, "card");
+              return (
+                <MyWordsCard
+                  key={idx}
+                  card={card}
+                  onClick={() => setModalOpen(true)}
+                />
+              );
+            })}
+          </Suspense>
         </div>
       </div>
       <DrawerPopup isOpen={modalOpen} setModalOpen={setModalOpen}>
