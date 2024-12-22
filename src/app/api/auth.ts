@@ -1,6 +1,6 @@
 "use server";
 
-import { createServerSupabaseClient } from "./supabase/server-props";
+import { createServerSupabaseClient } from "./supabase/server-client";
 
 export const signUp = async (email: string, password: string) => {
   const supabase = await createServerSupabaseClient();
