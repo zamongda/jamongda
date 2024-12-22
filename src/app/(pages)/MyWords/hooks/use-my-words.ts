@@ -1,16 +1,16 @@
 import { useMemo } from "react";
+import { useCategoryList } from "./use-category";
 import {
-  useCategoryCount,
   useMemorizedWordsCount,
   useMyWordsCount,
   useTodayMemorizedWordsCount,
-} from "./use-words-count";
+} from "./use-words";
 
 const useMyWords = () => {
   const myWordsCount = useMyWordsCount();
   const myMemorizedWordsCount = useMemorizedWordsCount();
   const todayMemorizedWordsCount = useTodayMemorizedWordsCount();
-  const categoryCount = useCategoryCount();
+  const categoryCount = useCategoryList().then((list) => list.length);
 
   const cardList = useMemo(
     () => [
