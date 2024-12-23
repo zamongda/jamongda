@@ -1,18 +1,29 @@
 import Form from "@common/form/form";
-import { Suspense } from "react";
+import { Suspense, use } from "react";
 import { css } from "@styled-system/css";
 import { useCategoryList } from "../../hooks/use-category";
+import useWordsList from "./hooks/use-words-list";
 
-const MyWordsDrawerFilter = async () => {
-  const categoryList = await useCategoryList();
+const MyWordsDrawerFilter = () => {
+  const { setCategory } = useWordsList();
+  const categoryList = use(useCategoryList());
 
-  console.log(categoryList, "categoryList");
+  if (!categoryList) return null;
+
   return (
     <Form className={wordsSelectStyle}>
       <Suspense>
-        <select name="wordsList" id="wordsList">
+        <select
+          name="wordsList"
+          id="wordsList"
+          onChange={(e) => {
+            setCategory(e.target.value);
+          }}
+        >
+          <option value={"ALL"}>전체</option>
+
           {categoryList.map((category) => (
-            <option key={category.id} value={category.id}>
+            <option key={category.id} value={category.category_name}>
               {category.category_name}
             </option>
           ))}

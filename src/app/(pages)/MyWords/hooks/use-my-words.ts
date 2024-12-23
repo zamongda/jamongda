@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import AllMyWordsDrawerComponent from "../components/my-words-drawer/all-my-words-drawer-component";
 import { useCategoryList } from "./use-category";
 import {
   useMemorizedWordsCount,
@@ -20,6 +21,7 @@ const useMyWords = () => {
         icon: "/icons/icon-note.svg",
         count: myWordsCount,
         color: "#FF8168",
+        modalContent: AllMyWordsDrawerComponent,
       },
       {
         id: 1,
@@ -27,6 +29,7 @@ const useMyWords = () => {
         icon: "/icons/icon-check.svg",
         count: myMemorizedWordsCount,
         color: "#618B7B",
+        modalContent: AllMyWordsDrawerComponent,
       },
       {
         id: 2,
@@ -34,6 +37,7 @@ const useMyWords = () => {
         icon: "/icons/icon-calendar.svg",
         count: todayMemorizedWordsCount,
         color: "#618B7B",
+        modalContent: AllMyWordsDrawerComponent,
       },
       {
         id: 3,
@@ -41,6 +45,7 @@ const useMyWords = () => {
         icon: "/icons/icon-chart.svg",
         count: categoryCount,
         color: "#FF8168",
+        modalContent: AllMyWordsDrawerComponent,
       },
     ],
     [

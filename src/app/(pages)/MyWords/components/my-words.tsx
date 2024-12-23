@@ -1,28 +1,40 @@
 "use client";
 
-import { Suspense, memo, useState } from "react";
+import { ReactNode, Suspense, memo, useState } from "react";
 import { sva } from "@styled-system/css";
 import useMyWords from "../hooks/use-my-words";
 import MyWordsCard from "./my-words-card";
-import MyWordsDrawer from "./my-words-drawer";
+import MyWordsDrawerContainer from "./my-words-drawer";
 
 const MyWords = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState<ReactNode | null>(null);
 
   const myWordsStyle = MyWordsSva();
 
   return (
     <>
       <div className={myWordsStyle.wrapper}>
-        <MyWordsContainer setModalOpen={setModalOpen} />
+        <MyWordsContainer
+          setModalOpen={setModalOpen}
+          setModalContent={setModalContent}
+        />
       </div>
-      <MyWordsDrawer modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      <MyWordsDrawerContainer modalOpen={modalOpen} setModalOpen={setModalOpen}>
+        <Suspense fallback={<>loading</>}>{modalContent}</Suspense>
+      </MyWordsDrawerContainer>
     </>
   );
 };
 
 const MyWordsContainer = memo(
-  ({ setModalOpen }: { setModalOpen: (value: boolean) => void }) => {
+  ({
+    setModalOpen,
+    setModalContent,
+  }: {
+    setModalOpen: (value: boolean) => void;
+    setModalContent: (value: ReactNode) => void;
+  }) => {
     const { cardList } = useMyWords();
 
     const myWordsStyle = MyWordsSva();
@@ -31,12 +43,14 @@ const MyWordsContainer = memo(
       <div className={myWordsStyle.inner}>
         <Suspense fallback={<>loading</>}>
           {cardList.map((card) => {
-            console.log(card, "card");
             return (
               <MyWordsCard
                 key={card.id}
                 card={card}
-                onClick={() => setModalOpen(true)}
+                onClick={() => {
+                  setModalOpen(true);
+                  setModalContent(card.modalContent());
+                }}
               />
             );
           })}
