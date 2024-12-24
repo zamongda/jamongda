@@ -1,16 +1,18 @@
+"use client";
+
 import { getWords } from "../../../api/word";
 
-export const useMyWordsCount = async () => {
+export const useMyWords = async () => {
   const { data: myWords } = await getWords({});
 
   if (!myWords) {
     return 0;
   }
 
-  return JSON.parse(myWords).length;
+  return JSON.parse(myWords);
 };
 
-export const useMemorizedWordsCount = async () => {
+export const useMemorizedWords = async () => {
   const { data: memorizedWords } = await getWords({
     is_memorized: true,
   });
@@ -19,10 +21,10 @@ export const useMemorizedWordsCount = async () => {
     return 0;
   }
 
-  return JSON.parse(memorizedWords).length;
+  return JSON.parse(memorizedWords);
 };
 
-export const useTodayMemorizedWordsCount = async () => {
+export const useTodayMemorizedWords = async () => {
   const { data: todayMemorizedWords } = await getWords({
     is_memorized: true,
     memory_date: new Date().toLocaleDateString(),
@@ -32,5 +34,5 @@ export const useTodayMemorizedWordsCount = async () => {
     return 0;
   }
 
-  return JSON.parse(todayMemorizedWords).length;
+  return JSON.parse(todayMemorizedWords);
 };

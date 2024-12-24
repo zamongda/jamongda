@@ -2,7 +2,7 @@
 
 import { ReactNode, Suspense, memo, useState } from "react";
 import { sva } from "@styled-system/css";
-import useMyWords from "../hooks/use-my-words";
+import useMyWordCards from "../hooks/use-my-word-cards";
 import MyWordsCard from "./my-words-card";
 import MyWordsDrawerContainer from "./my-words-drawer";
 
@@ -35,7 +35,7 @@ const MyWordsContainer = memo(
     setModalOpen: (value: boolean) => void;
     setModalContent: (value: ReactNode) => void;
   }) => {
-    const { cardList } = useMyWords();
+    const { cardList } = useMyWordCards();
 
     const myWordsStyle = MyWordsSva();
 

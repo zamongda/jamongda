@@ -1,16 +1,21 @@
 import { useMemo } from "react";
-import AllMyWordsDrawerComponent from "../components/my-words-drawer/all-my-words-drawer-component";
+import AllWordsContent from "../components/my-words-drawer/drawer-content-component/all-words-content";
+import MemorizedWordsContent from "../components/my-words-drawer/drawer-content-component/memorized-words-content";
+import MyCategoryContent from "../components/my-words-drawer/drawer-content-component/my-category-content";
+import TodayMemorizedWordsContent from "../components/my-words-drawer/drawer-content-component/today-memorized-words-content";
 import { useCategoryList } from "./use-category";
 import {
-  useMemorizedWordsCount,
-  useMyWordsCount,
-  useTodayMemorizedWordsCount,
+  useMemorizedWords,
+  useMyWords,
+  useTodayMemorizedWords,
 } from "./use-words";
 
-const useMyWords = () => {
-  const myWordsCount = useMyWordsCount();
-  const myMemorizedWordsCount = useMemorizedWordsCount();
-  const todayMemorizedWordsCount = useTodayMemorizedWordsCount();
+const useMyWordCards = () => {
+  const myWordsCount = useMyWords().then((list) => list.length);
+  const myMemorizedWordsCount = useMemorizedWords().then((list) => list.length);
+  const todayMemorizedWordsCount = useTodayMemorizedWords().then(
+    (list) => list.length,
+  );
   const categoryCount = useCategoryList().then((list) => list.length);
 
   const cardList = useMemo(
@@ -21,7 +26,7 @@ const useMyWords = () => {
         icon: "/icons/icon-note.svg",
         count: myWordsCount,
         color: "#FF8168",
-        modalContent: AllMyWordsDrawerComponent,
+        modalContent: AllWordsContent,
       },
       {
         id: 1,
@@ -29,7 +34,7 @@ const useMyWords = () => {
         icon: "/icons/icon-check.svg",
         count: myMemorizedWordsCount,
         color: "#618B7B",
-        modalContent: AllMyWordsDrawerComponent,
+        modalContent: MemorizedWordsContent,
       },
       {
         id: 2,
@@ -37,7 +42,7 @@ const useMyWords = () => {
         icon: "/icons/icon-calendar.svg",
         count: todayMemorizedWordsCount,
         color: "#618B7B",
-        modalContent: AllMyWordsDrawerComponent,
+        modalContent: TodayMemorizedWordsContent,
       },
       {
         id: 3,
@@ -45,7 +50,7 @@ const useMyWords = () => {
         icon: "/icons/icon-chart.svg",
         count: categoryCount,
         color: "#FF8168",
-        modalContent: AllMyWordsDrawerComponent,
+        modalContent: MyCategoryContent,
       },
     ],
     [
@@ -61,4 +66,4 @@ const useMyWords = () => {
   };
 };
 
-export default useMyWords;
+export default useMyWordCards;

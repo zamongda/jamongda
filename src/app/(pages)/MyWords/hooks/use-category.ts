@@ -1,6 +1,8 @@
+"use client";
+
 import { getCategories } from "../../../api/category";
 
-interface IUseCategoryListReturn {
+export interface IUseCategoryListReturn {
   id: number;
   category_name: string;
 }

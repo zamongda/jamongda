@@ -1,6 +1,7 @@
 import DrawerPopup from "@common/modal/drawer-popup";
 import { Suspense, memo } from "react";
 import { css } from "@styled-system/css";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import MyWordsDrawerFilter from "./drawer-filter";
 
 interface IMyWordsDrawerProps {
@@ -16,9 +17,6 @@ const MyWordsDrawerContainer = ({
 }: IMyWordsDrawerProps) => {
   return (
     <DrawerPopup isOpen={modalOpen} setModalOpen={setModalOpen}>
-      <Suspense fallback={null}>
-        <MyWordsDrawerFilter />
-      </Suspense>
       <ul
         className={css({
           "& li ~ li": {
@@ -28,10 +26,12 @@ const MyWordsDrawerContainer = ({
           },
         })}
       >
-        <Suspense>{children}</Suspense>
+        <ErrorBoundary errorComponent={undefined}>
+          <Suspense fallback={null}>{children}</Suspense>
+        </ErrorBoundary>
       </ul>
     </DrawerPopup>
   );
 };
 
-export default memo(MyWordsDrawerContainer);
+export default MyWordsDrawerContainer;
