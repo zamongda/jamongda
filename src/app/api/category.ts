@@ -25,7 +25,7 @@ export const addCategory = async (name: string) => {
   return { success: true };
 };
 
-export const deleteCategory = async (id: string) => {
+export const deleteCategory = async (id: number) => {
   const { user, error: userError } = await getUserInClient();
   const userId = user?.id;
 
