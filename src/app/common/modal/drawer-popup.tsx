@@ -44,12 +44,12 @@ const DrawerPopup = ({ children, isOpen, setModalOpen }: ModalPopupProps) => {
             <div
               className={css({
                 display: "flex",
-                pos: "absolute",
-                bgColor: "transparent",
+                pos: "sticky",
+                bgColor: "white",
                 h: "35px",
                 left: "0",
                 right: "0",
-                top: "-8px",
+                top: "0",
                 zIndex: "1000",
               })}
             >
@@ -94,6 +94,7 @@ export default DrawerPopup;
 const modalContentStyle = {
   width: "100%",
   minHeight: "85%",
+  height: "85%",
   position: "fixed",
   bottom: "0",
   left: "0",
@@ -102,7 +103,8 @@ const modalContentStyle = {
   borderRadius: "1.875rem 1.875rem 0 0",
   backgroundColor: "white",
   border: "none",
-  padding: "60px 30px",
+  padding: "0px 30px",
+  overflowY: "scroll",
 };
 const customModalStyles: ReactModal.Styles = {
   overlay: {

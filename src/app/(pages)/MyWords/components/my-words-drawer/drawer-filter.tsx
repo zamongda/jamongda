@@ -50,9 +50,12 @@ const FilterSelect = ({
 export default MyWordsDrawerFilter;
 
 const wordsSelectStyle = css({
-  position: "absolute",
-  top: "30px",
-  right: "30px",
-  w: "auto",
+  position: "sticky",
+  top: "35px",
+  minW: "75px",
+  w: "fit-content",
   textStyle: "Text-14-M",
+  bg: "white",
+  py: "10px",
+  ml: "auto",
 });
