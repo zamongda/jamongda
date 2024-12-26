@@ -7,12 +7,14 @@ import ModalPopup from "@common/modal/modal-popup";
 import { useState } from "react";
 import { sva } from "@styled-system/css";
 import { useRouter } from "next/navigation";
+import { useMyWords } from "../../MyWords/hooks/use-words";
 import AddWordModal from "./add-word-modal";
 import CardSlide from "./card-slide";
 
 const Main = () => {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
+  const allWordsData = useMyWords();
 
   return (
     <div className={mainStyle.wrapper}>
@@ -24,7 +26,7 @@ const Main = () => {
           <img src="/icons/icon-plus.svg" alt="추가하기" />
           <span>카드 추가하기</span>
         </button>
-        <CardSlide />
+        <CardSlide allWordsData={allWordsData} />
         <Form className={mainStyle.form}>
           <select name="category" id="category" className={mainStyle.select}>
             <option value="all" selected>

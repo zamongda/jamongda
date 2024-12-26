@@ -1,11 +1,15 @@
 "use client";
 
+import { use } from "react";
 import { css } from "@styled-system/css";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { IWordRes } from "../../../api/word";
 
-const CardSlide = () => {
+const CardSlide = ({ allWordsData }: { allWordsData: Promise<IWordRes[]> }) => {
+  const allWords = use(allWordsData);
+  console.log(allWords);
   return (
-    <div className={SwierStyle}>
+    <div className={SwiperStyle}>
       <Swiper
         loop={true}
         slidesPerView="auto"
@@ -13,24 +17,13 @@ const CardSlide = () => {
         spaceBetween="-20"
         // loopAdditionalSlides={4}
       >
-        <SwiperSlide>
-          <div>test01</div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div>test02</div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div>test03</div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div>test04</div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div>test05</div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div>test06</div>
-        </SwiperSlide>
+        {allWords.map((word) => (
+          <SwiperSlide key={word.id}>
+            <div>
+              <div>{word.en}</div>
+            </div>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );
@@ -38,7 +31,7 @@ const CardSlide = () => {
 
 export default CardSlide;
 
-const SwierStyle = css({
+const SwiperStyle = css({
   "& .swiper": {
     w: "100vw",
     overflow: "visible!",
