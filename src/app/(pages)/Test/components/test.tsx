@@ -9,12 +9,17 @@ import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { finishTest } from "../../../api/word";
 import { useMyWords } from "../../MyWords/hooks/use-words";
 import TestCard from "./test-card";
+import TestScoreModal from "./test-score-modal";
 
 const Test = () => {
   const [answer, setAnswer] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [correctWordIds, setCorrectWordIds] = useState<string[]>([]);
+  const [modalOpen, setModalOpen] = useState(false);
+
   const allWordsData = useMyWords();
+
+  console.log(allWordsData.then.length, "allWords"); // TODO: 확인필요
 
   const handleAnswerSubmit = async () => {
     const allWords = await allWordsData;
@@ -35,7 +40,8 @@ const Test = () => {
       } else {
         // 모든 단어를 완료한 경우
         await finishTest(correctWordIds);
-        // TODO: 페이지 이동
+        console.log("finished");
+        setModalOpen(true);
       }
       setAnswer(""); // 입력 초기화
     }
@@ -66,6 +72,12 @@ const Test = () => {
           onClick={handleAnswerSubmit}
         />
       </div>
+      <TestScoreModal
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+        totalCount={allWordsData.then.length}
+        correctCount={correctWordIds.length}
+      />
     </div>
   );
 };

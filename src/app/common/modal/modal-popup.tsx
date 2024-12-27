@@ -6,18 +6,27 @@ interface ModalPopupProps {
   children: React.ReactNode;
   isOpen: boolean;
   setModalOpen?: (value: boolean) => void;
+  useCloseButton?: boolean;
 }
 
-const ModalPopup = ({ children, isOpen, setModalOpen }: ModalPopupProps) => {
+const ModalPopup = ({
+  children,
+  isOpen,
+  setModalOpen,
+  useCloseButton = true,
+}: ModalPopupProps) => {
   return (
     <Modal isOpen={isOpen} style={customModalStyles} ariaHideApp={false}>
-      <div style={closeIconStyle}>
-        <img
-          src="/icons/icon-close.svg"
-          alt="닫기"
-          onClick={() => setModalOpen && setModalOpen(false)}
-        />
-      </div>
+      {useCloseButton && (
+        <div style={closeIconStyle}>
+          <img
+            src="/icons/icon-close.svg"
+            alt="닫기"
+            onClick={() => setModalOpen && setModalOpen(false)}
+          />
+        </div>
+      )}
+
       {children}
     </Modal>
   );
