@@ -32,8 +32,7 @@ const MemorizedWordsList = ({
           key={word.id}
           word={word.en}
           meaning={word.ko}
-          handleDelete={() => {}}
-          handleModify={() => {}}
+          readonly
         />
       ))}
     </div>

@@ -2,7 +2,6 @@ import { use } from "react";
 import { css, sva } from "@styled-system/css";
 import { deleteCategory } from "../../../../../api/category";
 import { IUseCategoryListReturn } from "../../../hooks/use-category";
-import DrawerListItem from "../drawer-list-item";
 
 const MyCategoryList = ({
   categoryListData,
