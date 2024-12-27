@@ -11,31 +11,44 @@ import TestCard from "./test-card";
 
 const Test = () => {
   const [answer, setAnswer] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
   const allWordsData = useMyWords();
 
-  const openAddCardModal = () => {
-    toast(<ToastPopup type="correct" />);
+  const handleAnswerSubmit = async () => {
+    const allWords = await allWordsData;
+    const currentWord = allWords[currentIndex];
+    if (answer.trim() === currentWord?.ko) {
+      toast(<ToastPopup type="correct" />);
+      setCurrentIndex((prev) => prev + 1);
+      setAnswer("");
+    } else {
+      toast(<ToastPopup type="error" />);
+    }
   };
 
   return (
     <div className={testStyle.wrapper}>
       <ErrorBoundary errorComponent={undefined}>
         <Suspense fallback={null}>
-          <TestCard allWordsData={allWordsData} />
+          <TestCard allWordsData={allWordsData} currentIndex={currentIndex} />
         </Suspense>
       </ErrorBoundary>
       <div className={testStyle.answerWrapper}>
         <div className={testStyle.answer}>
           <div className={testStyle.input}>
             <img src="/icons/icon-pencil.svg" alt="작성하기" />
-            <input type="text" onChange={(e) => setAnswer(e.target.value)} />
+            <input
+              type="text"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
           </div>
         </div>
         <Button
           text="확인"
           disabled={!answer}
           className={css({ mt: "1.25rem!" })}
-          onClick={openAddCardModal}
+          onClick={handleAnswerSubmit}
         />
       </div>
     </div>
