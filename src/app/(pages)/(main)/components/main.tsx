@@ -2,8 +2,6 @@
 
 import Button from "@common/button/button";
 import Form from "@common/form/form";
-import Input from "@common/input/input";
-import ModalPopup from "@common/modal/modal-popup";
 import { Suspense, useState } from "react";
 import { sva } from "@styled-system/css";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";

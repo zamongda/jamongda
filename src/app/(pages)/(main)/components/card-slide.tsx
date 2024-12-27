@@ -8,14 +8,13 @@ const CardSlide = ({ allWordsData }: { allWordsData: Promise<IWordRes[]> }) => {
   return (
     <div className={SwierStyle}>
       <Swiper
-        loop={true}
+        // loop={true}
         slidesPerView="auto"
         centeredSlides={true}
         spaceBetween="-20"
-        // loopAdditionalSlides={4}
       >
         {allWords.map((word) => (
-          <SwiperSlide>
+          <SwiperSlide key={word.id}>
             <div>{word.en}</div>
           </SwiperSlide>
         ))}
