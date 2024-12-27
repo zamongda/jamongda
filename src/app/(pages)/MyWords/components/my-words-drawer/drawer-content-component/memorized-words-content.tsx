@@ -1,7 +1,37 @@
+import { use } from "react";
+import { css } from "@styled-system/css";
+import { IWordRes } from "../../../../../api/word";
+import { useMemorizedWords } from "../../../hooks/use-words";
+import MyWordsDrawerFilter from "../drawer-filter";
+import DrawerListItem from "../drawer-list-item";
+
 const MemorizedWordsContent = () => {
+  const memorizedWordsData = useMemorizedWords();
   return (
     <div>
-      <h2>Memorized Words Drawer Component</h2>
+      <MyWordsDrawerFilter />
+      <MemorizedWordsList memorizedWordsData={memorizedWordsData} />
+    </div>
+  );
+};
+
+const MemorizedWordsList = ({
+  memorizedWordsData,
+}: {
+  memorizedWordsData: Promise<IWordRes[]>;
+}) => {
+  const memorizedWords = use(memorizedWordsData);
+  return (
+    <div className={css({ py: "10px" })}>
+      {memorizedWords.map((word) => (
+        <DrawerListItem
+          key={word.id}
+          word={word.en}
+          meaning={word.ko}
+          handleDelete={() => {}}
+          handleModify={() => {}}
+        />
+      ))}
     </div>
   );
 };
