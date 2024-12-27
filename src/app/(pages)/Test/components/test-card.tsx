@@ -16,20 +16,10 @@ const TestCard = ({
 
   return (
     <div className={testStyle.card}>
-      {currentWord ? (
-        <>
-          <div className={css({ textStyle: "Text-28-B" })}>
-            {currentWord.en}
-          </div>
-          <span className={testStyle.count}>
-            {currentIndex + 1} / {allWords.length}
-          </span>
-        </>
-      ) : (
-        <div className={css({ textStyle: "Text-28-B" })}>
-          단어를 모두 완료했습니다!
-        </div>
-      )}
+      <div className={css({ textStyle: "Text-28-B" })}>{currentWord.en}</div>
+      <span className={testStyle.count}>
+        {currentIndex + 1} / {allWords.length}
+      </span>
     </div>
   );
 };

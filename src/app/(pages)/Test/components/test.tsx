@@ -6,23 +6,38 @@ import { Suspense, useState } from "react";
 import { toast } from "react-toastify";
 import { css, sva } from "@styled-system/css";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+import { finishTest } from "../../../api/word";
 import { useMyWords } from "../../MyWords/hooks/use-words";
 import TestCard from "./test-card";
 
 const Test = () => {
   const [answer, setAnswer] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [correctWordIds, setCorrectWordIds] = useState<string[]>([]);
   const allWordsData = useMyWords();
 
   const handleAnswerSubmit = async () => {
     const allWords = await allWordsData;
     const currentWord = allWords[currentIndex];
-    if (answer.trim() === currentWord?.ko) {
-      toast(<ToastPopup type="correct" />);
-      setCurrentIndex((prev) => prev + 1);
-      setAnswer("");
-    } else {
-      toast(<ToastPopup type="error" />);
+
+    if (currentWord) {
+      // 정답 처리
+      if (answer.trim() === currentWord.ko) {
+        setCorrectWordIds((prev) => [...prev, currentWord.id]);
+        toast(<ToastPopup type="correct" />);
+      } else {
+        toast(<ToastPopup type="error" />);
+      }
+      // 다음 단어로 이동
+      const nextIndex = currentIndex + 1;
+      if (nextIndex < allWords.length) {
+        setCurrentIndex(nextIndex);
+      } else {
+        // 모든 단어를 완료한 경우
+        await finishTest(correctWordIds);
+        // TODO: 페이지 이동
+      }
+      setAnswer(""); // 입력 초기화
     }
   };
 
