@@ -1,9 +1,10 @@
-"use client";
-
+import { use } from "react";
 import { css } from "@styled-system/css";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { IWordRes } from "../../../api/word";
 
-const CardSlide = () => {
+const CardSlide = ({ allWordsData }: { allWordsData: Promise<IWordRes[]> }) => {
+  const allWords = use(allWordsData);
   return (
     <div className={SwierStyle}>
       <Swiper
@@ -13,24 +14,11 @@ const CardSlide = () => {
         spaceBetween="-20"
         // loopAdditionalSlides={4}
       >
-        <SwiperSlide>
-          <div>test01</div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div>test02</div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div>test03</div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div>test04</div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div>test05</div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div>test06</div>
-        </SwiperSlide>
+        {allWords.map((word) => (
+          <SwiperSlide>
+            <div>{word.en}</div>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );
