@@ -2,12 +2,16 @@
 
 import Button from "@common/button/button";
 import { ToastPopup } from "@common/toast/toast-popup";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { toast } from "react-toastify";
 import { css, sva } from "@styled-system/css";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+import { useMyWords } from "../../MyWords/hooks/use-words";
+import TestCard from "./test-card";
 
 const Test = () => {
   const [answer, setAnswer] = useState("");
+  const allWordsData = useMyWords();
 
   const openAddCardModal = () => {
     toast(<ToastPopup type="correct" />);
@@ -15,10 +19,11 @@ const Test = () => {
 
   return (
     <div className={testStyle.wrapper}>
-      <div className={testStyle.card}>
-        <div className={testStyle.word}>grapefruit</div>
-        <span className={testStyle.count}>1 / 20</span>
-      </div>
+      <ErrorBoundary errorComponent={undefined}>
+        <Suspense fallback={null}>
+          <TestCard allWordsData={allWordsData} />
+        </Suspense>
+      </ErrorBoundary>
       <div className={testStyle.answerWrapper}>
         <div className={testStyle.answer}>
           <div className={testStyle.input}>
