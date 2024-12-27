@@ -21,6 +21,10 @@ const MemorizedWordsList = ({
   memorizedWordsData: Promise<IWordRes[]>;
 }) => {
   const memorizedWords = use(memorizedWordsData);
+  if (memorizedWords.length === 0) {
+    // TODO: EMPTY 컴포넌트 필요
+    return <div>암기한 단어가 없습니다.</div>;
+  }
   return (
     <div className={css({ py: "10px" })}>
       {memorizedWords.map((word) => (
