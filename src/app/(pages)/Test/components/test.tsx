@@ -19,8 +19,6 @@ const Test = () => {
 
   const allWordsData = useMyWords();
 
-  console.log(allWordsData.then.length, "allWords"); // TODO: 확인필요
-
   const handleAnswerSubmit = async () => {
     const allWords = await allWordsData;
     const currentWord = allWords[currentIndex];
@@ -72,12 +70,16 @@ const Test = () => {
           onClick={handleAnswerSubmit}
         />
       </div>
-      <TestScoreModal
-        modalOpen={modalOpen}
-        setModalOpen={setModalOpen}
-        totalCount={allWordsData.then.length}
-        correctCount={correctWordIds.length}
-      />
+      <ErrorBoundary errorComponent={undefined}>
+        <Suspense fallback={null}>
+          <TestScoreModal
+            modalOpen={modalOpen}
+            setModalOpen={setModalOpen}
+            allWordsData={allWordsData}
+            correctCount={correctWordIds.length}
+          />
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
 };

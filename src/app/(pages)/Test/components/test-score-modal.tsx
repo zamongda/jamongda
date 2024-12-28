@@ -1,22 +1,27 @@
+"use client";
+
 import Button from "@common/button/button";
 import ModalPopup from "@common/modal/modal-popup";
+import { use } from "react";
 import { css } from "@styled-system/css";
 import { useRouter } from "next/navigation";
+import { IWordRes } from "../../../api/word";
 
 interface ITestScoreModal {
   modalOpen: boolean;
   setModalOpen: (value: boolean) => void;
-  totalCount: number;
+  allWordsData: Promise<IWordRes[]>;
   correctCount: number;
 }
 
 const TestScoreModal = ({
   modalOpen,
   setModalOpen,
-  totalCount,
+  allWordsData,
   correctCount,
 }: ITestScoreModal) => {
   const router = useRouter();
+  const allWords = use(allWordsData);
 
   return (
     <ModalPopup
@@ -31,7 +36,7 @@ const TestScoreModal = ({
           mt: "20px",
         })}
       >
-        총 {totalCount}개 단어 중 {correctCount} 맞췄습니다 🥳
+        총 {allWords.length}개 단어 중 {correctCount} 맞췄습니다 🥳
       </div>
       <Button
         text="테스트 종료하기"
