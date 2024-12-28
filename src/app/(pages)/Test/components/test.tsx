@@ -2,37 +2,84 @@
 
 import Button from "@common/button/button";
 import { ToastPopup } from "@common/toast/toast-popup";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { toast } from "react-toastify";
 import { css, sva } from "@styled-system/css";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+import { finishTest } from "../../../api/word";
+import { useMyWords } from "../../MyWords/hooks/use-words";
+import TestCard from "./test-card";
+import TestScoreModal from "./test-score-modal";
 
 const Test = () => {
   const [answer, setAnswer] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [correctWordIds, setCorrectWordIds] = useState<string[]>([]);
+  const [modalOpen, setModalOpen] = useState(false);
 
-  const openAddCardModal = () => {
-    toast(<ToastPopup type="correct" />);
+  const allWordsData = useMyWords();
+
+  const handleAnswerSubmit = async () => {
+    const allWords = await allWordsData;
+    const currentWord = allWords[currentIndex];
+
+    if (currentWord) {
+      // 정답 처리
+      if (answer.trim() === currentWord.ko) {
+        setCorrectWordIds((prev) => [...prev, currentWord.id]);
+        toast(<ToastPopup type="correct" />);
+      } else {
+        toast(<ToastPopup type="error" />);
+      }
+      // 다음 단어로 이동
+      const nextIndex = currentIndex + 1;
+      if (nextIndex < allWords.length) {
+        setCurrentIndex(nextIndex);
+      } else {
+        // 모든 단어를 완료한 경우
+        await finishTest(correctWordIds);
+        console.log("finished");
+        setModalOpen(true);
+      }
+      setAnswer(""); // 입력 초기화
+    }
   };
 
   return (
     <div className={testStyle.wrapper}>
-      <div className={testStyle.card}>
-        <div className={testStyle.word}>grapefruit</div>
-        <span className={testStyle.count}>1 / 20</span>
-      </div>
+      <ErrorBoundary errorComponent={undefined}>
+        <Suspense fallback={null}>
+          <TestCard allWordsData={allWordsData} currentIndex={currentIndex} />
+        </Suspense>
+      </ErrorBoundary>
       <div className={testStyle.answerWrapper}>
         <div className={testStyle.answer}>
           <div className={testStyle.input}>
             <img src="/icons/icon-pencil.svg" alt="작성하기" />
-            <input type="text" onChange={(e) => setAnswer(e.target.value)} />
+            <input
+              type="text"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
           </div>
         </div>
         <Button
           text="확인"
           disabled={!answer}
           className={css({ mt: "1.25rem!" })}
-          onClick={openAddCardModal}
+          onClick={handleAnswerSubmit}
         />
       </div>
+      <ErrorBoundary errorComponent={undefined}>
+        <Suspense fallback={null}>
+          <TestScoreModal
+            modalOpen={modalOpen}
+            setModalOpen={setModalOpen}
+            allWordsData={allWordsData}
+            correctCount={correctWordIds.length}
+          />
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
 };
