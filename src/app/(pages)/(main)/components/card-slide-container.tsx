@@ -3,7 +3,6 @@ import React, { use } from "react";
 import { IWordRes } from "../../../api/word";
 import useWordsList from "../../MyWords/components/my-words-drawer/hooks/use-words-list";
 import { IUseCategoryListReturn } from "../../MyWords/hooks/use-category";
-import { useMyWords } from "../../MyWords/hooks/use-words";
 import CardSlide from "./card-slide";
 import { mainStyle } from "./main";
 
@@ -28,12 +27,13 @@ const CardSlideContainer = ({
           id="category"
           className={mainStyle.select}
           onChange={(e) => setCategory(e.target.value)}
+          defaultValue={"ALL"}
         >
-          <option value="ALL" selected>
-            전체
-          </option>
+          <option value="ALL">전체</option>
           {categoryList?.map((category) => (
-            <option value={category.id}>{category.category_name}</option>
+            <option value={category.id} key={category.id}>
+              {category.category_name}
+            </option>
           ))}
         </select>
       </Form>

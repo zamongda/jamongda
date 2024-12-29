@@ -17,49 +17,41 @@ const Main = () => {
 
   const isLogin = useLogin();
 
-  useEffect(() => {
-    if (!isLogin) {
-      router.replace("/Login");
-      router.refresh();
-      return;
-    }
-  }, [isLogin]);
-
   const allWordsData = useMyWords();
   const categoryListData = useCategoryList();
 
   return (
     <div className={mainStyle.wrapper}>
-      {isLogin && (
-        <>
-          <div className={mainStyle.inner}>
-            <button
-              className={mainStyle.addButton}
-              onClick={() => setModalOpen(true)}
-            >
-              <img src="/icons/icon-plus.svg" alt="추가하기" />
-              <span>카드 추가하기</span>
-            </button>
+      {/* {isLogin && (
+        <> */}
+      <div className={mainStyle.inner}>
+        <button
+          className={mainStyle.addButton}
+          onClick={() => setModalOpen(true)}
+        >
+          <img src="/icons/icon-plus.svg" alt="추가하기" />
+          <span>카드 추가하기</span>
+        </button>
 
-            <ErrorBoundary errorComponent={undefined}>
-              <Suspense fallback={null}>
-                <CardSlideContainer
-                  allWordsData={allWordsData}
-                  categoryListData={categoryListData}
-                />
-              </Suspense>
-            </ErrorBoundary>
-            <div className={mainStyle.buttonWrapper}>
-              <Button
-                text="테스트 시작"
-                size="lg"
-                onClick={() => router.push("/Test")}
-              />
-            </div>
-          </div>
-          <AddWordModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
-        </>
-      )}
+        <ErrorBoundary errorComponent={undefined}>
+          <Suspense fallback={null}>
+            <CardSlideContainer
+              allWordsData={allWordsData}
+              categoryListData={categoryListData}
+            />
+          </Suspense>
+        </ErrorBoundary>
+        <div className={mainStyle.buttonWrapper}>
+          <Button
+            text="테스트 시작"
+            size="lg"
+            onClick={() => router.push("/Test")}
+          />
+        </div>
+      </div>
+      <AddWordModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      {/* </>
+      )} */}
     </div>
   );
 };

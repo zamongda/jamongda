@@ -73,7 +73,7 @@ export const addWord = async (
   return { success: true };
 };
 
-export const deleteWord = async (id: string) => {
+export const deleteWord = async (id: number) => {
   const { user, error: userError } = await getUserInClient();
   const userId = user?.id;
 
@@ -87,6 +87,33 @@ export const deleteWord = async (id: string) => {
   const { error } = await supabase
     .from("words")
     .delete()
+    .eq("id", id)
+    .eq("user_id", userId);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return { success: true };
+};
+
+export const modifyWord = async (
+  id: number,
+  word: { en: string; ko: string },
+) => {
+  const { user, error: userError } = await getUserInClient();
+  const userId = user?.id;
+
+  if (userError) {
+    throw new Error(userError.message);
+  }
+  if (!userId) {
+    throw new Error("User not found");
+  }
+
+  const { error } = await supabase
+    .from("words")
+    .update(word)
     .eq("id", id)
     .eq("user_id", userId);
 

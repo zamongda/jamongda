@@ -10,9 +10,9 @@ const Setting = () => {
 
   const settings = [
     { id: 0, title: "비밀번호 변경하기", onClick: () => {} },
-    { id: 0, title: "회원 탈퇴하기", onClick: () => {} },
+    { id: 1, title: "회원 탈퇴하기", onClick: () => {} },
     {
-      id: 0,
+      id: 2,
       title: "로그아웃",
       onClick: () => {
         logout();

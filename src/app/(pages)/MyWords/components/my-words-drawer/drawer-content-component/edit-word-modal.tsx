@@ -1,28 +1,20 @@
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { addWord } from "../../../api/word";
+import React from "react";
+import { IWordRes, modifyWord } from "../../../../../api/word";
 import WordModal, {
   IHandleWordSaveProps,
-} from "../../../components/word-modal";
-import { useLogin } from "../../../providers/auth-provider";
+} from "../../../../../components/word-modal";
 
-interface IAddWordModal {
+interface IEditWordModalProps {
   modalOpen: boolean;
   setModalOpen: (value: boolean) => void;
+  originWord: IWordRes;
 }
 
-const AddWordModal = ({ modalOpen, setModalOpen }: IAddWordModal) => {
-  const router = useRouter();
-  const { isLogin } = useLogin();
-
-  useEffect(() => {
-    if (!isLogin) {
-      alert("로그인이 필요합니다.");
-      router.push("/Login");
-      return;
-    }
-  }, [isLogin]);
-
+const EditWordModal = ({
+  modalOpen,
+  setModalOpen,
+  originWord,
+}: IEditWordModalProps) => {
   const handleWordSave = async ({ word, meaning }: IHandleWordSaveProps) => {
     if (word.trim() === "") {
       alert("단어를 입력해주세요.");
@@ -33,12 +25,10 @@ const AddWordModal = ({ modalOpen, setModalOpen }: IAddWordModal) => {
       return;
     }
 
-    const { success } = await addWord([
-      {
-        ko: meaning,
-        en: word,
-      },
-    ]);
+    const { success } = await modifyWord(originWord.id, {
+      ko: meaning,
+      en: word,
+    });
 
     if (!success) {
       alert("단어 저장에 실패했습니다.");
@@ -47,14 +37,15 @@ const AddWordModal = ({ modalOpen, setModalOpen }: IAddWordModal) => {
     alert("단어가 저장되었습니다.");
     setModalOpen(false);
   };
-
   return (
     <WordModal
       modalOpen={modalOpen}
       setModalOpen={setModalOpen}
       handleWordSave={handleWordSave}
+      originWord={originWord.en}
+      originMeaning={originWord.ko}
     />
   );
 };
 
-export default AddWordModal;
+export default React.memo(EditWordModal);
