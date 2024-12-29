@@ -26,7 +26,7 @@ const CardSlide = ({ allWords }: { allWords: IWordRes[] }) => {
         spaceBetween={-20}
         onSlideChange={onSlideChange}
       >
-        {allWords.length === 0 ? (
+        {!allWords || allWords?.length === 0 ? (
           //  TODO: EMPTY 컴포넌트 필요
           <SwiperSlide>
             <div>저장된 단어가 없습니다.</div>

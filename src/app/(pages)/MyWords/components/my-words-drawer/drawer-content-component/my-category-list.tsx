@@ -26,7 +26,7 @@ const MyCategoryList = ({
 
   const categoryListItemStyle = CategoryListItemSva();
 
-  if (categoryList.length === 0) {
+  if (!categoryList || categoryList.length === 0) {
     // TODO: EMPTY 컴포넌트 필요
     return <div>카테고리가 없습니다.</div>;
   }

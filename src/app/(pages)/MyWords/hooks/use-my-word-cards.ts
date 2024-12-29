@@ -11,12 +11,14 @@ import {
 } from "./use-words";
 
 const useMyWordCards = () => {
-  const myWordsCount = useMyWords().then((list) => list.length);
-  const myMemorizedWordsCount = useMemorizedWords().then((list) => list.length);
-  const todayMemorizedWordsCount = useTodayMemorizedWords().then(
-    (list) => list.length,
+  const myWordsCount = useMyWords().then((list) => list?.length);
+  const myMemorizedWordsCount = useMemorizedWords().then(
+    (list) => list?.length,
   );
-  const categoryCount = useCategoryList().then((list) => list.length);
+  const todayMemorizedWordsCount = useTodayMemorizedWords().then(
+    (list) => list?.length,
+  );
+  const categoryCount = useCategoryList().then((list) => list?.length);
 
   const cardList = useMemo(
     () => [

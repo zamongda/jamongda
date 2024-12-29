@@ -7,8 +7,12 @@ export interface IUseCategoryListReturn {
   category_name: string;
 }
 
-export const useCategoryList = async (): Promise<IUseCategoryListReturn[]> => {
-  const list = await getCategories();
+export const useCategoryList = async () => {
+  try {
+    const list = await getCategories();
 
-  return JSON.parse(list.data);
+    return JSON.parse(list.data);
+  } catch (e) {
+    console.error(e);
+  }
 };

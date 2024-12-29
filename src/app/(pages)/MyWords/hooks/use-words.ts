@@ -3,36 +3,48 @@
 import { getWords } from "../../../api/word";
 
 export const useMyWords = async () => {
-  const { data: myWords } = await getWords({});
+  try {
+    const { data: myWords } = await getWords({});
 
-  if (!myWords) {
-    return 0;
+    if (!myWords) {
+      return [];
+    }
+
+    return JSON.parse(myWords);
+  } catch (e) {
+    console.error(e);
   }
-
-  return JSON.parse(myWords);
 };
 
 export const useMemorizedWords = async () => {
-  const { data: memorizedWords } = await getWords({
-    is_memorized: true,
-  });
+  try {
+    const { data: memorizedWords } = await getWords({
+      is_memorized: true,
+    });
 
-  if (!memorizedWords) {
-    return 0;
+    if (!memorizedWords) {
+      return [];
+    }
+
+    return JSON.parse(memorizedWords);
+  } catch (e) {
+    console.error(e);
   }
-
-  return JSON.parse(memorizedWords);
 };
 
 export const useTodayMemorizedWords = async () => {
-  const { data: todayMemorizedWords } = await getWords({
-    is_memorized: true,
-    memory_date: new Date().toLocaleDateString(),
-  });
+  try {
+    const { data: todayMemorizedWords } = await getWords({
+      is_memorized: true,
+      memory_date: new Date().toLocaleDateString(),
+    });
 
-  if (!todayMemorizedWords) {
-    return 0;
+    if (!todayMemorizedWords) {
+      return [];
+    }
+
+    return JSON.parse(todayMemorizedWords);
+  } catch (e) {
+    console.error(e);
   }
-
-  return JSON.parse(todayMemorizedWords);
 };

@@ -1,7 +1,7 @@
 "use client";
 
+import { ToastPopup } from "@common/Toast/toast-popup";
 import Button from "@common/button/button";
-import { ToastPopup } from "@common/toast/toast-popup";
 import { Suspense, useState } from "react";
 import { toast } from "react-toastify";
 import { css, sva } from "@styled-system/css";
@@ -33,7 +33,7 @@ const Test = () => {
       }
       // 다음 단어로 이동
       const nextIndex = currentIndex + 1;
-      if (nextIndex < allWords.length) {
+      if (nextIndex < allWords?.length) {
         setCurrentIndex(nextIndex);
       } else {
         // 모든 단어를 완료한 경우

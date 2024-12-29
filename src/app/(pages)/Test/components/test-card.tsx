@@ -18,7 +18,7 @@ const TestCard = ({
     <div className={testStyle.card}>
       <div className={css({ textStyle: "Text-28-B" })}>{currentWord.en}</div>
       <span className={testStyle.count}>
-        {currentIndex + 1} / {allWords.length}
+        {currentIndex + 1} / {allWords?.length}
       </span>
     </div>
   );

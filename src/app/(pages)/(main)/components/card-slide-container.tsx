@@ -32,7 +32,7 @@ const CardSlideContainer = ({
           <option value="ALL" selected>
             전체
           </option>
-          {categoryList.map((category) => (
+          {categoryList?.map((category) => (
             <option value={category.id}>{category.category_name}</option>
           ))}
         </select>

@@ -1,8 +1,7 @@
 "use client";
 
 import Button from "@common/button/button";
-import Form from "@common/form/form";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { sva } from "@styled-system/css";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { useRouter } from "next/navigation";
@@ -10,39 +9,57 @@ import { useLogin } from "../../../providers/auth-provider";
 import { useCategoryList } from "../../MyWords/hooks/use-category";
 import { useMyWords } from "../../MyWords/hooks/use-words";
 import AddWordModal from "./add-word-modal";
-import CardSlide from "./card-slide";
 import CardSlideContainer from "./card-slide-container";
 
 const Main = () => {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
 
+  const isLogin = useLogin();
+
+  useEffect(() => {
+    if (!isLogin) {
+      router.replace("/Login");
+      router.refresh();
+      return;
+    }
+  }, [isLogin]);
+
   const allWordsData = useMyWords();
   const categoryListData = useCategoryList();
 
   return (
     <div className={mainStyle.wrapper}>
-      <div className={mainStyle.inner}>
-        <button
-          className={mainStyle.addButton}
-          onClick={() => setModalOpen(true)}
-        >
-          <img src="/icons/icon-plus.svg" alt="추가하기" />
-          <span>카드 추가하기</span>
-        </button>
-        <CardSlideContainer
-          allWordsData={allWordsData}
-          categoryListData={categoryListData}
-        />
-        <div className={mainStyle.buttonWrapper}>
-          <Button
-            text="테스트 시작"
-            size="lg"
-            onClick={() => router.push("/Test")}
-          />
-        </div>
-      </div>
-      <AddWordModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      {isLogin && (
+        <>
+          <div className={mainStyle.inner}>
+            <button
+              className={mainStyle.addButton}
+              onClick={() => setModalOpen(true)}
+            >
+              <img src="/icons/icon-plus.svg" alt="추가하기" />
+              <span>카드 추가하기</span>
+            </button>
+
+            <ErrorBoundary errorComponent={undefined}>
+              <Suspense fallback={null}>
+                <CardSlideContainer
+                  allWordsData={allWordsData}
+                  categoryListData={categoryListData}
+                />
+              </Suspense>
+            </ErrorBoundary>
+            <div className={mainStyle.buttonWrapper}>
+              <Button
+                text="테스트 시작"
+                size="lg"
+                onClick={() => router.push("/Test")}
+              />
+            </div>
+          </div>
+          <AddWordModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+        </>
+      )}
     </div>
   );
 };
