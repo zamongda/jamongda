@@ -7,7 +7,11 @@ import {
 } from "../../hooks/use-category";
 import useWordsList from "./hooks/use-words-list";
 
-const MyWordsDrawerFilter = () => {
+const MyWordsDrawerFilter = ({
+  setCategory,
+}: {
+  setCategory: (category: string) => void;
+}) => {
   const categoryList = useCategoryList();
 
   if (!categoryList) return null;
@@ -15,7 +19,10 @@ const MyWordsDrawerFilter = () => {
   return (
     <Form className={wordsSelectStyle}>
       <Suspense>
-        <FilterSelect categoryListData={categoryList} />
+        <FilterSelect
+          categoryListData={categoryList}
+          setCategory={setCategory}
+        />
       </Suspense>
     </Form>
   );
@@ -23,10 +30,11 @@ const MyWordsDrawerFilter = () => {
 
 const FilterSelect = ({
   categoryListData,
+  setCategory,
 }: {
   categoryListData: Promise<IUseCategoryListReturn[]>;
+  setCategory: (category: string) => void;
 }) => {
-  const { setCategory } = useWordsList();
   const categoryList = use(categoryListData);
   return (
     <select
@@ -39,7 +47,7 @@ const FilterSelect = ({
       <option value={"ALL"}>전체</option>
 
       {categoryList.map((category) => (
-        <option key={category.id} value={category.category_name}>
+        <option key={category.id} value={category.id}>
           {category.category_name}
         </option>
       ))}

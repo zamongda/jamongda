@@ -6,15 +6,19 @@ import { Suspense, useState } from "react";
 import { sva } from "@styled-system/css";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { useRouter } from "next/navigation";
+import { useLogin } from "../../../providers/auth-provider";
+import { useCategoryList } from "../../MyWords/hooks/use-category";
 import { useMyWords } from "../../MyWords/hooks/use-words";
 import AddWordModal from "./add-word-modal";
 import CardSlide from "./card-slide";
+import CardSlideContainer from "./card-slide-container";
 
 const Main = () => {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
 
   const allWordsData = useMyWords();
+  const categoryListData = useCategoryList();
 
   return (
     <div className={mainStyle.wrapper}>
@@ -26,20 +30,10 @@ const Main = () => {
           <img src="/icons/icon-plus.svg" alt="추가하기" />
           <span>카드 추가하기</span>
         </button>
-        <ErrorBoundary errorComponent={undefined}>
-          <Suspense fallback={null}>
-            <CardSlide allWordsData={allWordsData} />
-          </Suspense>
-        </ErrorBoundary>
-        <Form className={mainStyle.form}>
-          <select name="category" id="category" className={mainStyle.select}>
-            <option value="all" selected>
-              전체
-            </option>
-            <option value="business">비즈니스</option>
-            <option value="conversation">회화</option>
-          </select>
-        </Form>
+        <CardSlideContainer
+          allWordsData={allWordsData}
+          categoryListData={categoryListData}
+        />
         <div className={mainStyle.buttonWrapper}>
           <Button
             text="테스트 시작"
@@ -124,4 +118,4 @@ const MainSva = sva({
     },
   },
 });
-const mainStyle = MainSva();
+export const mainStyle = MainSva();
