@@ -1,36 +1,39 @@
 "use client";
 
+import { use, useState } from "react";
 import { css } from "@styled-system/css";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { IWordRes } from "../../../api/word";
 
-const CardSlide = () => {
+const CardSlide = ({ allWordsData }: { allWordsData: Promise<IWordRes[]> }) => {
+  const [clickedCards, setClickedCards] = useState<Record<number, boolean>>({});
+  const allWords = use(allWordsData);
+
+  const onClickCard = (id: number) => {
+    setClickedCards((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+  const onSlideChange = () => {
+    setClickedCards({});
+  };
+
   return (
-    <div className={SwierStyle}>
+    <div className={SwiperStyle}>
       <Swiper
-        loop={true}
         slidesPerView="auto"
         centeredSlides={true}
-        spaceBetween="-20"
-        // loopAdditionalSlides={4}
+        spaceBetween={-20}
+        onSlideChange={onSlideChange}
       >
-        <SwiperSlide>
-          <div>test01</div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div>test02</div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div>test03</div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div>test04</div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div>test05</div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div>test06</div>
-        </SwiperSlide>
+        {allWords.map((word) => (
+          <SwiperSlide key={word.id}>
+            <div onClick={() => onClickCard(word.id)}>
+              {clickedCards[word.id] ? word.ko : word.en}
+            </div>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );
@@ -38,7 +41,7 @@ const CardSlide = () => {
 
 export default CardSlide;
 
-const SwierStyle = css({
+const SwiperStyle = css({
   "& .swiper": {
     w: "100vw",
     overflow: "visible!",

@@ -24,7 +24,7 @@ const supabase = createClient();
 
 export const getWords = async (conditions: IGetWordsArgs) => {
   const { user, error: userError } = await getUserInClient();
-  console.log(user);
+  // console.log(user);
   if (userError) {
     throw new Error(userError.message);
   }
