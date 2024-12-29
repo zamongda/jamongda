@@ -19,13 +19,13 @@ const AddWordModal = ({ modalOpen, setModalOpen }: IAddWordModal) => {
   const router = useRouter();
   const { isLogin } = useLogin();
 
-  useEffect(() => {
-    if (!isLogin) {
-      alert("로그인이 필요합니다.");
-      router.push("/Login");
-      return;
-    }
-  }, [isLogin, router]);
+  // useEffect(() => {
+  //   if (!isLogin) {
+  //     alert("로그인이 필요합니다.");
+  //     router.push("/Login");
+  //     return;
+  //   }
+  // }, [isLogin]);
 
   const handleSaveWord = async () => {
     if (word.trim() === "") {

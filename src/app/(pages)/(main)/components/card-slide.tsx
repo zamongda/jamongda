@@ -1,13 +1,12 @@
 "use client";
 
-import { use, useState } from "react";
+import { useState } from "react";
 import { css } from "@styled-system/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { IWordRes } from "../../../api/word";
 
-const CardSlide = ({ allWordsData }: { allWordsData: Promise<IWordRes[]> }) => {
+const CardSlide = ({ allWords }: { allWords: IWordRes[] }) => {
   const [clickedCards, setClickedCards] = useState<Record<number, boolean>>({});
-  const allWords = use(allWordsData);
 
   const onClickCard = (id: number) => {
     setClickedCards((prev) => ({
@@ -27,13 +26,20 @@ const CardSlide = ({ allWordsData }: { allWordsData: Promise<IWordRes[]> }) => {
         spaceBetween={-20}
         onSlideChange={onSlideChange}
       >
-        {allWords.map((word) => (
-          <SwiperSlide key={word.id}>
-            <div onClick={() => onClickCard(word.id)}>
-              {clickedCards[word.id] ? word.ko : word.en}
-            </div>
+        {!allWords || allWords?.length === 0 ? (
+          //  TODO: EMPTY 컴포넌트 필요
+          <SwiperSlide>
+            <div>저장된 단어가 없습니다.</div>
           </SwiperSlide>
-        ))}
+        ) : (
+          allWords.map((word) => (
+            <SwiperSlide key={word.id}>
+              <div onClick={() => onClickCard(word.id)}>
+                {clickedCards[word.id] ? word.ko : word.en}
+              </div>
+            </SwiperSlide>
+          ))
+        )}
       </Swiper>
     </div>
   );
@@ -59,6 +65,7 @@ const SwiperStyle = css({
         h: "45vh !important",
         boxShadow: "0rem -0.3125rem 1.25rem 0rem rgba(0, 0, 0, 0.1)",
         textStyle: "Text-22-M",
+        p: "1.25rem",
         "& > div": {
           w: "100%",
           h: "100%",

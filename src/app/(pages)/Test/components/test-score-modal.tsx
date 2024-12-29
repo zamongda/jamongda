@@ -36,7 +36,7 @@ const TestScoreModal = ({
           mt: "20px",
         })}
       >
-        총 {allWords.length}개 단어 중 {correctCount} 맞췄습니다 🥳
+        총 {allWords?.length}개 단어 중 {correctCount} 맞췄습니다 🥳
       </div>
       <Button
         text="테스트 종료하기"

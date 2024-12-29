@@ -2,7 +2,6 @@ import { use } from "react";
 import { css, sva } from "@styled-system/css";
 import { deleteCategory } from "../../../../../api/category";
 import { IUseCategoryListReturn } from "../../../hooks/use-category";
-import DrawerListItem from "../drawer-list-item";
 
 const MyCategoryList = ({
   categoryListData,
@@ -26,6 +25,11 @@ const MyCategoryList = ({
   };
 
   const categoryListItemStyle = CategoryListItemSva();
+
+  if (!categoryList || categoryList.length === 0) {
+    // TODO: EMPTY 컴포넌트 필요
+    return <div>카테고리가 없습니다.</div>;
+  }
   return (
     <div>
       {categoryList.map((category) => (

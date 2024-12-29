@@ -4,13 +4,15 @@ import { css, sva } from "@styled-system/css";
 interface IDrawerListItemProps {
   word: string;
   meaning: string;
-  handleModify: () => void;
-  handleDelete: () => void;
+  readonly?: boolean;
+  handleModify?: () => void;
+  handleDelete?: () => void;
 }
 
 const DrawerListItem = ({
   word,
   meaning,
+  readonly = false,
   handleModify,
   handleDelete,
 }: IDrawerListItemProps) => {
@@ -21,18 +23,20 @@ const DrawerListItem = ({
         <div className={wordsListItemStyle.word}>{word}</div>
         <div className={wordsListItemStyle.meaning}>{meaning}</div>
       </div>
-      <div className={wordsListItemStyle.buttonWrapper}>
-        <button onClick={handleModify}>
-          <img
-            src="/icons/icon-pencil.svg"
-            alt="수정"
-            className={css({ w: "18px" })}
-          />
-        </button>
-        <button onClick={handleDelete}>
-          <img src="/icons/icon-close.svg" alt="삭제" />
-        </button>
-      </div>
+      {!readonly && (
+        <div className={wordsListItemStyle.buttonWrapper}>
+          <button onClick={handleModify}>
+            <img
+              src="/icons/icon-pencil.svg"
+              alt="수정"
+              className={css({ w: "18px" })}
+            />
+          </button>
+          <button onClick={handleDelete}>
+            <img src="/icons/icon-close.svg" alt="삭제" />
+          </button>
+        </div>
+      )}
     </li>
   );
 };
