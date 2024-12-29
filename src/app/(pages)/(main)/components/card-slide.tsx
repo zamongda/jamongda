@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { css } from "@styled-system/css";
 import { Swiper, SwiperSlide } from "swiper/react";
