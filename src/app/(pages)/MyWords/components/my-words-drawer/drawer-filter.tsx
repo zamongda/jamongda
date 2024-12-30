@@ -5,7 +5,6 @@ import {
   IUseCategoryListReturn,
   useCategoryList,
 } from "../../hooks/use-category";
-import useWordsList from "./hooks/use-words-list";
 
 const MyWordsDrawerFilter = ({
   setCategory,
@@ -17,14 +16,16 @@ const MyWordsDrawerFilter = ({
   if (!categoryList) return null;
 
   return (
-    <Form className={wordsSelectStyle}>
-      <Suspense>
-        <FilterSelect
-          categoryListData={categoryList}
-          setCategory={setCategory}
-        />
-      </Suspense>
-    </Form>
+    <div className={css({ bg: "white", position: "sticky", top: "35px" })}>
+      <Form className={wordsSelectStyle}>
+        <Suspense>
+          <FilterSelect
+            categoryListData={categoryList}
+            setCategory={setCategory}
+          />
+        </Suspense>
+      </Form>
+    </div>
   );
 };
 
@@ -58,8 +59,6 @@ const FilterSelect = ({
 export default MyWordsDrawerFilter;
 
 const wordsSelectStyle = css({
-  position: "sticky",
-  top: "35px",
   minW: "75px",
   w: "fit-content",
   textStyle: "Text-14-M",

@@ -5,6 +5,7 @@ import WordModal, {
   IHandleWordSaveProps,
 } from "../../../components/word-modal";
 import { useLogin } from "../../../providers/auth-provider";
+import { useCategoryList } from "../../MyWords/hooks/use-category";
 
 interface IAddWordModal {
   modalOpen: boolean;
@@ -15,6 +16,8 @@ const AddWordModal = ({ modalOpen, setModalOpen }: IAddWordModal) => {
   const router = useRouter();
   const { isLogin } = useLogin();
 
+  const categoryListData = useCategoryList();
+
   useEffect(() => {
     if (!isLogin) {
       alert("로그인이 필요합니다.");
@@ -23,7 +26,11 @@ const AddWordModal = ({ modalOpen, setModalOpen }: IAddWordModal) => {
     }
   }, [isLogin]);
 
-  const handleWordSave = async ({ word, meaning }: IHandleWordSaveProps) => {
+  const handleWordSave = async ({
+    word,
+    meaning,
+    categoryId,
+  }: IHandleWordSaveProps) => {
     if (word.trim() === "") {
       alert("단어를 입력해주세요.");
       return;
@@ -37,6 +44,7 @@ const AddWordModal = ({ modalOpen, setModalOpen }: IAddWordModal) => {
       {
         ko: meaning,
         en: word,
+        category_id: categoryId,
       },
     ]);
 
@@ -53,6 +61,7 @@ const AddWordModal = ({ modalOpen, setModalOpen }: IAddWordModal) => {
       modalOpen={modalOpen}
       setModalOpen={setModalOpen}
       handleWordSave={handleWordSave}
+      categoryListData={categoryListData}
     />
   );
 };

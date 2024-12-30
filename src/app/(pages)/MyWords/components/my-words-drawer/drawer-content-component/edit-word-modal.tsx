@@ -3,6 +3,7 @@ import { IWordRes, modifyWord } from "../../../../../api/word";
 import WordModal, {
   IHandleWordSaveProps,
 } from "../../../../../components/word-modal";
+import { useCategoryList } from "../../../hooks/use-category";
 
 interface IEditWordModalProps {
   modalOpen: boolean;
@@ -15,6 +16,7 @@ const EditWordModal = ({
   setModalOpen,
   originWord,
 }: IEditWordModalProps) => {
+  const categoryListData = useCategoryList();
   const handleWordSave = async ({ word, meaning }: IHandleWordSaveProps) => {
     if (word.trim() === "") {
       alert("단어를 입력해주세요.");
@@ -44,6 +46,7 @@ const EditWordModal = ({
       handleWordSave={handleWordSave}
       originWord={originWord.en}
       originMeaning={originWord.ko}
+      categoryListData={categoryListData}
     />
   );
 };

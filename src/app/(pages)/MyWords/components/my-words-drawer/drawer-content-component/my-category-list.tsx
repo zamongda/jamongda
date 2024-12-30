@@ -1,6 +1,6 @@
 import { use } from "react";
 import { css, sva } from "@styled-system/css";
-import { deleteCategory } from "../../../../../api/category";
+import { addCategory, deleteCategory } from "../../../../../api/category";
 import { IUseCategoryListReturn } from "../../../hooks/use-category";
 
 const MyCategoryList = ({
@@ -9,6 +9,17 @@ const MyCategoryList = ({
   categoryListData: Promise<IUseCategoryListReturn[]>;
 }) => {
   const categoryList = use(categoryListData);
+
+  const handleAddCategory = async () => {
+    const { success } = await addCategory("새 카테고리");
+
+    if (success) {
+      alert("추가되었습니다.");
+      return;
+    }
+    alert("잠시후 다시 시도해주세요.");
+    return;
+  };
 
   const handleModify = () => {
     console.log("수정");
@@ -21,6 +32,7 @@ const MyCategoryList = ({
       alert("삭제되었습니다.");
       return;
     }
+    alert("잠시후 다시 시도해주세요.");
     return;
   };
 
@@ -32,27 +44,32 @@ const MyCategoryList = ({
   }
   return (
     <div>
-      {categoryList.map((category) => (
-        <li className={categoryListItemStyle.item} key={category.id}>
-          <div>
-            <div className={categoryListItemStyle.categoryName}>
-              {category.category_name}
+      <div className={categoryListItemStyle.addButtonWrapper}>
+        <button onClick={handleAddCategory}>카테고리 추가하기</button>
+      </div>
+      <div>
+        {categoryList.map((category) => (
+          <li className={categoryListItemStyle.item} key={category.id}>
+            <div>
+              <div className={categoryListItemStyle.categoryName}>
+                {category.category_name}
+              </div>
             </div>
-          </div>
-          <div className={categoryListItemStyle.buttonWrapper}>
-            <button onClick={handleModify}>
-              <img
-                src="/icons/icon-pencil.svg"
-                alt="수정"
-                className={css({ w: "18px" })}
-              />
-            </button>
-            <button onClick={() => handleDelete(category.id)}>
-              <img src="/icons/icon-close.svg" alt="삭제" />
-            </button>
-          </div>
-        </li>
-      ))}
+            <div className={categoryListItemStyle.buttonWrapper}>
+              <button onClick={handleModify}>
+                <img
+                  src="/icons/icon-pencil.svg"
+                  alt="수정"
+                  className={css({ w: "18px" })}
+                />
+              </button>
+              <button onClick={() => handleDelete(category.id)}>
+                <img src="/icons/icon-close.svg" alt="삭제" />
+              </button>
+            </div>
+          </li>
+        ))}
+      </div>
     </div>
   );
 };
@@ -60,7 +77,7 @@ const MyCategoryList = ({
 export default MyCategoryList;
 
 const CategoryListItemSva = sva({
-  slots: ["item", "categoryName", "buttonWrapper"],
+  slots: ["item", "categoryName", "buttonWrapper", "addButtonWrapper"],
   base: {
     item: {
       display: "flex",
@@ -74,6 +91,11 @@ const CategoryListItemSva = sva({
     buttonWrapper: {
       display: "flex",
       gap: "12px",
+    },
+    addButtonWrapper: {
+      position: "sticky",
+      bg: "white",
+      top: "35px",
     },
   },
 });

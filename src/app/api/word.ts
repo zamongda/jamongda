@@ -32,7 +32,11 @@ export const getWords = async (conditions: IGetWordsArgs) => {
     throw new Error("User not found");
   }
 
-  let query = supabase.from("words").select("*").eq("user_id", user?.id);
+  let query = supabase
+    .from("words")
+    .select("*")
+    .eq("user_id", user?.id)
+    .order("created_at", { ascending: false });
 
   for (const key in conditions) {
     query = query.eq(key, conditions[key as keyof IGetWordsArgs]);
@@ -48,7 +52,7 @@ export const getWords = async (conditions: IGetWordsArgs) => {
 };
 
 export const addWord = async (
-  words: { ko: string; en: string; category_id?: string }[],
+  words: { ko: string; en: string; category_id?: number }[],
 ) => {
   const { user, error: userError } = await getUserInClient();
   const userId = user?.id;
@@ -64,7 +68,7 @@ export const addWord = async (
     return { ...word, user_id: userId };
   });
 
-  const { error } = await supabase.from("words").insert(newWordsArray);
+  const { error } = await supabase.from("words").insert(newWordsArray).select();
 
   if (error) {
     throw new Error(error.message);
@@ -115,7 +119,8 @@ export const modifyWord = async (
     .from("words")
     .update(word)
     .eq("id", id)
-    .eq("user_id", userId);
+    .eq("user_id", userId)
+    .select();
 
   if (error) {
     throw new Error(error.message);
