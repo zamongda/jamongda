@@ -1,4 +1,4 @@
-import Form from "@common/form/form";
+import Form from "@common/ㅍorm";
 import React, { use } from "react";
 import { IWordRes } from "../../../api/word";
 import useWordsList from "../../MyWords/components/my-words-drawer/hooks/use-words-list";

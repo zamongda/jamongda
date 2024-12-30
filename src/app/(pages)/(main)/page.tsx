@@ -1,4 +1,4 @@
-import Header from "@common/Header/header";
+import Header from "@common/ㅎeader";
 import { Suspense } from "react";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import Main from "./components/main";

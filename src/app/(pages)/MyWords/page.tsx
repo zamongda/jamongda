@@ -1,4 +1,4 @@
-import Header from "@common/header/header";
+import Header from "@common/ㅎeader";
 import MyWords from "./components/my-words";
 
 const MyWordsPage = () => {

@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@common/button/button";
+import Button from "@common/ㅜutton";
 import { Suspense, useEffect, useState } from "react";
 import { sva } from "@styled-system/css";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";

@@ -1,8 +1,8 @@
 "use client";
 
-import Button from "@common/button/button";
-import Form from "@common/form/form";
-import Input from "@common/input/input";
+import Input from "@common/ㅇnput";
+import Form from "@common/ㅍorm";
+import Button from "@common/ㅜutton";
 import { useEffect, useState } from "react";
 import { css, sva } from "@styled-system/css";
 import { useRouter } from "next/navigation";

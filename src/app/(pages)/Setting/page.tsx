@@ -1,4 +1,4 @@
-import Header from "@common/header/header";
+import Header from "@common/ㅎeader";
 import Setting from "./components/setting";
 
 const MyWordsPage = () => {

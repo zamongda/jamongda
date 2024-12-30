@@ -1,5 +1,5 @@
-import Form from "@common/form/form";
 import ModalPopup from "@common/modal/modal-popup";
+import Form from "@common/ㅍorm";
 import { use, useState } from "react";
 import { css } from "@styled-system/css";
 import { IWordRes, deleteWord } from "../../../../../api/word";
