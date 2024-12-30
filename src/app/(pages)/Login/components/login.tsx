@@ -1,13 +1,12 @@
 "use client";
 
-import Input from "@common/ㅇnput";
-import Form from "@common/ㅍorm";
-import Button from "@common/ㅜutton";
-import { useEffect, useState } from "react";
+import Button from "@common/button";
+import Form from "@common/form";
+import Input from "@common/input";
+import { useState } from "react";
 import { css, sva } from "@styled-system/css";
 import { useRouter } from "next/navigation";
 import { createClient } from "../../../api/supabase/create-client";
-import { useLogin } from "../../../providers/auth-provider";
 
 const Login = () => {
   const router = useRouter();

@@ -1,11 +1,10 @@
 "use client";
 
-import Button from "@common/ㅜutton";
-import { Suspense, useEffect, useState } from "react";
+import Button from "@common/button";
+import { Suspense, useState } from "react";
 import { sva } from "@styled-system/css";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { useRouter } from "next/navigation";
-import { useLogin } from "../../../providers/auth-provider";
 import { useCategoryList } from "../../MyWords/hooks/use-category";
 import { useMyWords } from "../../MyWords/hooks/use-words";
 import AddWordModal from "./add-word-modal";
@@ -14,8 +13,6 @@ import CardSlideContainer from "./card-slide-container";
 const Main = () => {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
-
-  const isLogin = useLogin();
 
   const allWordsData = useMyWords();
   const categoryListData = useCategoryList();

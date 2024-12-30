@@ -1,7 +1,7 @@
 "use client";
 
+import Button from "@common/button";
 import ModalPopup from "@common/modal/modal-popup";
-import Button from "@common/ㅜutton";
 import { use } from "react";
 import { css } from "@styled-system/css";
 import { useRouter } from "next/navigation";

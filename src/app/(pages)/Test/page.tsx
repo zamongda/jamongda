@@ -1,4 +1,4 @@
-import Header from "@common/ㅎeader";
+import Header from "@common/header";
 import Test from "./components/test";
 
 const TestPage = () => {

@@ -1,11 +1,10 @@
-import Form from "@common/ㅍorm";
+import Form from "@common/form";
 import { Suspense, use } from "react";
 import { css } from "@styled-system/css";
 import {
   IUseCategoryListReturn,
   useCategoryList,
 } from "../../hooks/use-category";
-import useWordsList from "./hooks/use-words-list";
 
 const MyWordsDrawerFilter = ({
   setCategory,
