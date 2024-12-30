@@ -1,8 +1,7 @@
 import DrawerPopup from "@common/modal/drawer-popup";
-import { Suspense, memo } from "react";
+import { Suspense } from "react";
 import { css } from "@styled-system/css";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
-import MyWordsDrawerFilter from "./drawer-filter";
 
 interface IMyWordsDrawerProps {
   modalOpen: boolean;

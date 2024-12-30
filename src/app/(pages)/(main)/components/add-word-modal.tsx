@@ -24,7 +24,7 @@ const AddWordModal = ({ modalOpen, setModalOpen }: IAddWordModal) => {
       router.push("/Login");
       return;
     }
-  }, [isLogin]);
+  }, [isLogin, router]);
 
   const handleWordSave = async ({
     word,

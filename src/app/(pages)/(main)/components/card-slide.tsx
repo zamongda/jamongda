@@ -24,20 +24,13 @@ const CardSlide = ({ allWords }: { allWords: IWordRes[] }) => {
         spaceBetween={-20}
         onSlideChange={onSlideChange}
       >
-        {!allWords || allWords?.length === 0 ? (
-          //  TODO: EMPTY 컴포넌트 필요
-          <SwiperSlide>
-            <div>저장된 단어가 없습니다.</div>
+        {allWords.map((word) => (
+          <SwiperSlide key={word.id}>
+            <div onClick={() => onClickCard(word.id)}>
+              {clickedCards[word.id] ? word.ko : word.en}
+            </div>
           </SwiperSlide>
-        ) : (
-          allWords.map((word) => (
-            <SwiperSlide key={word.id}>
-              <div onClick={() => onClickCard(word.id)}>
-                {clickedCards[word.id] ? word.ko : word.en}
-              </div>
-            </SwiperSlide>
-          ))
-        )}
+        ))}
       </Swiper>
     </div>
   );

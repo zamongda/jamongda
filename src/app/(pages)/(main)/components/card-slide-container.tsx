@@ -1,4 +1,4 @@
-import Form from "@common/form/form";
+import Form from "@common/form";
 import React, { use } from "react";
 import { IWordRes } from "../../../api/word";
 import CategorySelect from "../../../components/category-select";

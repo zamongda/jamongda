@@ -1,7 +1,7 @@
 "use client";
 
-import { ToastPopup } from "@common/Toast/toast-popup";
-import Button from "@common/button/button";
+import Button from "@common/button";
+import { ToastPopup } from "@common/toast";
 import { Suspense, useState } from "react";
 import { toast } from "react-toastify";
 import { css, sva } from "@styled-system/css";

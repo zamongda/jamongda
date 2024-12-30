@@ -1,6 +1,6 @@
-import Button from "@common/button/button";
-import Form from "@common/form/form";
-import Input from "@common/input/input";
+import Button from "@common/button";
+import Form from "@common/form";
+import Input from "@common/input";
 import ModalPopup from "@common/modal/modal-popup";
 import React, { use, useState } from "react";
 import { css } from "@styled-system/css";

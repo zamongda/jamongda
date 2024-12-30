@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@common/button/button";
+import Button from "@common/button";
 import ModalPopup from "@common/modal/modal-popup";
 import { use } from "react";
 import { css } from "@styled-system/css";

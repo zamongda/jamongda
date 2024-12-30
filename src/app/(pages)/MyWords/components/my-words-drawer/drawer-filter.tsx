@@ -1,4 +1,4 @@
-import Form from "@common/form/form";
+import Form from "@common/form";
 import { Suspense, use } from "react";
 import { css } from "@styled-system/css";
 import {
