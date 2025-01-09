@@ -2,14 +2,12 @@ import React, { use } from "react";
 import { mainStyle } from "../(pages)/(main)/components/main";
 import { IUseCategoryListReturn } from "../(pages)/MyWords/hooks/use-category";
 
-interface ICategorySelectProps {}
-
 const CategorySelect = ({
   setCategory,
   categoryList,
 }: {
   setCategory: (value: string) => void;
-  categoryList: IUseCategoryListReturn[];
+  categoryList?: IUseCategoryListReturn[];
 }) => {
   return (
     <select

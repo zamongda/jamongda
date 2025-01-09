@@ -24,7 +24,7 @@ const CardSlide = ({ allWords }: { allWords: IWordRes[] }) => {
         spaceBetween={-20}
         onSlideChange={onSlideChange}
       >
-        {allWords.map((word) => (
+        {allWords?.map((word) => (
           <SwiperSlide key={word.id}>
             <div onClick={() => onClickCard(word.id)}>
               {clickedCards[word.id] ? word.ko : word.en}
