@@ -1,13 +1,12 @@
 "use client";
 
 import Button from "@common/button";
+import Loading from "@common/loading";
 import { ToastPopup } from "@common/toast";
-import { Suspense, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { css, sva } from "@styled-system/css";
-import { ErrorBoundary } from "next/dist/client/components/error-boundary";
-import { finishTest } from "../../../api/word";
-import { useMyWords } from "../../MyWords/hooks/use-words";
+import { IWordRes, finishTest, getWords } from "../../../api/word";
 import TestCard from "./test-card";
 import TestScoreModal from "./test-score-modal";
 
@@ -16,42 +15,60 @@ const Test = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [correctWordIds, setCorrectWordIds] = useState<string[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [allWords, setAllWords] = useState<IWordRes[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const allWordsData = useMyWords();
+  const currentWord = allWords?.[currentIndex] ?? { en: "", ko: "" };
+  const totalCount = allWords?.length ?? 0;
+
+  useEffect(() => {
+    const fetchWords = async () => {
+      try {
+        const { data: myWords } = await getWords({});
+        setAllWords(JSON.parse(myWords) as IWordRes[]);
+      } catch (e) {
+        console.error("Failed to fetch words:", e);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchWords();
+  }, []);
 
   const handleAnswerSubmit = async () => {
-    const allWords = await allWordsData;
-    const currentWord = allWords[currentIndex];
-
+    const currentWord = allWords?.[currentIndex];
     if (currentWord) {
-      // 정답 처리
       if (answer.trim() === currentWord.ko) {
-        setCorrectWordIds((prev) => [...prev, currentWord.id]);
+        setCorrectWordIds((prev) => [...prev, String(currentWord.id)]);
         toast(<ToastPopup type="correct" />);
       } else {
         toast(<ToastPopup type="error" />);
       }
-      // 다음 단어로 이동
+
       const nextIndex = currentIndex + 1;
       if (nextIndex < allWords?.length) {
         setCurrentIndex(nextIndex);
       } else {
-        // 모든 단어를 완료한 경우
         await finishTest(correctWordIds);
         console.log("finished");
         setModalOpen(true);
       }
-      setAnswer(""); // 입력 초기화
+      setAnswer("");
     }
   };
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <div className={testStyle.wrapper}>
-      <ErrorBoundary errorComponent={undefined}>
-        <Suspense fallback={null}>
-          <TestCard allWordsData={allWordsData} currentIndex={currentIndex} />
-        </Suspense>
-      </ErrorBoundary>
+      <TestCard
+        currentWord={currentWord}
+        totalCount={totalCount}
+        currentIndex={currentIndex}
+      />
       <div className={testStyle.answerWrapper}>
         <div className={testStyle.answer}>
           <div className={testStyle.input}>
@@ -70,16 +87,12 @@ const Test = () => {
           onClick={handleAnswerSubmit}
         />
       </div>
-      <ErrorBoundary errorComponent={undefined}>
-        <Suspense fallback={null}>
-          <TestScoreModal
-            modalOpen={modalOpen}
-            setModalOpen={setModalOpen}
-            allWordsData={allWordsData}
-            correctCount={correctWordIds.length}
-          />
-        </Suspense>
-      </ErrorBoundary>
+      <TestScoreModal
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+        allWords={allWords}
+        correctCount={correctWordIds.length}
+      />
     </div>
   );
 };

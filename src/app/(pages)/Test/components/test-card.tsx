@@ -1,24 +1,22 @@
 "use client";
 
-import { use } from "react";
 import { css, sva } from "@styled-system/css";
 import { IWordRes } from "../../../api/word";
 
 const TestCard = ({
-  allWordsData,
+  currentWord,
   currentIndex,
+  totalCount,
 }: {
-  allWordsData: Promise<IWordRes[]>;
+  currentWord: IWordRes;
   currentIndex: number;
+  totalCount: number;
 }) => {
-  const allWords = use(allWordsData);
-  const currentWord = allWords[currentIndex];
-
   return (
     <div className={testStyle.card}>
       <div className={css({ textStyle: "Text-28-B" })}>{currentWord.en}</div>
       <span className={testStyle.count}>
-        {currentIndex + 1} / {allWords?.length}
+        {currentIndex + 1} / {totalCount}
       </span>
     </div>
   );
