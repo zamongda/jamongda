@@ -53,7 +53,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <head>{/* <link href="./styles/global.css" rel="stylesheet" /> */}</head>
+      <head>
+        <link href="/styles/global.css" rel="stylesheet" />
+      </head>
       <body
         className={`${godoB.variable} ${godoM.variable} ${godoL.variable} ${godoR.variable}`}
       >
