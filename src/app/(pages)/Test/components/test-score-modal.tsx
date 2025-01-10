@@ -2,7 +2,6 @@
 
 import Button from "@common/button";
 import ModalPopup from "@common/modal/modal-popup";
-import { use } from "react";
 import { css } from "@styled-system/css";
 import { useRouter } from "next/navigation";
 import { IWordRes } from "../../../api/word";
@@ -10,18 +9,17 @@ import { IWordRes } from "../../../api/word";
 interface ITestScoreModal {
   modalOpen: boolean;
   setModalOpen: (value: boolean) => void;
-  allWordsData: Promise<IWordRes[]>;
+  allWords: IWordRes[];
   correctCount: number;
 }
 
 const TestScoreModal = ({
   modalOpen,
   setModalOpen,
-  allWordsData,
+  allWords,
   correctCount,
 }: ITestScoreModal) => {
   const router = useRouter();
-  const allWords = use(allWordsData);
 
   return (
     <ModalPopup
