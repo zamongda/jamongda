@@ -51,7 +51,6 @@ const Test = () => {
         setCurrentIndex(nextIndex);
       } else {
         await finishTest(correctWordIds);
-        console.log("finished");
         setModalOpen(true);
       }
       setAnswer("");
