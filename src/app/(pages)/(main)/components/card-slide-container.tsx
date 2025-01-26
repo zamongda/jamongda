@@ -18,6 +18,9 @@ const CardSlideContainer = ({
   const allWords = use(allWordsData);
   const categoryList = use(categoryListData);
   const { filteredWords, setCategory } = useWordsList(allWords);
+
+  if(!filteredWords) return <></>
+  
   return (
     <>
       <CardSlide allWords={filteredWords} />
