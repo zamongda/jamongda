@@ -16,8 +16,7 @@ export const addCategory = async (name: string) => {
 
   const { error } = await supabase
     .from("category")
-    .insert([{ category_name: name, user_id: userId }])
-    .select();
+    .insert([{ category_name: name, user_id: userId }]).select();
 
   if (error) {
     throw new Error(error.message);
@@ -59,8 +58,7 @@ export const getCategories = async () => {
   const { data, error } = await supabase
     .from("category")
     .select("*")
-    .eq("user_id", userId)
-    .order("created_at", { ascending: false });
+    .eq("user_id", userId).order("created_at", { ascending: false });
 
   if (error) {
     throw new Error(error.message);

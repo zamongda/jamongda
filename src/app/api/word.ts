@@ -32,11 +32,7 @@ export const getWords = async (conditions: IGetWordsArgs) => {
     throw new Error("User not found");
   }
 
-  let query = supabase
-    .from("words")
-    .select("*")
-    .eq("user_id", user?.id)
-    .order("created_at", { ascending: false });
+  let query = supabase.from("words").select("*").eq("user_id", user?.id).order("created_at", { ascending: false });
 
   for (const key in conditions) {
     query = query.eq(key, conditions[key as keyof IGetWordsArgs]);
@@ -92,7 +88,7 @@ export const deleteWord = async (id: number) => {
     .from("words")
     .delete()
     .eq("id", id)
-    .eq("user_id", userId);
+    .eq("user_id", userId).select();
 
   if (error) {
     throw new Error(error.message);

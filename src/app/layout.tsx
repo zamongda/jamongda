@@ -2,8 +2,6 @@ import "@styles/globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "swiper/css";
-import { getUser } from "./api/auth";
-import { getUserInClient } from "./api/get-client-user";
 import { AuthProvider } from "./providers/auth-provider";
 import ToastContainer from "./providers/toast-container";
 
@@ -45,9 +43,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
-      <head>{/* <link href="./styles/global.css" rel="stylesheet" /> */}</head>
+      <head>
+        <link href="/styles/global.css" rel="stylesheet" />
+      </head>
       <body
         className={`${godoB.variable} ${godoM.variable} ${godoL.variable} ${godoR.variable}`}
       >

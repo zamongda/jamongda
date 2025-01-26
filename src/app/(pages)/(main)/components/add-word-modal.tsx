@@ -19,12 +19,12 @@ const AddWordModal = ({ modalOpen, setModalOpen }: IAddWordModal) => {
   const categoryListData = useCategoryList();
 
   useEffect(() => {
-    if (!isLogin) {
+    if (modalOpen && !isLogin) {
       alert("로그인이 필요합니다.");
       router.push("/Login");
       return;
     }
-  }, [isLogin, router]);
+  }, [isLogin, router, modalOpen]);
 
   const handleWordSave = async ({
     word,
