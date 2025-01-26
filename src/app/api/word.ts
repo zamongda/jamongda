@@ -48,7 +48,7 @@ export const getWords = async (conditions: IGetWordsArgs) => {
 };
 
 export const addWord = async (
-  words: { ko: string; en: string; category_id?: string }[],
+  words: { ko: string; en: string; category_id?: number }[],
 ) => {
   const { user, error: userError } = await getUserInClient();
   const userId = user?.id;
@@ -64,7 +64,7 @@ export const addWord = async (
     return { ...word, user_id: userId };
   });
 
-  const { error } = await supabase.from("words").insert(newWordsArray);
+  const { error } = await supabase.from("words").insert(newWordsArray).select();
 
   if (error) {
     throw new Error(error.message);
@@ -88,7 +88,7 @@ export const deleteWord = async (id: number) => {
     .from("words")
     .delete()
     .eq("id", id)
-    .eq("user_id", userId);
+    .eq("user_id", userId).select();
 
   if (error) {
     throw new Error(error.message);
