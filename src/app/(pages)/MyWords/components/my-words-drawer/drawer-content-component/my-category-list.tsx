@@ -36,7 +36,7 @@ const MyCategoryList = () => {
   return (
     <div>
       <div className={categoryListItemStyle.addButtonWrapper}>
-        <button onClick={() => setAddModalOpen(true)}><IconPlus fill="#000" /><span>카테고리 추가하기</span></button>
+        <button onClick={() => setAddModalOpen(true)}><IconPlus fill="#000" /><span>카테고리 추가</span></button>
       </div>
       <div>
         {categoryList.map((category) => (
@@ -86,13 +86,14 @@ const CategoryListItemSva = sva({
       gap: "12px",
     },
     addButtonWrapper: {
-      width:"160px",
+      width:"130px",
       position: "sticky",
       bg: "white",
       top: "35px",
       margin:"0 0 20px auto",
       "& > button": {
         display: 'flex',
+        paddingTop: "10px",
         gap:"10px",
         textStyle: "Text-16-M",
       }
