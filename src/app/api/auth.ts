@@ -30,7 +30,7 @@ export const getUser = async () => {
   const supabase = await createServerSupabaseClient();
   const { data, error } = await supabase.auth.getUser();
 
-  return { user: data.user, error };
+  return { user: JSON.stringify(data.user), error:JSON.stringify(error) };
 };
 
 export const logout = async () => {
