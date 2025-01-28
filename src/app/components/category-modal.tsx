@@ -5,19 +5,23 @@ import ModalPopup from "@common/modal/modal-popup";
 import { BaseModalProps } from "@common/modal/types";
 import { css } from "@styled-system/css";
 import React, { useState } from "react";
+import { IUseCategoryListReturn } from "../hooks/use-category";
 
 interface ICategoryModalProps extends BaseModalProps {
-	handleAddCategory: (name: string) => void;
+	handleCategory: (name: string) => void;
+	category?: IUseCategoryListReturn;
 }
 
-const CategoryModal = ({modalOpen, setModalOpen, handleAddCategory}:ICategoryModalProps) => {
-	const [name, setName] = useState("");
+const CategoryModal = ({modalOpen, setModalOpen, handleCategory, category}:ICategoryModalProps) => {
+	const [name, setName] = useState(category?.category_name || "");
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		handleAddCategory(name);
+		handleCategory(name);
 		setModalOpen(false);
 	}
+
+	console.log("category", category);
 
     return <ModalPopup isOpen={modalOpen} setModalOpen={setModalOpen}>
 			<Form onSubmit={handleSubmit}>
@@ -28,8 +32,8 @@ const CategoryModal = ({modalOpen, setModalOpen, handleAddCategory}:ICategoryMod
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-              <Button
-              type="submit"
+       <Button
+        type="submit"
         text="저장하기"
         className={css({ mt: "2.5rem!" })}
       />

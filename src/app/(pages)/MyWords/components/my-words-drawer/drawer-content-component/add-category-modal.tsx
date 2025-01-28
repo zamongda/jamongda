@@ -15,7 +15,7 @@ const AddCategoryModal = ({modalOpen, setModalOpen}:IAddCategoryModalProps) => {
         alert("잠시후 다시 시도해주세요.");
         return;
       };
-    return <CategoryModal modalOpen={modalOpen} setModalOpen={setModalOpen} handleAddCategory={handleAddCategory} />
+    return <CategoryModal modalOpen={modalOpen} setModalOpen={setModalOpen} handleCategory={handleAddCategory} />
 }
 
 export default AddCategoryModal;

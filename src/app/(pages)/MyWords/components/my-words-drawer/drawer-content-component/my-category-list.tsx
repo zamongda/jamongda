@@ -1,17 +1,20 @@
 import { css, sva } from "@styled-system/css";
 import { addCategory, deleteCategory } from "../../../../../api/category";
-import useCategory from "../../../../../hooks/use-category";
+import useCategory, { IUseCategoryListReturn } from "../../../../../hooks/use-category";
 import IconPlus from "../../icon-plus";
 import { useState } from "react";
 import AddCategoryModal from "./add-category-modal";
+import EditCategoryModal from "./edit-category-modal";
 
 const MyCategoryList = () => {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [addModalOpen, setAddModalOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState<IUseCategoryListReturn>();
+
   const categoryList = useCategory();
 
-  const handleModify = () => {
-    console.log("수정");
-  };
+  const handleCloseEditModal = () => {
+    setEditModalOpen(undefined);
+  }
 
   const handleDelete = async (id: number) => {
     const { success } = await deleteCategory(id);
@@ -33,7 +36,7 @@ const MyCategoryList = () => {
   return (
     <div>
       <div className={categoryListItemStyle.addButtonWrapper}>
-        <button onClick={() => setModalOpen(true)}><IconPlus fill="#000" /><span>카테고리 추가하기</span></button>
+        <button onClick={() => setAddModalOpen(true)}><IconPlus fill="#000" /><span>카테고리 추가하기</span></button>
       </div>
       <div>
         {categoryList.map((category) => (
@@ -44,7 +47,7 @@ const MyCategoryList = () => {
               </div>
             </div>
             <div className={categoryListItemStyle.buttonWrapper}>
-              <button onClick={handleModify}>
+              <button onClick={() => setEditModalOpen(category)}>
                 <img
                   src="/icons/icon-pencil.svg"
                   alt="수정"
@@ -58,7 +61,8 @@ const MyCategoryList = () => {
           </li>
         ))}
       </div>
-        {modalOpen && <AddCategoryModal modalOpen={modalOpen} setModalOpen={setModalOpen} />}
+        {addModalOpen && <AddCategoryModal modalOpen={addModalOpen} setModalOpen={setAddModalOpen} />}
+        {editModalOpen && <EditCategoryModal modalOpen={!!editModalOpen} setModalOpen={handleCloseEditModal} category={editModalOpen} />}
     </div>
   );
 };

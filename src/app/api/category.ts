@@ -25,6 +25,30 @@ export const addCategory = async (name: string) => {
   return { success: true };
 };
 
+export const modifyCategory = async (id: number, name: string) => {
+  const { user, error: userError } = await getUserInClient();
+  const userId = user?.id;
+
+  if (userError) {
+    throw new Error(userError.message);
+  }
+  if (!userId) {
+    throw new Error("User not found");
+  }
+
+  const { error } = await supabase
+    .from("category")
+    .update({ category_name: name })
+    .eq("id", id)
+    .eq("user_id", userId).select();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return { success: true };
+}
+
 export const deleteCategory = async (id: number) => {
   const { user, error: userError } = await getUserInClient();
   const userId = user?.id;
