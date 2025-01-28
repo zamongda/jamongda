@@ -23,7 +23,11 @@ const AddWordModal = ({ modalOpen, setModalOpen }: IAddWordModal) => {
     }
   }, [isLogin, router, modalOpen]);
 
-  const handleWordSave = async ({ word, meaning }: IHandleWordSaveProps) => {
+  const handleWordSave = async ({
+    word,
+    meaning,
+    categoryId,
+  }: IHandleWordSaveProps) => {
     if (word.trim() === "") {
       alert("단어를 입력해주세요.");
       return;
@@ -37,15 +41,17 @@ const AddWordModal = ({ modalOpen, setModalOpen }: IAddWordModal) => {
       {
         ko: meaning,
         en: word,
+        category_id: categoryId,
       },
     ]);
 
     if (!success) {
       alert("단어 저장에 실패했습니다.");
-      return;
+      return false;
     }
     alert("단어가 저장되었습니다.");
     setModalOpen(false);
+    return true;
   };
 
   return (

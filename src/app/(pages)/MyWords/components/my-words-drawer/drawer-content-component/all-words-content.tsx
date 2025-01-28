@@ -1,26 +1,25 @@
-import { use, useState } from "react";
+import { useState } from "react";
 import { css } from "@styled-system/css";
 import { IWordRes, deleteWord } from "../../../../../api/word";
-import { useMyWords } from "../../../hooks/use-words";
 import MyWordsDrawerFilter from "../drawer-filter";
 import DrawerListItem from "../drawer-list-item";
 import useWordsList from "../hooks/use-words-list";
 import EditWordModal from "./edit-word-modal";
+import useWords from "../../../../../hooks/use-words";
 
 const AllWordsContent = () => {
-  const allWordsData = useMyWords();
+  const allWordsData = useWords();
 
-  return <AllWordsList allWordsData={allWordsData} />;
+  return <AllWordsList allWords={allWordsData} />;
 };
 
 const AllWordsList = ({
-  allWordsData,
+  allWords,
 }: {
-  allWordsData: Promise<IWordRes[]>;
+  allWords?: IWordRes[];
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [word, setWord] = useState<IWordRes | null>(null);
-  const allWords = use(allWordsData);
   const { filteredWords, setCategory } = useWordsList(allWords);
 
   const handleWordDelete = async (id: number) => {
@@ -36,7 +35,7 @@ const AllWordsList = ({
     <div>
       <MyWordsDrawerFilter setCategory={setCategory} />
       <div className={css({ py: "10px" })}>
-        {filteredWords.length === 0 ? (
+        {!filteredWords || filteredWords.length === 0 ? (
           // TODO: EMPTY 컴포넌트 필요 / 단어추가하러가기 클릭하면 홈으로
           <div>추가한 단어가 없습니다.</div>
         ) : (
@@ -54,13 +53,11 @@ const AllWordsList = ({
           ))
         )}
       </div>
-      {word && (
         <EditWordModal
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
           originWord={word}
         />
-      )}
     </div>
   );
 };

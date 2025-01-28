@@ -6,15 +6,16 @@ import Input from "@common/input";
 import { useState } from "react";
 import { css, sva } from "@styled-system/css";
 import { useRouter } from "next/navigation";
-import { createClient } from "../../../api/supabase/create-client";
+import { login } from "../../../api/auth";
 
 const Login = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const supabase = createClient();
 
-  const handleLogin = async () => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
     if (trimmedEmail === "") {
@@ -25,18 +26,19 @@ const Login = () => {
       alert("비밀번호를 입력해주세요.");
       return;
     }
-    const { data } = await supabase.auth.signInWithPassword({
-      email: trimmedEmail,
-      password: trimmedPassword,
-    });
+    const { data } = await login(  
+      trimmedEmail,
+      trimmedPassword,
+    )
 
     if (!data) {
       alert("로그인에 실패했습니다.");
       return;
+    } else {
+      router.push("/");
+      router.refresh(); // 강제 리로드하여 auth-provider에서 isLogin을 갱신
+      return;
     }
-
-    router.push("/");
-    router.refresh(); // 강제 리로드하여 auth-provider에서 isLogin을 갱신
   };
 
   return (
@@ -46,7 +48,7 @@ const Login = () => {
       </h2>
       <div className={loginStyle.box}>
         <h3 className={css({ textStyle: "Text-22-M" })}>로그인</h3>
-        <Form>
+        <Form onSubmit={handleLogin}>
           <Input
             text="이메일"
             name="email"
@@ -58,9 +60,8 @@ const Login = () => {
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-        </Form>
         <div className={loginStyle.buttonWrapper}>
-          <Button text="로그인하기" onClick={handleLogin} />
+          <Button text="로그인하기" type="submit" />
           <Button
             text="카카오 로그인"
             bgColor="white"
@@ -72,6 +73,8 @@ const Login = () => {
             onClick={() => router.push("/SignUp")}
           />
         </div>
+        </Form>
+        
         <span className={loginStyle.findAccountButton}>
           계정을 잃어버리셨나요?
         </span>

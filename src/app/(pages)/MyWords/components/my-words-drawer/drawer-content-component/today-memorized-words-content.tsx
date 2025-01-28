@@ -1,7 +1,6 @@
-import { use } from "react";
 import { css } from "@styled-system/css";
 import { IWordRes } from "../../../../../api/word";
-import { useTodayMemorizedWords } from "../../../hooks/use-words";
+import { useTodayMemorizedWords } from "../../../hooks/use-my-words";
 import MyWordsDrawerFilter from "../drawer-filter";
 import DrawerListItem from "../drawer-list-item";
 import useWordsList from "../hooks/use-words-list";
@@ -10,17 +9,16 @@ const TodayMemorizedWordsContent = () => {
   const todayMemorizedWordsData = useTodayMemorizedWords();
   return (
     <TodayMemorizedWordsList
-      todayMemorizedWordsData={todayMemorizedWordsData}
+    todayMemorizedWords={todayMemorizedWordsData}
     />
   );
 };
 
 const TodayMemorizedWordsList = ({
-  todayMemorizedWordsData,
+  todayMemorizedWords,
 }: {
-  todayMemorizedWordsData: Promise<IWordRes[]>;
+  todayMemorizedWords?: IWordRes[];
 }) => {
-  const todayMemorizedWords = use(todayMemorizedWordsData);
   const { filteredWords, setCategory } = useWordsList(todayMemorizedWords);
 
   return (
@@ -28,7 +26,7 @@ const TodayMemorizedWordsList = ({
       <MyWordsDrawerFilter setCategory={setCategory} />
       <div className={css({ py: "10px" })}>
         {/* TODO: EMPTY 컴포넌트 필요 */}
-        {filteredWords.length === 0 ? (
+        {!filteredWords || filteredWords.length === 0 ? (
           <div>오늘 암기한 단어가 없습니다.</div>
         ) : (
           filteredWords.map((word) => (

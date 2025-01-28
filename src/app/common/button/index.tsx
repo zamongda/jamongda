@@ -2,13 +2,11 @@
 
 import { css, cva, cx } from "@styled-system/css";
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   bgColor?: "orange" | "lightGreen" | "white";
   size?: "lg" | "sm";
   Icon?: string;
-  disabled?: boolean;
-  onClick?: () => void;
   className?: string;
 }
 

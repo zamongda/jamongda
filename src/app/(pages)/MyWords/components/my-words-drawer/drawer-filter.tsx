@@ -1,42 +1,21 @@
 import Form from "@common/form";
-import { Suspense, use } from "react";
+import { Suspense } from "react";
 import { css } from "@styled-system/css";
-import {
-  IUseCategoryListReturn,
-  useCategoryList,
-} from "../../hooks/use-category";
+import useCategory from "../../../../hooks/use-category";
 
 const MyWordsDrawerFilter = ({
   setCategory,
 }: {
   setCategory: (category: string) => void;
 }) => {
-  const categoryList = useCategoryList();
+  const categoryList = useCategory();
 
   if (!categoryList) return null;
 
   return (
-    <Form className={wordsSelectStyle}>
-      <Suspense>
-        <FilterSelect
-          categoryListData={categoryList}
-          setCategory={setCategory}
-        />
-      </Suspense>
-    </Form>
-  );
-};
-
-const FilterSelect = ({
-  categoryListData,
-  setCategory,
-}: {
-  categoryListData: Promise<IUseCategoryListReturn[]>;
-  setCategory: (category: string) => void;
-}) => {
-  const categoryList = use(categoryListData);
-  return (
-    <select
+      <Form className={wordsSelectStyle}>
+        <Suspense>
+        <select
       name="wordsList"
       id="wordsList"
       onChange={(e) => {
@@ -51,14 +30,13 @@ const FilterSelect = ({
         </option>
       ))}
     </select>
+        </Suspense>
+      </Form>
   );
 };
-
 export default MyWordsDrawerFilter;
 
 const wordsSelectStyle = css({
-  position: "sticky",
-  top: "35px",
   minW: "75px",
   w: "fit-content",
   textStyle: "Text-14-M",

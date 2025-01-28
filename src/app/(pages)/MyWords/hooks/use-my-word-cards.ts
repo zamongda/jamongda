@@ -1,24 +1,20 @@
 import { useMemo } from "react";
 import AllWordsContent from "../components/my-words-drawer/drawer-content-component/all-words-content";
 import MemorizedWordsContent from "../components/my-words-drawer/drawer-content-component/memorized-words-content";
-import MyCategoryContent from "../components/my-words-drawer/drawer-content-component/my-category-content";
 import TodayMemorizedWordsContent from "../components/my-words-drawer/drawer-content-component/today-memorized-words-content";
-import { useCategoryList } from "./use-category";
 import {
   useMemorizedWords,
-  useMyWords,
   useTodayMemorizedWords,
-} from "./use-words";
+} from "./use-my-words";
+import useWords from "../../../hooks/use-words";
+import useCategory from "../../../hooks/use-category";
+import MyCategoryList from "../components/my-words-drawer/drawer-content-component/my-category-list";
 
 const useMyWordCards = () => {
-  const myWordsCount = useMyWords().then((list) => list?.length);
-  const myMemorizedWordsCount = useMemorizedWords().then(
-    (list) => list?.length,
-  );
-  const todayMemorizedWordsCount = useTodayMemorizedWords().then(
-    (list) => list?.length,
-  );
-  const categoryCount = useCategoryList().then((list) => list?.length);
+  const myWordsCount = useWords()?.length
+   const myMemorizedWordsCount = useMemorizedWords()?.length
+  const todayMemorizedWordsCount = useTodayMemorizedWords()?.length
+  const categoryCount = useCategory()?.length
 
   const cardList = useMemo(
     () => [
@@ -52,7 +48,7 @@ const useMyWordCards = () => {
         icon: "/icons/icon-chart.svg",
         count: categoryCount,
         color: "#FF8168",
-        modalContent: MyCategoryContent,
+        modalContent: MyCategoryList,
       },
     ],
     [

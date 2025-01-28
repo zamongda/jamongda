@@ -2,13 +2,12 @@
 
 import { css, cx } from "@styled-system/css";
 
-interface FormProps {
+interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   children: React.ReactNode;
-  className?: string;
-}
+  className?: string;}
 
-const Form = ({ children, className }: FormProps) => {
-  return <form className={cx(FormStyle, className)}>{children}</form>;
+const Form = ({ children, className, onSubmit }: FormProps) => {
+  return <form className={cx(FormStyle, className)} onSubmit={onSubmit}>{children}</form>;
 };
 
 export default Form;

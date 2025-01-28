@@ -7,7 +7,7 @@ import WordModal, {
 interface IEditWordModalProps {
   modalOpen: boolean;
   setModalOpen: (value: boolean) => void;
-  originWord: IWordRes;
+  originWord: IWordRes | null;
 }
 
 const EditWordModal = ({
@@ -16,6 +16,7 @@ const EditWordModal = ({
   originWord,
 }: IEditWordModalProps) => {
   const handleWordSave = async ({ word, meaning }: IHandleWordSaveProps) => {
+    if(!originWord) return;
     if (word.trim() === "") {
       alert("단어를 입력해주세요.");
       return;
@@ -32,11 +33,13 @@ const EditWordModal = ({
 
     if (!success) {
       alert("단어 저장에 실패했습니다.");
-      return;
+      return false;
     }
     alert("단어가 저장되었습니다.");
     setModalOpen(false);
+    return true;
   };
+  if(!originWord) return null;
   return (
     <WordModal
       modalOpen={modalOpen}
