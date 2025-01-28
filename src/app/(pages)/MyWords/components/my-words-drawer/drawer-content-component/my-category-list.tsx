@@ -1,20 +1,13 @@
 import { css, sva } from "@styled-system/css";
 import { addCategory, deleteCategory } from "../../../../../api/category";
 import useCategory from "../../../../../hooks/use-category";
+import IconPlus from "../../icon-plus";
+import { useState } from "react";
+import AddCategoryModal from "./add-category-modal";
 
 const MyCategoryList = () => {
+  const [modalOpen, setModalOpen] = useState(false);
   const categoryList = useCategory();
-
-  const handleAddCategory = async () => {
-    const { success } = await addCategory("새 카테고리");
-
-    if (success) {
-      alert("추가되었습니다.");
-      return;
-    }
-    alert("잠시후 다시 시도해주세요.");
-    return;
-  };
 
   const handleModify = () => {
     console.log("수정");
@@ -40,7 +33,7 @@ const MyCategoryList = () => {
   return (
     <div>
       <div className={categoryListItemStyle.addButtonWrapper}>
-        <button onClick={handleAddCategory}>카테고리 추가하기</button>
+        <button onClick={() => setModalOpen(true)}><IconPlus fill="#000" /><span>카테고리 추가하기</span></button>
       </div>
       <div>
         {categoryList.map((category) => (
@@ -65,6 +58,7 @@ const MyCategoryList = () => {
           </li>
         ))}
       </div>
+        {modalOpen && <AddCategoryModal modalOpen={modalOpen} setModalOpen={setModalOpen} />}
     </div>
   );
 };
@@ -88,9 +82,16 @@ const CategoryListItemSva = sva({
       gap: "12px",
     },
     addButtonWrapper: {
+      width:"160px",
       position: "sticky",
       bg: "white",
       top: "35px",
+      margin:"0 0 20px auto",
+      "& > button": {
+        display: 'flex',
+        gap:"10px",
+        textStyle: "Text-16-M",
+      }
     },
   },
 });
