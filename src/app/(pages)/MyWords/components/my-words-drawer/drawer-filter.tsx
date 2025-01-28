@@ -13,7 +13,6 @@ const MyWordsDrawerFilter = ({
   if (!categoryList) return null;
 
   return (
-    <div className={css({ bg: "white", position: "sticky", top: "35px" })}>
       <Form className={wordsSelectStyle}>
         <Suspense>
         <select
@@ -33,7 +32,6 @@ const MyWordsDrawerFilter = ({
     </select>
         </Suspense>
       </Form>
-    </div>
   );
 };
 export default MyWordsDrawerFilter;

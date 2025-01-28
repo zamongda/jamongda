@@ -61,7 +61,7 @@ const MyCategoryList = () => {
           </li>
         ))}
       </div>
-        {addModalOpen && <AddCategoryModal modalOpen={addModalOpen} setModalOpen={setAddModalOpen} />}
+        <AddCategoryModal modalOpen={addModalOpen} setModalOpen={setAddModalOpen} />
         {editModalOpen && <EditCategoryModal modalOpen={!!editModalOpen} setModalOpen={handleCloseEditModal} category={editModalOpen} />}
     </div>
   );

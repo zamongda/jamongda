@@ -53,13 +53,11 @@ const AllWordsList = ({
           ))
         )}
       </div>
-      {word && (
         <EditWordModal
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
           originWord={word}
         />
-      )}
     </div>
   );
 };
