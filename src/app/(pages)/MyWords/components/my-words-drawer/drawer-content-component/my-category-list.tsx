@@ -1,5 +1,5 @@
 import { css, sva } from "@styled-system/css";
-import { addCategory, deleteCategory } from "../../../../../api/category";
+import { deleteCategory } from "../../../../../api/category";
 import useCategory, { IUseCategoryListReturn } from "../../../../../hooks/use-category";
 import IconPlus from "../../icon-plus";
 import { useState } from "react";

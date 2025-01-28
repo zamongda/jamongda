@@ -2,9 +2,7 @@ import { BaseModalProps } from "@common/modal/types";
 import CategoryModal from "../../../../../components/category-modal";
 import { addCategory } from "../../../../../api/category";
 
-interface IAddCategoryModalProps extends BaseModalProps {}
-
-const AddCategoryModal = ({modalOpen, setModalOpen}:IAddCategoryModalProps) => {
+const AddCategoryModal = ({modalOpen, setModalOpen}:BaseModalProps) => {
       const handleAddCategory = async (name: string) => {
         const { success } = await addCategory(name);
     
