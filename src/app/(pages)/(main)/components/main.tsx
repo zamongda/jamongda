@@ -5,19 +5,17 @@ import { Suspense, useState } from "react";
 import { sva } from "@styled-system/css";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { useRouter } from "next/navigation";
-import { useCategoryList } from "../../MyWords/hooks/use-category";
 import AddWordModal from "./add-word-modal";
 import CardSlideContainer from "./card-slide-container";
 import useWords from "../../../hooks/use-words";
+import useCategory from "../../../hooks/use-category";
 
 const Main = () => {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
 
   const allWordsData = useWords();
-  const categoryListData = useCategoryList();
-
-  console.log(allWordsData)
+  const categoryListData = useCategory();
 
   return (
     <div className={mainStyle.wrapper}>

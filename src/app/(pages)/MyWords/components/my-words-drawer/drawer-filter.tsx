@@ -1,17 +1,14 @@
 import Form from "@common/form";
-import { Suspense, use } from "react";
+import { Suspense } from "react";
 import { css } from "@styled-system/css";
-import {
-  IUseCategoryListReturn,
-  useCategoryList,
-} from "../../hooks/use-category";
+import useCategory from "../../../../hooks/use-category";
 
 const MyWordsDrawerFilter = ({
   setCategory,
 }: {
   setCategory: (category: string) => void;
 }) => {
-  const categoryList = useCategoryList();
+  const categoryList = useCategory();
 
   if (!categoryList) return null;
 
@@ -19,26 +16,7 @@ const MyWordsDrawerFilter = ({
     <div className={css({ bg: "white", position: "sticky", top: "35px" })}>
       <Form className={wordsSelectStyle}>
         <Suspense>
-          <FilterSelect
-            categoryListData={categoryList}
-            setCategory={setCategory}
-          />
-        </Suspense>
-      </Form>
-    </div>
-  );
-};
-
-const FilterSelect = ({
-  categoryListData,
-  setCategory,
-}: {
-  categoryListData: Promise<IUseCategoryListReturn[]>;
-  setCategory: (category: string) => void;
-}) => {
-  const categoryList = use(categoryListData);
-  return (
-    <select
+        <select
       name="wordsList"
       id="wordsList"
       onChange={(e) => {
@@ -53,9 +31,11 @@ const FilterSelect = ({
         </option>
       ))}
     </select>
+        </Suspense>
+      </Form>
+    </div>
   );
 };
-
 export default MyWordsDrawerFilter;
 
 const wordsSelectStyle = css({

@@ -1,6 +1,6 @@
-import React, { use } from "react";
+import React from "react";
 import { mainStyle } from "../(pages)/(main)/components/main";
-import { IUseCategoryListReturn } from "../(pages)/MyWords/hooks/use-category";
+import { IUseCategoryListReturn } from "../hooks/use-category";
 
 const CategorySelect = ({
   setCategory,

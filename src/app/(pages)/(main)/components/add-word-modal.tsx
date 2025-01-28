@@ -5,7 +5,6 @@ import WordModal, {
   IHandleWordSaveProps,
 } from "../../../components/word-modal";
 import { useLogin } from "../../../providers/auth-provider";
-import { useCategoryList } from "../../MyWords/hooks/use-category";
 
 interface IAddWordModal {
   modalOpen: boolean;
@@ -15,8 +14,6 @@ interface IAddWordModal {
 const AddWordModal = ({ modalOpen, setModalOpen }: IAddWordModal) => {
   const router = useRouter();
   const { isLogin } = useLogin();
-
-  const categoryListData = useCategoryList();
 
   useEffect(() => {
     if (modalOpen && !isLogin) {
@@ -61,7 +58,6 @@ const AddWordModal = ({ modalOpen, setModalOpen }: IAddWordModal) => {
       modalOpen={modalOpen}
       setModalOpen={setModalOpen}
       handleWordSave={handleWordSave}
-      categoryListData={categoryListData}
     />
   );
 };

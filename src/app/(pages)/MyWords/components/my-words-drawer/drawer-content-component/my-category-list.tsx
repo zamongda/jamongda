@@ -1,14 +1,9 @@
-import { use } from "react";
 import { css, sva } from "@styled-system/css";
 import { addCategory, deleteCategory } from "../../../../../api/category";
-import { IUseCategoryListReturn } from "../../../hooks/use-category";
+import useCategory from "../../../../../hooks/use-category";
 
-const MyCategoryList = ({
-  categoryListData,
-}: {
-  categoryListData: Promise<IUseCategoryListReturn[]>;
-}) => {
-  const categoryList = use(categoryListData);
+const MyCategoryList = () => {
+  const categoryList = useCategory();
 
   const handleAddCategory = async () => {
     const { success } = await addCategory("새 카테고리");

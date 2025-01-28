@@ -2,14 +2,10 @@ import Button from "@common/button";
 import Form from "@common/form";
 import Input from "@common/input";
 import ModalPopup from "@common/modal/modal-popup";
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 import { css } from "@styled-system/css";
-import { mainStyle } from "../(pages)/(main)/components/main";
-import {
-  IUseCategoryListReturn,
-  useCategoryList,
-} from "../(pages)/MyWords/hooks/use-category";
 import CategorySelect from "./category-select";
+import useCategory from "../hooks/use-category";
 
 export interface IHandleWordSaveProps {
   word: string;
@@ -28,7 +24,6 @@ interface IWordModalProps {
     meaning: string;
     categoryId?: number;
   }) => void;
-  categoryListData: Promise<IUseCategoryListReturn[]>;
   originWord?: string;
   originMeaning?: string;
 }
@@ -39,13 +34,12 @@ const WordModal = ({
   handleWordSave,
   originWord,
   originMeaning,
-  categoryListData,
 }: IWordModalProps) => {
   const [word, setWord] = useState(originWord || "");
   const [meaning, setMeaning] = useState(originMeaning || "");
   const [category, setCategory] = useState("ALL");
 
-  const categoryList = use(categoryListData);
+  const categoryList = useCategory();
 
   return (
     <ModalPopup isOpen={modalOpen} setModalOpen={setModalOpen}>

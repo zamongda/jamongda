@@ -14,7 +14,7 @@ export interface IWordRes {
   user_id: string;
   en: string;
   ko: string;
-  category_id?: string;
+  category_id?: number;
   is_memorized: boolean;
   memory_date?: string;
   created_at: string;
