@@ -8,7 +8,7 @@ import CardSlide from "./card-slide";
 import { mainStyle } from "./main";
 
 interface ICardSlideContainerProps {
-  allWordsData: Promise<IWordRes[]>;
+  allWordsData?: IWordRes[];
   categoryListData: Promise<IUseCategoryListReturn[]>;
 }
 
@@ -16,8 +16,7 @@ const CardSlideContainer = ({
   allWordsData,
   categoryListData,
 }: ICardSlideContainerProps) => {
-  const allWords = use(allWordsData);
-  const { filteredWords, setCategory } = useWordsList(allWords);
+  const { filteredWords, setCategory } = useWordsList(allWordsData);
 
   if(!filteredWords) return <></>
   

@@ -3,7 +3,7 @@
 import { getUserInClient } from "./get-client-user";
 import { createClient } from "./supabase/create-client";
 
-interface IGetWordsArgs {
+export interface IGetWordsArgs {
   category_id?: string;
   is_memorized?: boolean;
   memory_date?: string;
@@ -24,7 +24,6 @@ const supabase = createClient();
 
 export const getWords = async (conditions: IGetWordsArgs) => {
   const { user, error: userError } = await getUserInClient();
-  // console.log(user);
   if (userError) {
     throw new Error(userError.message);
   }

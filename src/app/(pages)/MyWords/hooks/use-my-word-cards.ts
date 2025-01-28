@@ -6,19 +6,16 @@ import TodayMemorizedWordsContent from "../components/my-words-drawer/drawer-con
 import { useCategoryList } from "./use-category";
 import {
   useMemorizedWords,
-  useMyWords,
   useTodayMemorizedWords,
-} from "./use-words";
+} from "./use-my-words";
+import useWords from "../../../hooks/use-words";
 
 const useMyWordCards = () => {
-  const myWordsCount = useMyWords().then((list) => list?.length);
-  const myMemorizedWordsCount = useMemorizedWords().then(
-    (list) => list?.length,
-  );
-  const todayMemorizedWordsCount = useTodayMemorizedWords().then(
-    (list) => list?.length,
-  );
-  const categoryCount = useCategoryList().then((list) => list?.length);
+  const myWordsCount = useWords()?.length
+   const myMemorizedWordsCount = useMemorizedWords()?.length
+  const todayMemorizedWordsCount = useTodayMemorizedWords()?.length
+  const categoryCount = 0
+  // useCategoryList().then((list) => list?.length);
 
   const cardList = useMemo(
     () => [

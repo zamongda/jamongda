@@ -5,7 +5,7 @@ import { IWordRes } from "../../../api/word";
 
 const CardSlide = ({ allWords }: { allWords: IWordRes[] }) => {
   const [clickedCards, setClickedCards] = useState<Record<number, boolean>>({});
-
+  
   const onClickCard = (id: number) => {
     setClickedCards((prev) => ({
       ...prev,

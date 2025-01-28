@@ -8,7 +8,7 @@ import MyWordsDrawerContainer from "./my-words-drawer";
 
 const MyWords = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<ReactNode | null>(null);
+  const [modalContent, setModalContent] = useState< ReactNode | null>(null);
 
   const myWordsStyle = MyWordsSva();
 
@@ -33,7 +33,7 @@ const MyWordsContainer = memo(
     setModalContent,
   }: {
     setModalOpen: (value: boolean) => void;
-    setModalContent: (value: ReactNode) => void;
+    setModalContent: (value:ReactNode) => void;
   }) => {
     const { cardList } = useMyWordCards();
 
@@ -49,7 +49,7 @@ const MyWordsContainer = memo(
                 card={card}
                 onClick={() => {
                   setModalOpen(true);
-                  setModalContent(card.modalContent());
+                    setModalContent(<card.modalContent />);
                 }}
               />
             );
