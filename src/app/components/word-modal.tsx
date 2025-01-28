@@ -41,7 +41,9 @@ const WordModal = ({
 
   const categoryList = useCategory();
 
-  const submitHandler = () => {
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     handleWordSave({
       word,
       meaning,
@@ -77,7 +79,6 @@ const WordModal = ({
               type="submit"
         text="저장하기"
         className={css({ mt: "2.5rem!" })}
-        onClick={submitHandler}
       />
       </Form>
     </ModalPopup>
