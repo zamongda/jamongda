@@ -47,10 +47,11 @@ const AddWordModal = ({ modalOpen, setModalOpen }: IAddWordModal) => {
 
     if (!success) {
       alert("단어 저장에 실패했습니다.");
-      return;
+      return false;
     }
     alert("단어가 저장되었습니다.");
     setModalOpen(false);
+    return true;
   };
 
   return (

@@ -23,7 +23,7 @@ interface IWordModalProps {
     word: string;
     meaning: string;
     categoryId?: number;
-  }) => void;
+  }) => Promise<boolean|undefined>;
   originWord?: string;
   originMeaning?: string;
 }
@@ -41,9 +41,23 @@ const WordModal = ({
 
   const categoryList = useCategory();
 
+  const submitHandler = () => {
+    handleWordSave({
+      word,
+      meaning,
+      categoryId: category === "ALL" ? undefined : Number(category),
+    }).then((success) => {
+      if(success){
+
+    setWord("");
+    setMeaning("");
+      }
+    })
+  }
+
   return (
     <ModalPopup isOpen={modalOpen} setModalOpen={setModalOpen}>
-      <Form>
+      <Form onSubmit={submitHandler}>
         <CategorySelect setCategory={setCategory} categoryList={categoryList} />
         <Input
           text="단어 또는 문장"
@@ -59,18 +73,13 @@ const WordModal = ({
           value={meaning}
           onChange={(e) => setMeaning(e.target.value)}
         />
-      </Form>
-      <Button
+              <Button
+              type="submit"
         text="저장하기"
         className={css({ mt: "2.5rem!" })}
-        onClick={() =>
-          handleWordSave({
-            word,
-            meaning,
-            categoryId: category === "ALL" ? undefined : Number(category),
-          })
-        }
+        onClick={submitHandler}
       />
+      </Form>
     </ModalPopup>
   );
 };
