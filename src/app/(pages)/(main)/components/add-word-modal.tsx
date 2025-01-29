@@ -9,9 +9,10 @@ import { useLogin } from "../../../providers/auth-provider";
 interface IAddWordModal {
   modalOpen: boolean;
   setModalOpen: (value: boolean) => void;
+  refetch: () => void;
 }
 
-const AddWordModal = ({ modalOpen, setModalOpen }: IAddWordModal) => {
+const AddWordModal = ({ modalOpen, setModalOpen, refetch }: IAddWordModal) => {
   const router = useRouter();
   const { isLogin } = useLogin();
 
@@ -50,6 +51,7 @@ const AddWordModal = ({ modalOpen, setModalOpen }: IAddWordModal) => {
       return false;
     }
     alert("단어가 저장되었습니다.");
+    refetch();
     setModalOpen(false);
     return true;
   };

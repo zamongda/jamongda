@@ -12,8 +12,9 @@ import MyCategoryList from "../components/my-words-drawer/drawer-content-compone
 
 const useMyWordCards = () => {
   const {categories} = useCategory();
-  
-  const myWordsCount = useWords()?.length
+  const {words} = useWords();
+
+  const myWordsCount = words?.length
   const myMemorizedWordsCount = useMemorizedWords()?.length
   const todayMemorizedWordsCount = useTodayMemorizedWords()?.length
   const categoryCount = categories?.length

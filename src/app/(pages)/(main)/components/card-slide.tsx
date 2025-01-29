@@ -67,6 +67,8 @@ const SwiperStyle = css({
         "&.swiper-slide-active": {
           scale: "1",
           textStyle: "Text-28-B",
+          textAlign: "center",
+          whiteSpace:"pre"
         },
       },
     },

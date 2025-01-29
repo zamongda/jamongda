@@ -2,14 +2,18 @@
 import useWords from "../../../hooks/use-words";
 
 export const useMemorizedWords = () => {
-return useWords({
+const {words} = useWords({
   is_memorized: true,
 })
+
+return words;
 };
 
 export const useTodayMemorizedWords = () => {
-  return useWords({
+  const {words} =  useWords({
     is_memorized: true,
     memory_date: new Date().toISOString().split("T")[0],
   })
+
+  return words;
 };

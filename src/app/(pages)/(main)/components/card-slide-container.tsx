@@ -18,13 +18,11 @@ const CardSlideContainer = ({
 }: ICardSlideContainerProps) => {
   const { filteredWords, setCategory } = useWordsList(allWordsData);
 
-  console.log(filteredWords)
-
-  if(!filteredWords) return <></>
+  const defaultWord = [{id:0, user_id:"0", en:"저장된 단어가 \n 없습니다.", ko:"🥲", is_memorized: false, created_at:new Date().toDateString() }]
 
   return (
     <>
-      <CardSlide allWords={filteredWords} />
+      <CardSlide allWords={!filteredWords || filteredWords.length === 0 ? defaultWord:filteredWords} />
       <Form className={mainStyle.form}>
         <CategorySelect setCategory={setCategory} categoryList={categoryListData} />
       </Form>

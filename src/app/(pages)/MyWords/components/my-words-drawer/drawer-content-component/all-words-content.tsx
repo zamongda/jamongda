@@ -8,27 +8,23 @@ import EditWordModal from "./edit-word-modal";
 import useWords from "../../../../../hooks/use-words";
 
 const AllWordsContent = () => {
-  const allWordsData = useWords();
-
-  return <AllWordsList allWords={allWordsData} />;
-};
-
-const AllWordsList = ({
-  allWords,
-}: {
-  allWords?: IWordRes[];
-}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [word, setWord] = useState<IWordRes | null>(null);
-  const { filteredWords, setCategory } = useWordsList(allWords);
+
+  const {words, refetch} = useWords();
+  const { filteredWords, setCategory } = useWordsList(words);
 
   const handleWordDelete = async (id: number) => {
+    console.log("delete")
     const { success } = await deleteWord(id);
 
     if (!success) {
       alert("잠시 후 다시 시도해주세요.");
       return;
     }
+
+    alert("삭제되었습니다.");
+    refetch();
   };
 
   return (
@@ -57,6 +53,7 @@ const AllWordsList = ({
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
           originWord={word}
+          refetch={refetch}
         />
     </div>
   );
