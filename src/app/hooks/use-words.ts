@@ -9,27 +9,27 @@ const [words, setWords] = useState<IWordRes[]>();
 // eslint-disable-next-line react-hooks/exhaustive-deps
 const memoizedArgs = useMemo(() => args, [JSON.stringify(args)]);
 
+const fetchWords = async () => {
+  try {
+    const { data: myWords } = await getWords({...memoizedArgs});
 
-useEffect(() => {
-    const fetchWords = async () => {
-      try {
-        const { data: myWords } = await getWords({...memoizedArgs});
-    
-        if (!myWords) {
-          return;
-        }
-    
-        setWords(JSON.parse(myWords));
-        return ;
-      } catch (e) {
-        console.error(e);
-      }
+    if (!myWords) {
+      return;
     }
 
-    fetchWords();
-  }, [memoizedArgs]);
+    setWords(JSON.parse(myWords));
+    return ;
+  } catch (e) {
+    console.error(e);
+  }
+}
 
-  return words;
+
+useEffect(() => {
+    fetchWords();
+  }, []);
+
+  return {words, refetch: fetchWords};
 }
 
 export default useWords;

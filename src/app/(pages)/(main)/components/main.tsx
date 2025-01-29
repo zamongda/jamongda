@@ -14,13 +14,11 @@ const Main = () => {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
 
-  const allWordsData = useWords();
-  const categoryListData = useCategory();
+  const {words, refetch} = useWords();
+  const {categories: categoryList} = useCategory();
 
   return (
     <div className={mainStyle.wrapper}>
-      {/* {isLogin && (
-        <> */}
       <div className={mainStyle.inner}>
         <button
           className={mainStyle.addButton}
@@ -33,8 +31,8 @@ const Main = () => {
         <ErrorBoundary errorComponent={undefined}>
           <Suspense fallback={null}>
             <CardSlideContainer
-              allWordsData={allWordsData}
-              categoryListData={categoryListData}
+              allWordsData={words}
+              categoryListData={categoryList}
             />
           </Suspense>
         </ErrorBoundary>
@@ -46,9 +44,7 @@ const Main = () => {
           />
         </div>
       </div>
-      <AddWordModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      {/* </>
-      )} */}
+      <AddWordModal modalOpen={modalOpen} setModalOpen={setModalOpen} refetch={refetch} />
     </div>
   );
 };

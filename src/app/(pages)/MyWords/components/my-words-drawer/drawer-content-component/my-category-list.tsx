@@ -10,7 +10,7 @@ const MyCategoryList = () => {
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState<IUseCategoryListReturn>();
 
-  const categoryList = useCategory();
+  const {categories: categoryList, refetch} = useCategory();
 
   const handleCloseEditModal = () => {
     setEditModalOpen(undefined);
@@ -21,6 +21,7 @@ const MyCategoryList = () => {
 
     if (success) {
       alert("삭제되었습니다.");
+      refetch();
       return;
     }
     alert("잠시후 다시 시도해주세요.");
@@ -61,8 +62,8 @@ const MyCategoryList = () => {
           </li>
         ))}
       </div>
-        <AddCategoryModal modalOpen={addModalOpen} setModalOpen={setAddModalOpen} />
-        {editModalOpen && <EditCategoryModal modalOpen={!!editModalOpen} setModalOpen={handleCloseEditModal} category={editModalOpen} />}
+        <AddCategoryModal modalOpen={addModalOpen} setModalOpen={setAddModalOpen} refetch={refetch} />
+        {editModalOpen && <EditCategoryModal modalOpen={!!editModalOpen} setModalOpen={handleCloseEditModal} category={editModalOpen} refetch={refetch} />}
     </div>
   );
 };

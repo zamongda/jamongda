@@ -8,12 +8,14 @@ interface IEditWordModalProps {
   modalOpen: boolean;
   setModalOpen: (value: boolean) => void;
   originWord: IWordRes | null;
+  refetch: () => void;
 }
 
 const EditWordModal = ({
   modalOpen,
   setModalOpen,
   originWord,
+  refetch
 }: IEditWordModalProps) => {
   const handleWordSave = async ({ word, meaning }: IHandleWordSaveProps) => {
     if(!originWord) return;
@@ -37,6 +39,7 @@ const EditWordModal = ({
     }
     alert("단어가 저장되었습니다.");
     setModalOpen(false);
+    refetch();
     return true;
   };
   if(!originWord) return null;
