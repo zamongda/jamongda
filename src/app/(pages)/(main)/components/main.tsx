@@ -15,7 +15,7 @@ const Main = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const allWordsData = useWords();
-  const categoryListData = useCategory();
+  const {categories: categoryList} = useCategory();
 
   return (
     <div className={mainStyle.wrapper}>
@@ -34,7 +34,7 @@ const Main = () => {
           <Suspense fallback={null}>
             <CardSlideContainer
               allWordsData={allWordsData}
-              categoryListData={categoryListData}
+              categoryListData={categoryList}
             />
           </Suspense>
         </ErrorBoundary>

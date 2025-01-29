@@ -39,7 +39,7 @@ const WordModal = ({
   const [meaning, setMeaning] = useState(originMeaning || "");
   const [category, setCategory] = useState("ALL");
 
-  const categoryList = useCategory();
+  const {categories: categoryList} = useCategory();
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
