@@ -11,26 +11,27 @@ export interface IUseCategoryListReturn {
 const useCategory = () => {
 const [categories, setCategories] = useState<IUseCategoryListReturn[]>();
 
-useEffect(() => {
-    const fetchWords = async () => {
-      try {
-        const { data: myCategory } = await getCategories();
-    
-        if (!myCategory) {
-          return;
-        }
-    
-        setCategories(JSON.parse(myCategory));
-        return ;
-      } catch (e) {
-        console.error(e);
-      }
+const fetchWords = async () => {
+  try {
+    const { data: myCategory } = await getCategories();
+
+    if (!myCategory) {
+      return;
     }
+
+    setCategories(JSON.parse(myCategory));
+    return ;
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+useEffect(() => {
 
     fetchWords();
   }, []);
 
-  return categories;
+  return {categories, refetch: fetchWords};
 }
 
 export default useCategory;

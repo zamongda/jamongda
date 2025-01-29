@@ -21,8 +21,6 @@ const CategoryModal = ({modalOpen, setModalOpen, handleCategory, category}:ICate
 		setModalOpen(false);
 	}
 
-	console.log("category", category);
-
     return <ModalPopup isOpen={modalOpen} setModalOpen={setModalOpen}>
 			<Form onSubmit={handleSubmit}>
 			<Input

@@ -10,9 +10,7 @@ const useWordsList = (wordList?: IWordRes[]) => {
       setFilteredWords(wordList);
     } else {
       setFilteredWords(
-        wordList?.filter((word) => {
-          console.log(word.category_id, category);  
-          return word.category_id === Number(category)}),
+        wordList?.filter((word) => word.category_id === Number(category)),
       );
     }
   }, [category, wordList]);

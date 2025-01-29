@@ -8,7 +8,7 @@ const MyWordsDrawerFilter = ({
 }: {
   setCategory: (category: string) => void;
 }) => {
-  const categoryList = useCategory();
+  const {categories: categoryList} = useCategory();
 
   if (!categoryList) return null;
 

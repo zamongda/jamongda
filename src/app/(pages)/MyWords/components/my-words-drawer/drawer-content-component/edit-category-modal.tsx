@@ -5,15 +5,17 @@ import { modifyCategory } from "../../../../../api/category";
 import { IUseCategoryListReturn } from "../../../../../hooks/use-category";
 
 interface IEditCategoryModalProps extends BaseModalProps {
-    category: IUseCategoryListReturn
+    category: IUseCategoryListReturn;
+    refetch: () => void;
 }
 
-const EditCategoryModal = ({modalOpen, setModalOpen, category}: IEditCategoryModalProps) => {
+const EditCategoryModal = ({modalOpen, setModalOpen, category, refetch}: IEditCategoryModalProps) => {
     const handleEditCategory = async (name: string) => {
         const {success} = await modifyCategory(category.id, name);
 
         if (success) {
             alert("수정되었습니다.");
+            refetch();
             return;
           }
           alert("잠시후 다시 시도해주세요.");

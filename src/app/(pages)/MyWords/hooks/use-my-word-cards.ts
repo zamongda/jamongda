@@ -11,10 +11,12 @@ import useCategory from "../../../hooks/use-category";
 import MyCategoryList from "../components/my-words-drawer/drawer-content-component/my-category-list";
 
 const useMyWordCards = () => {
+  const {categories} = useCategory();
+  
   const myWordsCount = useWords()?.length
-   const myMemorizedWordsCount = useMemorizedWords()?.length
+  const myMemorizedWordsCount = useMemorizedWords()?.length
   const todayMemorizedWordsCount = useTodayMemorizedWords()?.length
-  const categoryCount = useCategory()?.length
+  const categoryCount = categories?.length
 
   const cardList = useMemo(
     () => [
