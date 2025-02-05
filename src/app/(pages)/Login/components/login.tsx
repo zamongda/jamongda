@@ -4,7 +4,7 @@ import Button from "@common/button";
 import Form from "@common/form";
 import Input from "@common/input";
 import { useState } from "react";
-import { css, sva } from "@styled-system/css";
+import { css, cx, sva } from "@styled-system/css";
 import { useRouter } from "next/navigation";
 import { login } from "../../../api/auth";
 
@@ -26,10 +26,7 @@ const Login = () => {
       alert("비밀번호를 입력해주세요.");
       return;
     }
-    const { data } = await login(  
-      trimmedEmail,
-      trimmedPassword,
-    )
+    const { data } = await login(trimmedEmail, trimmedPassword);
 
     if (!data) {
       alert("로그인에 실패했습니다.");
@@ -60,21 +57,24 @@ const Login = () => {
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-        <div className={loginStyle.buttonWrapper}>
-          <Button text="로그인하기" type="submit" />
-          <Button
+          <div className={loginStyle.buttonWrapper}>
+            <Button text="로그인하기" type="submit" />
+          </div>
+        </Form>
+
+        <div className={cx(loginStyle.buttonWrapper, css({ mt: ".875rem" }))}>
+          {/* <Button
             text="카카오 로그인"
             bgColor="white"
             Icon="/icons/icon-kakao.svg"
-          />
+          /> */}
           <Button
             text="회원가입하기"
             bgColor="lightGreen"
             onClick={() => router.push("/SignUp")}
           />
         </div>
-        </Form>
-        
+
         <span className={loginStyle.findAccountButton}>
           계정을 잃어버리셨나요?
         </span>
