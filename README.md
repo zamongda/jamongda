@@ -4,7 +4,7 @@ This is a word learning app that helps you save and organize words into categori
 
 Now you can see our JAMONGDA below
 
-[JAMONGDA](https://www.jamongda.netlify.app)
+[JAMONGDA](https://jamongda.netlify.app)
 
 ## 🛠️ TECH STACK
 
