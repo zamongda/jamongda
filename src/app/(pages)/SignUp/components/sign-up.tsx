@@ -7,6 +7,7 @@ import { useState } from "react";
 import { css, sva } from "@styled-system/css";
 import { useRouter } from "next/navigation";
 import { signUp } from "../../../api/auth";
+import { emailRegex } from "../../../utils/regex";
 
 const SignUp = () => {
   // const [name, setName] = useState("");
@@ -30,6 +31,10 @@ const SignUp = () => {
       alert("이메일을 입력해주세요.");
       return;
     }
+    if (!emailRegex.test(email)) {
+      alert("이메일 형식이 올바르지 않습니다.");
+      return;
+    }
     if (password.trim() === "") {
       alert("비밀번호를 입력해주세요.");
       return;
@@ -41,7 +46,7 @@ const SignUp = () => {
 
     const { data, error } = await signUp(email.trim(), password.trim());
 
-    if (error || !data) {
+    if (JSON.parse(error)?.__isAuthError || !JSON.parse(data)?.user) {
       alert("회원가입에 실패했습니다. 잠시 후 다시 시도해주세요.");
       return;
     }

@@ -11,7 +11,7 @@ export const signUp = async (email: string, password: string) => {
   // 회원가입 후에 이메일 인증을 위한 이메일이 발송됩니다.
   // 이메일 인증을 완료하면 로그인이 가능합니다.
 
-  return { data, error };
+  return { data: JSON.stringify(data), error: JSON.stringify(error) };
 };
 
 export const login = async (email: string, password: string) => {
@@ -30,7 +30,7 @@ export const getUser = async () => {
   const supabase = await createServerSupabaseClient();
   const { data, error } = await supabase.auth.getUser();
 
-  return { user: JSON.stringify(data.user), error:JSON.stringify(error) };
+  return { user: JSON.stringify(data.user), error: JSON.stringify(error) };
 };
 
 export const logout = async () => {

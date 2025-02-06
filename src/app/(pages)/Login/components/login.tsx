@@ -7,6 +7,7 @@ import { useState } from "react";
 import { css, cx, sva } from "@styled-system/css";
 import { useRouter } from "next/navigation";
 import { login } from "../../../api/auth";
+import { emailRegex } from "../../../utils/regex";
 
 const Login = () => {
   const router = useRouter();
@@ -18,8 +19,14 @@ const Login = () => {
 
     const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
+
+    console.log(emailRegex.test(trimmedEmail));
     if (trimmedEmail === "") {
       alert("이메일을 입력해주세요.");
+      return;
+    }
+    if (!emailRegex.test(trimmedEmail)) {
+      alert("이메일 형식이 올바르지 않습니다.");
       return;
     }
     if (trimmedPassword === "") {
@@ -28,7 +35,9 @@ const Login = () => {
     }
     const { data } = await login(trimmedEmail, trimmedPassword);
 
-    if (!data) {
+    const user = JSON.parse(data)?.user;
+
+    if (!user) {
       alert("로그인에 실패했습니다.");
       return;
     } else {
