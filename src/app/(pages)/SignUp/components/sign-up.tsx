@@ -39,6 +39,10 @@ const SignUp = () => {
       alert("비밀번호를 입력해주세요.");
       return;
     }
+    if (password.trim().length < 6) {
+      alert("비밀번호는 6자 이상이어야 합니다.");
+      return;
+    }
     if (checkPassword.trim() === "") {
       alert("비밀번호 확인을 입력해주세요.");
       return;
