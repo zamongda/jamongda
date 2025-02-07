@@ -84,7 +84,10 @@ const Login = () => {
           />
         </div>
 
-        <span className={loginStyle.findAccountButton}>
+        <span
+          className={loginStyle.findAccountButton}
+          onClick={() => router.push("/findAccount")}
+        >
           계정을 잃어버리셨나요?
         </span>
       </div>
@@ -164,4 +167,4 @@ const LoginSva = sva({
     },
   },
 });
-const loginStyle = LoginSva();
+export const loginStyle = LoginSva();
