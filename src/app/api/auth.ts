@@ -35,6 +35,13 @@ export const resetPassword = async (email: string) => {
   return { error: JSON.stringify(error) };
 };
 
+export const updatePassword = async (password: string) => {
+  const supabase = await createServerSupabaseClient();
+  const { error } = await supabase.auth.updateUser({ password });
+
+  return { error: JSON.stringify(error) };
+};
+
 export const getUser = async () => {
   const supabase = await createServerSupabaseClient();
   const { data, error } = await supabase.auth.getUser();

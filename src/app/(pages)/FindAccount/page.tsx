@@ -13,6 +13,12 @@ const FindAccount = () => {
 
   const handleFindAccount = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (email.trim() === "") {
+      alert("이메일을 입력해주세요.");
+      return;
+    }
+
     const { error } = await resetPassword(email);
 
     if (JSON.parse(error)) {
