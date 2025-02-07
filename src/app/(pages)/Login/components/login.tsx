@@ -86,7 +86,7 @@ const Login = () => {
 
         <span
           className={loginStyle.findAccountButton}
-          onClick={() => router.push("/findAccount")}
+          onClick={() => router.push("/FindAccount")}
         >
           계정을 잃어버리셨나요?
         </span>
